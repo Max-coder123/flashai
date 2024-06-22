@@ -1,0 +1,2 @@
+# flashai
+ai flashcard generator
