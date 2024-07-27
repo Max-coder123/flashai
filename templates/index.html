@@ -7,13 +7,19 @@
             height: 200px;
         }
         </style>
+         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     </head>
     <body>
-        <h1>{{completion}}</h1>
         <p><a href="https://monkeytype.com/">click here</a></p>
         <form method="POST">
             <textarea name="question"></textarea>
             <input type="submit" value="send">
         </form>
+        <div id="completion">{{completion}}</div>
+        <script>
+        const completion = document.getElementById("completion");
+        completion.innerHTML = marked.parse(completion.textContent);
+
+        </script>
     </body>
 </html>
