@@ -9,12 +9,7 @@ if not os.environ.get('OPENAI_API_KEY'):
     print("OPENAI_API_KEY not found in env")
     sys.exit(1)
 
-
-app = Flask(__name__)
-
-@app.route('/', methods = ["GET", "POST"])
-def index():
-    content = request.form.get("question", request.args.get("question","hello"))
+def fetch_completion(content):
     messages = [{"role": "user", "content": content}]
     headers = {"Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}"}
     url = "https://api.openai.com/v1/chat/completions"
@@ -28,7 +23,15 @@ def index():
     response = requests.post(url, headers=headers, json=data, stream=True)
     response.raise_for_status()
     content = response.json()["choices"][0]["message"]["content"]
-    return render_template("index.html",content=content)
+    return content
+
+app = Flask(__name__)
+
+@app.route('/', methods = ["GET", "POST"])
+def index():
+    user_message = request.form.get("question", request.args.get("question","hello"))
+    completion = fetch_completion(user_message)
+    return render_template("index.html",completion=completion)
 
 
 if __name__ == '__main__':
