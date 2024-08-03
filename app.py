@@ -18,6 +18,7 @@ def fetch_completion(content):
         "messages": messages,
         "temperature": 0.5,
         "max_tokens": 1000,
+        "response_format": { "type": "json_object" },
     }
 
     response = requests.post(url, headers=headers, json=data, stream=True)
@@ -33,9 +34,34 @@ def index():
     if not user_message:
         return render_template("index.html")
     content = f"""
-summarize the following text into sections:
+generate flashcards for the following text:
+
+'''
 
 {user_message}
+
+'''
+
+please return the following json structure:
+
+
+```
+{{
+    "data": [
+        {{
+            "question": "question 1 about the text", 
+            "answer": "answer 1 for question 1",
+            "explanation": "explanation of answer 1"
+        }},
+        {{
+            "question": "question 2 about the text", 
+            "answer": "answer 2 for question 2",
+            "explanation": "explanation of answer 2"
+        }}
+    ]
+}}
+```
+
     """
     completion = fetch_completion(content)
     return render_template("index.html",completion=completion)
