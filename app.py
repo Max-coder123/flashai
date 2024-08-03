@@ -29,8 +29,15 @@ app = Flask(__name__)
 
 @app.route('/', methods = ["GET", "POST"])
 def index():
-    user_message = request.form.get("question", request.args.get("question","hello"))
-    completion = fetch_completion(user_message)
+    user_message = request.form.get("question")
+    if not user_message:
+        return render_template("index.html")
+    content = f"""
+summarize the following text into sections:
+
+{user_message}
+    """
+    completion = fetch_completion(content)
     return render_template("index.html",completion=completion)
 
 
