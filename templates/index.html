@@ -13,6 +13,12 @@
             max-width: 600px;
 
         }
+        .flashcard{
+            padding: 1em;
+            border: 1px solid gray;
+            margin: 1em;
+            border-radius: 10px;
+        }
         </style>
         <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     </head>
@@ -23,12 +29,21 @@
             <textarea name="question"></textarea>
             <input type="submit" value="send">
         </form>
-        <div id="completion">{{completion}}</div>
+        <div id="completion"></div>
         <script>
         const {data} = {{completion | safe}};
         const completion = document.getElementById("completion");
-        completion.innerHTML = marked.parse(data[0].question + " " + data[0].answer);
-        
+        for (const question of data) {
+            completion.innerHTML += `<div class="flashcard">
+                <div>${question.question}</div>  
+                <button>reveal answer</button>
+            </div>`;
+        }
+        completion.querySelectorAll("button").forEach((e,i)=>{
+            e.addEventListener("click",event=>{
+                e.closest(".flashcard").innerHTML += data[i].answer
+            })
+        })
         </script>
     </body>
 </html>
