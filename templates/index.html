@@ -129,13 +129,13 @@
             })
         })
         document.querySelector(".next-card").addEventListener("click", event => {
-        const currentCard = cards[activeCardIndex]
-        currentCard.classList.remove("active-card")
-        activeCardIndex++
-        if (activeCardIndex >= cards.length) {
-            activeCardIndex = 0
-        }
-        cards[activeCardIndex].classList.add("active-card")
+            const currentCard = cards[activeCardIndex]
+            currentCard.classList.remove("active-card")
+            activeCardIndex++
+            if (activeCardIndex >= cards.length) {
+                activeCardIndex = 0
+            }
+            cards[activeCardIndex].classList.add("active-card")
 
         })
     </script>

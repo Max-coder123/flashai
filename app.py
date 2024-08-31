@@ -5,9 +5,10 @@ from dotenv import load_dotenv
 from flask import Flask, request, render_template
 
 load_dotenv()  # take environment variables from .env.
-if not os.environ.get('OPENAI_API_KEY'):
+if not os.environ.get("OPENAI_API_KEY"):
     print("OPENAI_API_KEY not found in env")
     sys.exit(1)
+
 
 def fetch_completion(content):
     messages = [{"role": "user", "content": content}]
@@ -18,7 +19,7 @@ def fetch_completion(content):
         "messages": messages,
         "temperature": 0.5,
         "max_tokens": 1000,
-        "response_format": { "type": "json_object" },
+        "response_format": {"type": "json_object"},
     }
 
     response = requests.post(url, headers=headers, json=data, stream=True)
@@ -26,9 +27,11 @@ def fetch_completion(content):
     content = response.json()["choices"][0]["message"]["content"]
     return content
 
+
 app = Flask(__name__)
 
-@app.route('/', methods = ["GET", "POST"])
+
+@app.route("/", methods=["GET", "POST"])
 def index():
     user_message = request.form.get("question")
     if not user_message:
@@ -64,8 +67,8 @@ please return the following json structure:
 
     """
     completion = fetch_completion(content)
-    return render_template("index.html",completion=completion)
+    return render_template("index.html", completion=completion)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
