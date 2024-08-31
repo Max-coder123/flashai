@@ -1,49 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>flashcard generator</title>
-        <style>
-        textarea{
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flashcard generator</title>
+    <link rel="icon" href="https://fav.farm/💩" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+        textarea {
             width: 100%;
             height: 200px;
         }
-        body {
-            max-width: 600px;
 
+        body {
+            font-family: "Montserrat", sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
         }
-        .flashcard{
+
+        button,
+        input[type="submit"] {
+            cursor: pointer;
+            padding: 1em;
+            border-radius: 5px;
+            background-color: aliceblue;
+        }
+
+        .flashcard {
+            display: none;
+            cursor: pointer;
             padding: 1em;
             border: 1px solid gray;
             margin: 1em;
             border-radius: 10px;
         }
-        </style>
-        <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    </head>
-    <body>
-        <h1>flashcard generator</h1>
-        <p>paste in notes below for summary</p>
-        <form method="POST">
-            <textarea name="question"></textarea>
-            <input type="submit" value="send">
-        </form>
-        <div id="completion"></div>
-        <script>
-        const {data} = {{completion | safe}};
-        const completion = document.getElementById("completion");
-        for (const question of data) {
-            completion.innerHTML += `<div class="flashcard">
-                <div>${question.question}</div>  
-                <button>reveal answer</button>
-            </div>`;
+
+        .active-card {
+            display: block;
         }
-        completion.querySelectorAll("button").forEach((e,i)=>{
-            e.addEventListener("click",event=>{
-                e.closest(".flashcard").innerHTML += data[i].answer
+
+        .flashcard:hover {
+            background-color: azure;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+    <h1>flashcard generator</h1>
+    <p>paste in notes below for summary</p>
+    <form method="POST">
+        <textarea name="question"></textarea>
+        <input type="submit" value="send">
+    </form>
+    <div id="completion"></div>
+    <button class="next-card">next</button>
+    <script>
+        const { data } = {
+            "data": [
+                {
+                    "question": "What is overfitting in machine learning?",
+                    "answer": "Overfitting is when a model fits too closely to the training data and fails to generalize to new, unseen data.",
+                    "explanation": "Overfitting is undesirable because it means the model performs well on the training set but poorly on any new data, indicating it has learned noise rather than the underlying pattern."
+                },
+                {
+                    "question": "What is spurious correlation?",
+                    "answer": "Spurious correlation occurs when data appears to be related, but in reality, it is not.",
+                    "explanation": "An example is when an AI assumes an object is a cow based solely on its background color, leading to incorrect conclusions when the background changes."
+                },
+                {
+                    "question": "What are the three sets used in train/validation/test split?",
+                    "answer": "The three sets are the training set, validation set, and test set.",
+                    "explanation": "The training set is used to train the model, the validation set is used to select the best model during training, and the test set is used for final evaluation."
+                },
+                {
+                    "question": "What is the purpose of the validation set?",
+                    "answer": "The validation set is used to select the best performing model during the training process.",
+                    "explanation": "It checks how well the model is performing on unseen data, helping to prevent overfitting."
+                },
+                {
+                    "question": "How can you tell if a model is overfitting?",
+                    "answer": "A model is overfitting if it has low training loss but high validation loss.",
+                    "explanation": "This indicates the model performs well on the training data but poorly on validation data, suggesting it has learned specific details rather than general patterns."
+                },
+                {
+                    "question": "What is the role of neural networks in scaling?",
+                    "answer": "Neural networks take in a list of numbers and output a list of numbers, effectively learning from the data.",
+                    "explanation": "They scale well by adding more weights, allowing them to handle larger datasets and learn complex relationships."
+                },
+                {
+                    "question": "What do probability distributions represent?",
+                    "answer": "Probability distributions pair up events with the likelihood of them occurring.",
+                    "explanation": "All probabilities in a distribution must add up to 1, and sampling involves picking an event based on its likelihood."
+                },
+                {
+                    "question": "What are generative models?",
+                    "answer": "Generative models estimate a probability distribution for events.",
+                    "explanation": "For example, a generative model for a 6-sided die would assign probabilities to each number, and they can also handle sequential data."
+                },
+                {
+                    "question": "What are autoregressive models?",
+                    "answer": "Autoregressive models are generative models that take a sequence of inputs and produce a probability distribution over the next token in the sequence.",
+                    "explanation": "They face challenges with longer sequences due to the exponential increase in the number of possible sequences."
+                }
+            ]
+        };
+        const completion = document.getElementById("completion");
+        let activeCardIndex = 0
+        data.forEach((question, i) => {
+            completion.innerHTML += `<div class="flashcard ${i === activeCardIndex ? "active-card" : ""}"> 
+                ${question.question}
+                
+            </div>`;
+        })
+        const cards = completion.querySelectorAll(".flashcard")
+        cards.forEach((e, i) => {
+            e.addEventListener("click", event => {
+                if (e.classList.contains("revealed")) {
+                    e.classList.remove("revealed")
+                    e.innerHTML = data[i].question
+                }
+                else {
+                    e.innerHTML = data[i].answer
+                    e.classList.add("revealed")
+                }
             })
         })
-        </script>
-    </body>
+        document.querySelector(".next-card").addEventListener("click", event => {
+        const currentCard = cards[activeCardIndex]
+        currentCard.classList.remove("active-card")
+        activeCardIndex++
+        if (activeCardIndex >= cards.length) {
+            activeCardIndex = 0
+        }
+        cards[activeCardIndex].classList.add("active-card")
+
+        })
+    </script>
+</body>
+
 </html>
