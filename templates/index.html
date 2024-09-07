@@ -9,6 +9,10 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+        * {
+            box-sizing: border-box;
+        }
+
         textarea {
             width: 100%;
             height: 200px;
@@ -18,14 +22,23 @@
             font-family: "Montserrat", sans-serif;
             max-width: 600px;
             margin: 0 auto;
+            padding: 1em;
         }
 
         button,
         input[type="submit"] {
+            font-family: "Montserrat", sans-serif;
             cursor: pointer;
-            padding: 1em;
+            padding: 0.8em;
             border-radius: 5px;
             background-color: aliceblue;
+        }
+
+        .flashcard-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 300px;
         }
 
         .flashcard {
@@ -35,10 +48,23 @@
             border: 1px solid gray;
             margin: 1em;
             border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            height: 300px;
+            width: 450px;
+            font-size: 1.8em;
+            text-align: center;
+        }
+
+        .revealed {
+            font-size: 1.2em;
+        }
+
+        .flashcard-content {
         }
 
         .active-card {
-            display: block;
+            display: flex;
         }
 
         .flashcard:hover {
@@ -55,9 +81,14 @@
         <textarea name="question"></textarea>
         <input type="submit" value="send">
     </form>
-    <div id="completion"></div>
-    <button class="next-card">next</button>
+    <div class="flashcard-container">
+        <button class="previous-card">⬅️</button>
+        <div id="completion"></div>
+        <button class="next-card">➡️</button>
+    </div>
     <script>
+        //TODO: restore actual data
+        //https://github.com/Max-coder123/flashai/commit/6582912ac0fc78ca266df94441dbf68f2210ce11#diff-37a968442c22648ceb4a16069820cc5350b97e50f45f26c5442d7c036ad743d2L34
         const { data } = {
             "data": [
                 {
@@ -111,7 +142,7 @@
         let activeCardIndex = 0
         data.forEach((question, i) => {
             completion.innerHTML += `<div class="flashcard ${i === activeCardIndex ? "active-card" : ""}"> 
-                ${question.question}
+                <div class="flashcard-content">${question.question}</div>
                 
             </div>`;
         })
