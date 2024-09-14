@@ -42,7 +42,7 @@
         .flashcard-container {
             margin-top: 1em;
             display: flex;
-            justify-content: space-around;
+            justify-content: space-between;
             align-items: center;
             height: 300px;
         }
@@ -102,64 +102,17 @@
     <script>
         //TODO: restore actual data
         //https://github.com/Max-coder123/flashai/commit/6582912ac0fc78ca266df94441dbf68f2210ce11#diff-37a968442c22648ceb4a16069820cc5350b97e50f45f26c5442d7c036ad743d2L34
-        const { data } = {
-            "data": [
-                {
-                    "question": "What is overfitting in machine learning?",
-                    "answer": "Overfitting is when a model fits too closely to the training data and fails to generalize to new, unseen data.",
-                    "explanation": "Overfitting is undesirable because it means the model performs well on the training set but poorly on any new data, indicating it has learned noise rather than the underlying pattern."
-                },
-                {
-                    "question": "What is spurious correlation?",
-                    "answer": "Spurious correlation occurs when data appears to be related, but in reality, it is not.",
-                    "explanation": "An example is when an AI assumes an object is a cow based solely on its background color, leading to incorrect conclusions when the background changes."
-                },
-                {
-                    "question": "What are the three sets used in train/validation/test split?",
-                    "answer": "The three sets are the training set, validation set, and test set.",
-                    "explanation": "The training set is used to train the model, the validation set is used to select the best model during training, and the test set is used for final evaluation."
-                },
-                {
-                    "question": "What is the purpose of the validation set?",
-                    "answer": "The validation set is used to select the best performing model during the training process.",
-                    "explanation": "It checks how well the model is performing on unseen data, helping to prevent overfitting."
-                },
-                {
-                    "question": "How can you tell if a model is overfitting?",
-                    "answer": "A model is overfitting if it has low training loss but high validation loss.",
-                    "explanation": "This indicates the model performs well on the training data but poorly on validation data, suggesting it has learned specific details rather than general patterns."
-                },
-                {
-                    "question": "What is the role of neural networks in scaling?",
-                    "answer": "Neural networks take in a list of numbers and output a list of numbers, effectively learning from the data.",
-                    "explanation": "They scale well by adding more weights, allowing them to handle larger datasets and learn complex relationships."
-                },
-                {
-                    "question": "What do probability distributions represent?",
-                    "answer": "Probability distributions pair up events with the likelihood of them occurring.",
-                    "explanation": "All probabilities in a distribution must add up to 1, and sampling involves picking an event based on its likelihood."
-                },
-                {
-                    "question": "What are generative models?",
-                    "answer": "Generative models estimate a probability distribution for events.",
-                    "explanation": "For example, a generative model for a 6-sided die would assign probabilities to each number, and they can also handle sequential data."
-                },
-                {
-                    "question": "What are autoregressive models?",
-                    "answer": "Autoregressive models are generative models that take a sequence of inputs and produce a probability distribution over the next token in the sequence.",
-                    "explanation": "They face challenges with longer sequences due to the exponential increase in the number of possible sequences."
-                }
-            ]
-        };
-        const completion = document.getElementById("completion");
+        const {data} = {{completion | safe}};
+
+        const completionEl = document.getElementById("completion");
         let activeCardIndex = 0
         data.forEach((question, i) => {
-            completion.innerHTML += `<div class="flashcard ${i === activeCardIndex ? "active-card" : ""}"> 
+            completionEl.innerHTML += `<div class="flashcard ${i === activeCardIndex ? "active-card" : ""}"> 
                 <div class="flashcard-content">${question.question}</div>
                 
             </div>`;
         })
-        const cards = completion.querySelectorAll(".flashcard")
+        const cards = completionEl.querySelectorAll(".flashcard")
         cards.forEach((e, i) => {
             e.addEventListener("click", event => {
                 if (e.classList.contains("revealed")) {
