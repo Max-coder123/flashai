@@ -25,6 +25,11 @@
             padding: 1em;
         }
 
+        h1,
+        p {
+            text-align: center;
+        }
+
         button,
         input[type="submit"] {
             font-family: "Montserrat", sans-serif;
@@ -35,8 +40,9 @@
         }
 
         .flashcard-container {
+            margin-top: 1em;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             height: 300px;
         }
@@ -51,7 +57,7 @@
             justify-content: center;
             align-items: center;
             height: 300px;
-            width: 450px;
+            width: 400px;
             font-size: 1.8em;
             text-align: center;
         }
@@ -60,11 +66,15 @@
             font-size: 1.2em;
         }
 
-        .flashcard-content {
-        }
+        .flashcard-content {}
 
         .active-card {
             display: flex;
+        }
+
+        .card-index {
+            text-align: center;
+            padding: 0.5em;
         }
 
         .flashcard:hover {
@@ -86,6 +96,9 @@
         <div id="completion"></div>
         <button class="next-card">➡️</button>
     </div>
+    <div class="card-index"></div>
+
+
     <script>
         //TODO: restore actual data
         //https://github.com/Max-coder123/flashai/commit/6582912ac0fc78ca266df94441dbf68f2210ce11#diff-37a968442c22648ceb4a16069820cc5350b97e50f45f26c5442d7c036ad743d2L34
@@ -159,6 +172,14 @@
                 }
             })
         })
+
+        const cardIndexEl = document.querySelector(".card-index");
+        function updateCardIndex() {
+            //cardIndexEl.textContent = (activeCardIndex + 1) + "/" + cards.length
+            cardIndexEl.textContent = `${activeCardIndex + 1}/${cards.length}`
+        }
+        updateCardIndex()
+
         document.querySelector(".next-card").addEventListener("click", event => {
             const currentCard = cards[activeCardIndex]
             currentCard.classList.remove("active-card")
@@ -166,6 +187,19 @@
             if (activeCardIndex >= cards.length) {
                 activeCardIndex = 0
             }
+            updateCardIndex()
+            cards[activeCardIndex].classList.add("active-card")
+
+        })
+
+        document.querySelector(".previous-card").addEventListener("click", event => {
+            const currentCard = cards[activeCardIndex]
+            currentCard.classList.remove("active-card")
+            activeCardIndex--
+            if (activeCardIndex <= 0) {
+                activeCardIndex = cards.length - 1
+            }
+            updateCardIndex()
             cards[activeCardIndex].classList.add("active-card")
 
         })
