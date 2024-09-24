@@ -1,6 +1,7 @@
 import os
 import requests
 import sys
+import json
 from dotenv import load_dotenv
 from flask import Flask, request, render_template
 
@@ -18,7 +19,7 @@ def fetch_completion(content):
         "model": "gpt-4o-mini",
         "messages": messages,
         "temperature": 0.5,
-        "max_tokens": 1000,
+        "max_tokens": 5000,
         "response_format": {"type": "json_object"},
     }
 

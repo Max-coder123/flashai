@@ -13,16 +13,30 @@
             box-sizing: border-box;
         }
 
+        body {
+            font-family: "Montserrat", sans-serif;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Full screen height */
+        }
+
+        .taskbar {
+            width: 15%;
+            background-color: #f0f0f0;
+            padding: 1em;
+            border-right: 2px solid #ccc;
+        }
+
+        .main-content {
+            width: 85%;
+            padding: 2em;
+            overflow-y: auto;
+        }
+
         textarea {
             width: 100%;
             height: 200px;
-        }
-
-        body {
-            font-family: "Montserrat", sans-serif;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 1em;
         }
 
         h1,
@@ -39,6 +53,11 @@
             background-color: aliceblue;
         }
 
+        button:hover, input[type="submit"]:hover {
+            background-color: lightblue;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
         .flashcard-container {
             margin-top: 1em;
             display: flex;
@@ -48,115 +67,155 @@
         }
 
         .flashcard {
+            perspective: 1000px;
+            width: 600px;
+            height: 375px;
             display: none;
-            cursor: pointer;
-            padding: 1em;
-            border: 1px solid gray;
-            margin: 1em;
-            border-radius: 10px;
             justify-content: center;
             align-items: center;
-            height: 300px;
-            width: 400px;
-            font-size: 1.8em;
-            text-align: center;
+            
         }
-
-        .revealed {
-            font-size: 1.2em;
-        }
-
-        .flashcard-content {}
 
         .active-card {
+        display: flex; /* Show the active flashcard */
+        position: relative;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flip .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            border: 1px solid gray;
+            border-radius: 10px;
+            padding: 1em;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1.75em;
+        }
+
+        .flashcard-front {
+            background-color: aliceblue;
+        }
+
+        .flashcard-back {
+            background-color: aliceblue;
+            transform: rotateY(180deg);
         }
 
         .card-index {
             text-align: center;
-            padding: 0.5em;
-        }
-
-        .flashcard:hover {
-            background-color: azure;
+            padding: 2em;
+            font-size: 1.2em;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-    <h1>flashcard generator</h1>
-    <p>paste in notes below for summary</p>
-    <form method="POST">
-        <textarea name="question"></textarea>
-        <input type="submit" value="send">
-    </form>
-    <div class="flashcard-container">
-        <button class="previous-card">⬅️</button>
-        <div id="completion"></div>
-        <button class="next-card">➡️</button>
+    <!-- Taskbar Section -->
+    <div class="taskbar">
+        <!-- Empty for now, but this is where navigation or other content can be added -->
     </div>
-    <div class="card-index"></div>
 
+    <!-- Main content section -->
+    <div class="main-content">
+        <h1>flashcard generator</h1>
+        <p>paste in notes below for summary</p>
+        <form method="POST">
+            <textarea name="question"></textarea>
+            <input type="submit" value="send">
+        </form>
+        <div class="flashcard-container">
+            <button class="previous-card"><</button>
+            <div id="completion"></div>
+            <button class="next-card">></button>
+        </div>
+        <div class="card-index"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
     <script>
-        //TODO: restore actual data
-        //https://github.com/Max-coder123/flashai/commit/6582912ac0fc78ca266df94441dbf68f2210ce11#diff-37a968442c22648ceb4a16069820cc5350b97e50f45f26c5442d7c036ad743d2L34
+        // Example data for demo purposes
         const {data} = {{completion | safe}};
 
         const completionEl = document.getElementById("completion");
-        let activeCardIndex = 0
-        data.forEach((question, i) => {
-            completionEl.innerHTML += `<div class="flashcard ${i === activeCardIndex ? "active-card" : ""}"> 
-                <div class="flashcard-content">${question.question}</div>
-                
+        let activeCardIndex = 0;
+
+        // Render flashcards with front and back sides
+        data.forEach((item, i) => {
+            completionEl.innerHTML += `
+            <div class="flashcard ${i === activeCardIndex ? "active-card" : ""}">
+                <div class="flashcard-inner">
+                    <div class="flashcard-front">
+                        <div class="flashcard-content">${item.question}</div>
+                    </div>
+                    <div class="flashcard-back">
+                        <div class="flashcard-content">${item.answer}</div>
+                    </div>
+                </div>
             </div>`;
-        })
-        const cards = completionEl.querySelectorAll(".flashcard")
-        cards.forEach((e, i) => {
-            e.addEventListener("click", event => {
-                if (e.classList.contains("revealed")) {
-                    e.classList.remove("revealed")
-                    e.innerHTML = data[i].question
-                }
-                else {
-                    e.innerHTML = data[i].answer
-                    e.classList.add("revealed")
-                }
-            })
-        })
+        });
+
+        const cards = document.querySelectorAll('.flashcard');
+
+        // Add click event to flip the flashcard
+        cards.forEach((card, i) => {
+            card.addEventListener('click', () => {
+                card.classList.toggle('flip');
+            });
+        });
 
         const cardIndexEl = document.querySelector(".card-index");
+
         function updateCardIndex() {
-            //cardIndexEl.textContent = (activeCardIndex + 1) + "/" + cards.length
-            cardIndexEl.textContent = `${activeCardIndex + 1}/${cards.length}`
+            cardIndexEl.textContent = `${activeCardIndex + 1}/${cards.length}`;
         }
-        updateCardIndex()
 
-        document.querySelector(".next-card").addEventListener("click", event => {
-            const currentCard = cards[activeCardIndex]
-            currentCard.classList.remove("active-card")
-            activeCardIndex++
+        updateCardIndex();
+
+        // Move to the next card
+        document.querySelector(".next-card").addEventListener("click", () => {
+            const currentCard = cards[activeCardIndex];
+            currentCard.classList.remove("active-card");
+            activeCardIndex++;
             if (activeCardIndex >= cards.length) {
-                activeCardIndex = 0
+                activeCardIndex = 0;
             }
-            updateCardIndex()
-            cards[activeCardIndex].classList.add("active-card")
+            updateCardIndex();
+            cards[activeCardIndex].classList.add("active-card");
+        });
 
-        })
-
-        document.querySelector(".previous-card").addEventListener("click", event => {
-            const currentCard = cards[activeCardIndex]
-            currentCard.classList.remove("active-card")
-            activeCardIndex--
-            if (activeCardIndex <= 0) {
-                activeCardIndex = cards.length - 1
+        // Move to the previous card
+        document.querySelector(".previous-card").addEventListener("click", () => {
+            const currentCard = cards[activeCardIndex];
+            currentCard.classList.remove("active-card");
+            activeCardIndex--;
+            if (activeCardIndex < 0) {
+                activeCardIndex = cards.length - 1;
             }
-            updateCardIndex()
-            cards[activeCardIndex].classList.add("active-card")
-
-        })
+            updateCardIndex();
+            cards[activeCardIndex].classList.add("active-card");
+        });
     </script>
 </body>
 
 </html>
+
+
