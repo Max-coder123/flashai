@@ -4,7 +4,7 @@ import sys
 import json
 import uuid
 from dotenv import load_dotenv
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, request_tearing_down, url_for
 
 load_dotenv()  # take environment variables from .env.
 if not os.environ.get("OPENAI_API_KEY"):
@@ -120,14 +120,14 @@ def clear_history():
             json.dump([], file)  # Clear history by writing an empty list
     return render_template("history.html", history=[])  # Return an empty history view
 
+
 @app.route("/flashcards/<flashcard_id>")
 def view_flashcards(flashcard_id):
     flashcards_history = load_flashcard_history()
     flashcard_set = next((entry for entry in flashcards_history if entry["id"] == flashcard_id), None)
     if not flashcard_set:
         return "Flashcards not found", 404
-    # Pass the flashcards as 'data' to match the index.html template structure
-    return render_template("view_flashcards.html", flashcard_set=flashcard_set, completion=flashcard_set["flashcards"])
+    return render_template("view_flashcards.html", flashcard_set=flashcard_set)
 
 if __name__ == "__main__":
     app.run(debug=True)
