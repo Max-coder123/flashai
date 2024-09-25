@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard History</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .taskbar {
+            width: 15%;
+            background-color: aliceblue;
+            padding: 1em;
+        }
+
+        .taskbar a {
+            display: block;
+            padding: 10px;
+            text-align: center;
+            font-family: "Montserrat", sans-serif;
+            text-decoration: none;
+            background-color: transparent;
+            border: 1px solid rgba(0, 0, 0, 0);
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 5px;
+            font-weight: bolder;
+            color: black;
+            font-size: 1.1em;
+        }
+
+        .taskbar a:hover {
+            background-color: lightblue;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            font-weight: bolder;
+            color: black;
+            border-radius: 5px;
+        }
+
+        .main-content {
+            width: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .flashcard-project {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            width: 100%;
+            background-color: aliceblue;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .clear-history-btn {
+            background-color: blue;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .clear-history-btn:hover {
+            background-color: darkblue;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Taskbar Section -->
+    <div class="taskbar">
+        <a href="/">Home</a>
+        <br>
+        <a href="/history">View History</a>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="main-content">
+        <h1>Flashcard History</h1>
+        <div id="history-section">
+            <!-- Loop through flashcard history entries -->
+            {% for entry in history %}
+            <div class="flashcard-project">
+                <h2>Project: {{ entry.input[:100] }}...</h2>
+                <a href="/flashcards/{{ entry.id }}">
+                    <button>View Flashcards</button>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Clear history button -->
+        <form method="POST" action="/clear-history">
+            <button type="submit" class="clear-history-btn">Clear All Flashcard History</button>
+        </form>
+    </div>
+</body>
+
+</html>

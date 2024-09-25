@@ -5,95 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flashcard generator</title>
-    <link rel="icon" href="https://fav.farm/💩" />
+    <title>Flashcards View</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Montserrat", sans-serif;
-            display: flex;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            /* Full screen height */
-        }
-
-        .taskbar {
-            width: 15%;
-            background-color: aliceblue;
-            padding: 1em;
-        }
-
-        .taskbar a {
-            display: block;
-            padding: 10px;
-            text-align: center;
-            font-family: "Montserrat", sans-serif;
-            text-decoration: none;
-            background-color: transparent;
-            /* Keep background transparent */
-            border: 1px solid rgba(0, 0, 0, 0);
-            /* Invisible border for spacing */
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 5px;
-            font-weight: bolder;
-            color: black;
-            font-size: 1.1em
-        }
-
-        .taskbar a:hover {
-            background-color: lightblue;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            font-weight: bolder;
-            color: black;
-            border-radius: 5px;
-            font-size: 1.1em;
-        }
-
-
-        .main-content {
-            width: 85%;
-            padding: 2em;
-            overflow-y: auto;
-        }
-
-        textarea {
-            padding: 10px;
-            width: 100%;
-            height: 200px;
-            border: none;
-            background-color: aliceblue;
-            border-radius: 10px;
-            box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
-            resize: none;
-            outline: none;
-        }
-
-        h1,
-        p {
-            text-align: center;
-        }
-
-        button,
-        input[type="submit"] {
-            font-family: "Montserrat", sans-serif;
-            cursor: pointer;
-            padding: 0.8em;
-            border-radius: 5px;
-            background-color: aliceblue;
-        }
-
-        button:hover,
-        input[type="submit"]:hover {
-            background-color: lightblue;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
         .flashcard-container {
             margin-top: 1em;
             display: flex;
@@ -110,12 +23,10 @@
             display: none;
             justify-content: center;
             align-items: center;
-
         }
 
         .active-card {
             display: flex;
-            /* Show the active flashcard */
             position: relative;
         }
 
@@ -156,93 +67,59 @@
             transform: rotateX(180deg);
         }
 
-        .card-index {
-            text-align: center;
-            padding: 2em;
-            font-size: 1.2em;
-        }
-
         .previous-card svg,
         .next-card svg {
             width: 24px;
-            /* Control the size of the SVG */
             height: 24px;
             fill: black;
-            /* SVG arrow color */
-            text-align: center;
         }
 
         .previous-card:hover,
         .next-card:hover {
             background-color: lightblue;
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        /* Add margin to space out the buttons */
-        .previous-card {
-            margin-right: 20px;
-            text-align: center;
-        }
-
-        .next-card {
-            margin-left: 20px;
-            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <!-- Taskbar Section -->
-    <div class="taskbar">
-        <a href="/">Home</a>
-        <br>
-        <a href="/history">View History</a>
+    <h1>Flashcards for: {{ flashcard_set.input }}</h1>
+
+    <div class="flashcard-container">
+        <button id="previousCard" class="previous-card" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+            </svg>
+        </button>
+        <div id="completion"></div>
+        <button id="nextCard" class="next-card" style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+            </svg>
+        </button>
     </div>
 
-    <!-- Main content section -->
-    <div class="main-content">
-        <h1>flashcard generator</h1>
-        <p>paste in notes below for summary</p>
-        <form method="POST">
-            <textarea name="question" placeholder="paste your text here..."></textarea>
-            <input type="submit" value="send">
-        </form>
-        <div class="flashcard-container">
-            <button id="previousCard" class="previous-card" style="display: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                </svg>
-            </button>
-            <div id="completion"></div>
-            <button id="nextCard" class="next-card" style="display: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-                </svg>
-            </button>
-        </div>
-        <div class="card-index"></div>
-    </div>
+    <div class="card-index"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <a href="/history">Back to History</a>
 
     <script>
-        // Example data for demo purposes
         const completionEl = document.getElementById("completion");
         const prevButton = document.getElementById("previousCard");
         const nextButton = document.getElementById("nextCard");
         let activeCardIndex = 0;
 
-        const { data } = {{ completion | safe}};
+        // Use the flashcards data passed from Flask
+        const data = {{ completion | tojson }};
 
         function renderFlashcards() {
             if (data.length === 0) {
                 prevButton.style.display = "none";
                 nextButton.style.display = "none";
-            }
-            else {
+            } else {
                 prevButton.style.display = "inline-block";
                 nextButton.style.display = "inline-block";
+
                 // Render flashcards with front and back sides
                 data.forEach((item, i) => {
                     completionEl.innerHTML += `
@@ -276,8 +153,8 @@
         }
 
         renderFlashcards();
-        const cards = document.querySelectorAll('.flashcard');  // Get flashcards after rendering
-        updateCardIndex(cards);
+        const cards = document.querySelectorAll('.flashcard');
+        updateCardIndex();
 
         // Move to the next card
         document.querySelector(".next-card").addEventListener("click", () => {
