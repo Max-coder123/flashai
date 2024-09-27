@@ -1,11 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>flashcard generator</title>
+    <title>Flashcard Generator</title>
     <link rel="icon" href="https://fav.farm/💩" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
@@ -16,91 +15,156 @@
 
         body {
             font-family: "Montserrat", sans-serif;
-            display: flex;
             margin: 0;
             padding: 0;
             height: 100vh;
-            /* Full screen height */
+            background-color: #F5F5F5;
+            /* Off-white background for the main page */
+            color: #0e0f23;
+            /* Dark text for readability */
+            display: flex;
         }
 
+        /* Top Taskbar Styling */
+        .top-taskbar {
+            width: 100%;
+            height: 60px;
+            /* About 1 inch */
+            background-color: #dee7ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Optional shadow for separation */
+            position: fixed;
+            /* Keeps it fixed at the top */
+            top: 0;
+            z-index: 10;
+            border-bottom: 0.1px solid #A0A4B8;
+        }
+
+        /* Taskbar (Left) Styling */
         .taskbar {
             width: 15%;
-            background-color: aliceblue;
-            padding: 1em;
+            background-color: #dee7ec;
+            padding: 1.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 0.01px grey;
+            position: fixed;
+            top: 60px;
+            /* Move it down below the top taskbar */
+            bottom: 0;
+            height: calc(100vh - 60px);
+            /* Adjust height to account for the top taskbar */
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            width: 85%;
+            padding: 3em;
+            overflow-y: auto;
+            background-color: #F2F6FA;
+            margin-left: 15%;
+            /* Account for the left taskbar */
+            margin-top: 60px;
+            /* Account for the top taskbar */
+            border-left: 0.1px solid #A0A4B8;
+            position: relative;
+            top: 0;
         }
 
         .taskbar a {
             display: block;
-            padding: 10px;
+            width: 100%;
+            /* Ensures buttons are the same size */
+            padding: 12px 0;
             text-align: center;
             font-family: "Montserrat", sans-serif;
             text-decoration: none;
+            color: #031738;
+            /* Blue for links */
             background-color: transparent;
-            /* Keep background transparent */
-            border: 1px solid rgba(0, 0, 0, 0);
-            /* Invisible border for spacing */
+            border-radius: 8px;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 5px;
-            font-weight: bolder;
-            color: black;
-            font-size: 1.1em
-        }
-
-        .taskbar a:hover {
-            background-color: lightblue;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            font-weight: bolder;
-            color: black;
-            border-radius: 5px;
+            font-weight: 600;
             font-size: 1.1em;
         }
 
-
-        .main-content {
-            width: 85%;
-            padding: 2em;
-            overflow-y: auto;
+        .taskbar a:hover {
+            background-color: #031738;
+            /* Blue hover effect */
+            color: #e6e5e7;
+            /* Keep text white on hover */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        textarea {
-            padding: 10px;
-            width: 100%;
-            height: 200px;
-            border: none;
-            background-color: aliceblue;
-            border-radius: 10px;
-            box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
-            resize: none;
-            outline: none;
+        h1 {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #031738;
+            /* Dark navy text */
         }
 
-        h1,
         p {
             text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: #031738;
+            /* Blue for text */
         }
 
+        /* Textarea Styling */
+        textarea {
+            width: 100%;
+            height: 180px;
+            padding: 15px;
+            background-color: #dee7ec;
+            /* Light gray for text area background */
+            color: #031738;
+            /* Dark navy text */
+            border-radius: 10px;
+            border: 2px solid #A0A4B8;
+            /* Subtle gray border */
+            box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+            resize: none;
+            outline: none;
+            font-size: 1.1em;
+        }
+
+        /* Button Styling */
         button,
         input[type="submit"] {
+            background-color: #031738;
+            /* Blue for buttons */
+            color: #e6e5e7;
+            /* White text */
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
             font-family: "Montserrat", sans-serif;
+            font-size: 1.1em;
             cursor: pointer;
-            padding: 0.8em;
-            border-radius: 5px;
-            background-color: aliceblue;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         button:hover,
         input[type="submit"]:hover {
-            background-color: lightblue;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #7FC29B;
+            /* Soft mint hover effect */
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
 
+        /* Flashcard Container */
         .flashcard-container {
-            margin-top: 1em;
+            margin-top: 2em;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 300px;
-            gap: 10px;
+            gap: 15px;
         }
 
         .flashcard {
@@ -110,17 +174,15 @@
             display: none;
             justify-content: center;
             align-items: center;
-
+            border: rgba(0, 0, 0, 0.2);
         }
 
         .active-card {
             display: flex;
-            /* Show the active flashcard */
             position: relative;
         }
 
         .flashcard-inner {
-            position: relative;
             width: 100%;
             height: 100%;
             transition: transform 0.6s;
@@ -142,57 +204,78 @@
             align-items: center;
             text-align: center;
             border-radius: 10px;
-            padding: 1em;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 1.75em;
-        }
-
-        .flashcard-front {
-            background-color: aliceblue;
+            padding: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 1.5em;
+            background-color: #f2f5f8;
+            /* White for flashcards */
+            color: #031738;
+            /* Dark navy text */
+            border: 1.5px solid #031738;
         }
 
         .flashcard-back {
-            background-color: aliceblue;
             transform: rotateX(180deg);
         }
 
-        .card-index {
-            text-align: center;
-            padding: 2em;
-            font-size: 1.2em;
-        }
-
+        /* Card Navigation Buttons */
         .previous-card svg,
         .next-card svg {
-            width: 24px;
-            /* Control the size of the SVG */
-            height: 24px;
-            fill: black;
-            /* SVG arrow color */
-            text-align: center;
+            width: 28px;
+            height: 28px;
+            fill: #F5F5F5;
+            /* White icons */
         }
 
         .previous-card:hover,
         .next-card:hover {
-            background-color: lightblue;
+            background-color: #031738;
+            /* Blue hover effect */
             box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-            text-align: center;
         }
 
-        /* Add margin to space out the buttons */
         .previous-card {
             margin-right: 20px;
-            text-align: center;
+            background-color: #031738;
+            /* Light gray */
+            padding: 10px;
+            border-radius: 50%;
         }
 
         .next-card {
             margin-left: 20px;
+            background-color: #031738;
+            /* Light gray */
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        /* Card Index */
+        .card-index {
             text-align: center;
+            padding: 2em;
+            font-size: 1.2em;
+            color: #031738;
         }
     </style>
 </head>
 
+
+
 <body>
+
+    <!-- Top Taskbar Section -->
+    <div class="top-taskbar">
+        <!-- future logo 0-->
+    </div>
+
+    <!-- Taskbar Section (left) -->
+    <div class="taskbar">
+        <a href="/">Home</a>
+        <br>
+        <a href="/history">View History</a>
+    </div>
+
     <!-- Taskbar Section -->
     <div class="taskbar">
         <a href="/">Home</a>
@@ -203,7 +286,7 @@
     <!-- Main content section -->
     <div class="main-content">
         <h1>flashcard generator</h1>
-        <p>paste in notes below for summary</p>
+        <p>paste in notes below</p>
         <form method="POST">
             <textarea name="question" placeholder="paste your text here..."></textarea>
             <input type="submit" value="send">
