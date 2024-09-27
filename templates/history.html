@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,110 +5,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcard History</title>
+    <link rel="icon" href="https://fav.farm/💩" />
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
         * {
             box-sizing: border-box;
         }
 
         body {
+            font-family: "Montserrat", sans-serif;
             margin: 0;
             padding: 0;
-            display: flex;
             height: 100vh;
-            font-family: "Montserrat", sans-serif;
+            background-color: #F5F5F5;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* Top Taskbar Styling */
+        .top-taskbar {
+            width: 100%;
+            height: 60px;
+            background-color: #dee7ec;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            z-index: 10;
+            border-bottom: 0.1px solid #A0A4B8;
+        }
+
+        /* Taskbar (Left) Styling */
         .taskbar {
             width: 15%;
-            background-color: aliceblue;
-            padding: 1em;
+            background-color: #dee7ec;
+            padding: 1.5em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 0.1px solid grey;
+            position: fixed;
+            top: 60px;
+            bottom: 0;
+            height: calc(100vh - 60px);
+            transition: width 0.3s ease;
+        }
+
+        .taskbar.minimized {
+            width: 60px;
         }
 
         .taskbar a {
             display: block;
-            padding: 10px;
+            width: 100%;
+            padding: 12px 0;
             text-align: center;
-            font-family: "Montserrat", sans-serif;
             text-decoration: none;
+            color: #031738;
             background-color: transparent;
-            border: 1px solid rgba(0, 0, 0, 0);
+            border-radius: 8px;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 5px;
-            font-weight: bolder;
-            color: black;
+            font-weight: 600;
             font-size: 1.1em;
         }
 
-        .taskbar a:hover {
-            background-color: lightblue;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            font-weight: bolder;
-            color: black;
-            border-radius: 5px;
+        .taskbar.minimized a span {
+            display: none;
         }
 
+        .taskbar a:hover {
+            background-color: #031738;
+            color: #e6e5e7;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Main Content Styling */
         .main-content {
             width: 85%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            text-align: center;
+            padding: 3em;
+            background-color: #F2F6FA;
+            margin-left: 15%;
+            margin-top: 60px;
+            border-left: 0.1px solid #A0A4B8;
+            transition: width 0.3s ease, margin-left 0.3s ease;
         }
 
+        .main-content.expanded {
+            margin-left: 60px;
+            width: calc(100% - 60px);
+        }
+
+        /* Toggle Button Styling */
+        #toggle-taskbar {
+            background-color: transparent;
+            border: none;
+            color: #031738;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            transition: color 0.3s ease;
+        }
+
+        #toggle-taskbar:hover {
+            color: #7FC29B;
+        }
+
+        /* Flashcard Project Styling */
         .flashcard-project {
             margin-bottom: 20px;
             padding: 20px;
-            border: 1px solid #ccc;
+            border: 1.5px solid #031738;
             border-radius: 8px;
-            width: 100%;
-            background-color: aliceblue;
+            width: 80%;
+            background-color: #f2f5f8;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
 
-        .clear-history-btn {
-            background-color: blue;
-            color: white;
-            padding: 10px 20px;
+        .flashcard-project button {
+            background-color: #031738;
+            color: #e6e5e7;
             border: none;
-            border-radius: 5px;
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
+            font-family: "Montserrat", sans-serif;
             font-size: 1em;
             cursor: pointer;
-            margin-top: 20px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .clear-history-btn:hover {
-            background-color: darkblue;
-        }
-
-        h1 {
-            margin-bottom: 30px;
-        }
-
-        button {
-            cursor: pointer;
-        }
-
-        a {
-            text-decoration: none;
-            color: black;
+        .flashcard-project button:hover {
+            background-color: #7FC29B;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
     </style>
 </head>
 
 <body>
-    <!-- Taskbar Section -->
-    <div class="taskbar">
-        <a href="/">Home</a>
+
+    <!-- Top Taskbar Section -->
+    <div class="top-taskbar">
+        <!-- future logo -->
+    </div>
+
+    <!-- Taskbar Section (Left) -->
+    <div class="taskbar" id="taskbar">
+        <button id="toggle-taskbar">☰</button>
+        <a href="/"><span>Home</span></a>
         <br>
-        <a href="/history">View History</a>
+        <a href="/history"><span>View History</span></a>
     </div>
 
     <!-- Main Content Section -->
-    <div class="main-content">
+    <div class="main-content" id="main-content">
         <h1>Flashcard History</h1>
         <div id="history-section">
-            <!-- Loop through flashcard history entries -->
             {% for entry in history %}
             <div class="flashcard-project">
                 <h2>Project: {{ entry.input[:100] }}...</h2>
@@ -125,6 +177,18 @@
             <button type="submit" class="clear-history-btn">Clear All Flashcard History</button>
         </form>
     </div>
+
+    <script>
+        const toggleButton = document.getElementById("toggle-taskbar");
+        const taskbar = document.getElementById("taskbar");
+        const mainContent = document.getElementById("main-content");
+
+        toggleButton.addEventListener("click", function () {
+            taskbar.classList.toggle("minimized");
+            mainContent.classList.toggle("expanded");
+        });
+    </script>
+
 </body>
 
 </html>
