@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcard History</title>
-    <link rel="icon" href="https://fav.farm/💩" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="https://fav.farm/⚙️" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -20,48 +21,142 @@
             height: 100vh;
             background-color: #F5F5F5;
             display: flex;
-            flex-direction: column;
         }
 
         /* Top Taskbar Styling */
         .top-taskbar {
-            width: 100%;
+            width: 100vw;
             height: 60px;
             background-color: #dee7ec;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-left: 15px;
             position: fixed;
             top: 0;
             z-index: 10;
             border-bottom: 0.1px solid #A0A4B8;
         }
 
+        .top-taskbar img {
+            height: 80px;
+            margin-right: 20px;
+            filter: brightness(0) saturate(100%) invert(17%) sepia(86%) saturate(1226%) hue-rotate(179deg) brightness(90%) contrast(92%);
+        }
+
         /* Taskbar (Left) Styling */
         .taskbar {
-            width: 15%;
+            width: 10vw;
             background-color: #dee7ec;
-            padding: 1.5em;
+            padding: 1em;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border-right: 0.1px solid grey;
+            border-right: 0.01px grey;
             position: fixed;
             top: 60px;
             bottom: 0;
             height: calc(100vh - 60px);
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
         }
 
         .taskbar.minimized {
             width: 60px;
+            align-items: center;
+        }
+
+        .taskbar.minimized a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .taskbar a i {
+            margin-right: 12px;
+        }
+
+        .taskbar.minimized a i {
+            margin-right: 0;
+        }
+
+        .taskbar.minimized a span {
+            display: none;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            /* Prevent overall body scroll */
+        }
+
+        /* Main Content Styling */
+        .main-content {
+            width: calc(100% - 10vw);
+            /* Adjust based on taskbar size (10vw here) */
+            padding-bottom: 2em;
+            padding-top: 2em;
+            background-color: #F2F6FA;
+            margin-left: 10vw;
+            /* Align content relative to taskbar */
+            margin-top: 60px;
+            /* Space for top taskbar */
+            border-left: 0.1px solid #A0A4B8;
+            position: relative;
+            top: 0;
+            transition: width 0.4s, margin-left 0.4s ease;
+
+            /* Flexbox properties to center content */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+        }
+
+        h1 {
+            margin-top: 2em;
+            /* Add extra margin to prevent cutting off due to the taskbar */
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #031738;
+            text-align: center;
+        }
+
+        #history-section {
+            width: 100%;
+            /* Ensure full width for centering */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* Center the flashcards */
+        }
+
+
+        form {
+            margin-top: 20px;
+            /* Add spacing between history list and form */
+        }
+
+        .main-content.expanded {
+            width: calc(100% - 60px);
+            margin-left: 60px;
         }
 
         .taskbar a {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12px;
             width: 100%;
-            padding: 12px 0;
-            text-align: center;
+            height: 48px;
+            font-family: "Montserrat", sans-serif;
             text-decoration: none;
             color: #031738;
             background-color: transparent;
@@ -69,47 +164,13 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             font-weight: 600;
             font-size: 1.1em;
-        }
-
-        .taskbar.minimized a span {
-            display: none;
+            box-sizing: border-box;
         }
 
         .taskbar a:hover {
             background-color: #031738;
             color: #e6e5e7;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Main Content Styling */
-        .main-content {
-            width: 85%;
-            padding: 3em;
-            background-color: #F2F6FA;
-            margin-left: 15%;
-            margin-top: 60px;
-            border-left: 0.1px solid #A0A4B8;
-            transition: width 0.3s ease, margin-left 0.3s ease;
-        }
-
-        .main-content.expanded {
-            margin-left: 60px;
-            width: calc(100% - 60px);
-        }
-
-        /* Toggle Button Styling */
-        #toggle-taskbar {
-            background-color: transparent;
-            border: none;
-            color: #031738;
-            cursor: pointer;
-            font-size: 1.2em;
-            margin-bottom: 1em;
-            transition: color 0.3s ease;
-        }
-
-        #toggle-taskbar:hover {
-            color: #7FC29B;
         }
 
         /* Flashcard Project Styling */
@@ -140,6 +201,23 @@
             background-color: #7FC29B;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
+
+        .clear-history-btn {
+            background-color: #031738;
+            color: #e6e5e7;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .clear-history-btn:hover {
+            background-color: #7FC29B;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 
@@ -147,18 +225,32 @@
 
     <!-- Top Taskbar Section -->
     <div class="top-taskbar">
-        <!-- future logo -->
+        <!-- Replace the logo source with your image path if necessary -->
+        <img src="data:image/png;base64,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"
+            alt="FlashAI Logo" style="filter: brightness(0) invert(0);">
     </div>
 
-    <!-- Taskbar Section (Left) -->
+    <!-- Taskbar Section (left) -->
     <div class="taskbar" id="taskbar">
-        <button id="toggle-taskbar">☰</button>
-        <a href="/"><span>Home</span></a>
+        <!-- Toggle Button -->
+        <a href="javascript:void(0)" id="toggle-taskbar">
+            <i class="fas fa-bars"></i> <!-- Toggle Icon -->
+            <span>Toggle</span> <!-- Text only visible when not minimized -->
+        </a>
         <br>
-        <a href="/history"><span>View History</span></a>
+        <!-- Existing Links -->
+        <a href="/">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <br>
+        <a href="/history">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+        </a>
     </div>
 
-    <!-- Main Content Section -->
+    <!-- Main content section -->
     <div class="main-content" id="main-content">
         <h1>Flashcard History</h1>
         <div id="history-section">
@@ -179,16 +271,11 @@
     </div>
 
     <script>
-        const toggleButton = document.getElementById("toggle-taskbar");
-        const taskbar = document.getElementById("taskbar");
-        const mainContent = document.getElementById("main-content");
-
-        toggleButton.addEventListener("click", function () {
-            taskbar.classList.toggle("minimized");
-            mainContent.classList.toggle("expanded");
+        // Toggle taskbar functionality
+        document.getElementById('toggle-taskbar').addEventListener('click', function () {
+            const taskbar = document.getElementById('taskbar');
+            const mainContent = document.getElementById('main-content');
+            taskbar.classList.toggle('minimized');
+            mainContent.classList.toggle('expanded');
         });
     </script>
-
-</body>
-
-</html>

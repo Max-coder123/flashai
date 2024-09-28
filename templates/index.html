@@ -27,7 +27,7 @@
 
         /* Top Taskbar Styling */
         .top-taskbar {
-            width: 100%;
+            width: 100vw;
             height: 60px;
             background-color: #dee7ec;
             display: flex;
@@ -42,6 +42,7 @@
             /* Allow the logo to resize */
             overflow: hidden;
             /* Hide any overflow */
+            margin-left: 0px;
         }
 
 
@@ -50,16 +51,15 @@
             /* Adjust this height to fit your taskbar */
             margin-right: 20px;
             align-items: left;
-            /* Push the logo a bit from the left edge */
             filter: brightness(0) saturate(100%) invert(17%) sepia(86%) saturate(1226%) hue-rotate(179deg) brightness(90%) contrast(92%);
         }
 
         /* Taskbar (Left) Styling */
         .taskbar {
-            width: 10%;
+            width: 10vw;
             /* Changed from 15% to 10% */
             background-color: #dee7ec;
-            padding: 1.5em;
+            padding: 1em;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -340,8 +340,10 @@
             <i class="fas fa-history"></i>
             <span>History</span>
         </a>
-
-
+        <a href="/practice">
+            <i class="fas fa-gamepad"></i>
+            <span>Practice</span>
+        </a>
 
     </div>
 

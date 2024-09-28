@@ -127,15 +127,7 @@ def view_flashcards(flashcard_id):
     flashcard_set = next((entry for entry in flashcards_history if entry["id"] == flashcard_id), None)
     if not flashcard_set:
         return "Flashcards not found", 404
-    
-    # Ensure that flashcard_set contains the correct 'flashcards' structure
-    flashcards = flashcard_set.get("flashcards", None)
-    if flashcards is None:
-        return "No flashcards available for this set", 404
-
-    # Render the flashcards in the view
-    return render_template("view_flashcards.html", flashcard_set=flashcard_set, completion=flashcards)
-
+    return render_template("view_flashcards.html", flashcard_set=flashcard_set)
 
 if __name__ == "__main__":
     app.run(debug=True)
