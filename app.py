@@ -101,6 +101,9 @@ please return the following json structure:
 def history():
     flashcards_history = load_flashcard_history()
     return render_template("history.html", history=flashcards_history)
+@app.route("/practice")
+def practice():
+    return render_template("practice.html")
 
 def load_flashcard_history():
     file_path = 'flashcards_history.json'
