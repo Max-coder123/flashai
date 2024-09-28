@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcard History</title>
-    <link rel="icon" href="https://fav.farm/💩" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="https://fav.farm/⚙️" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -20,48 +21,132 @@
             height: 100vh;
             background-color: #F5F5F5;
             display: flex;
-            flex-direction: column;
         }
 
-        /* Top Taskbar Styling */
         .top-taskbar {
-            width: 100%;
+            width: 100vw;
             height: 60px;
             background-color: #dee7ec;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            padding-left: 15px;
             position: fixed;
             top: 0;
             z-index: 10;
             border-bottom: 0.1px solid #A0A4B8;
         }
 
-        /* Taskbar (Left) Styling */
+        .top-taskbar img {
+            height: 80px;
+            margin-right: 20px;
+            filter: brightness(0) saturate(100%) invert(17%) sepia(86%) saturate(1226%) hue-rotate(179deg) brightness(90%) contrast(92%);
+        }
+
         .taskbar {
-            width: 15%;
+            width: 10vw;
             background-color: #dee7ec;
-            padding: 1.5em;
+            padding: 1em;
             display: flex;
             flex-direction: column;
             align-items: center;
-            border-right: 0.1px solid grey;
+            border-right: 0.01px grey;
             position: fixed;
             top: 60px;
             bottom: 0;
             height: calc(100vh - 60px);
-            transition: width 0.3s ease;
+            transition: width 0.4s ease;
         }
 
         .taskbar.minimized {
             width: 60px;
+            align-items: center;
+        }
+
+        .taskbar.minimized a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .taskbar.minimized a i {
+            font-size: 24px;
+            line-height: 60px;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: block;
+        }
+
+        .taskbar.minimized a span {
+            display: none;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .main-content {
+            width: calc(100% - 10vw);
+            padding-bottom: 2em;
+            padding-top: 2em;
+            background-color: #F2F6FA;
+            margin-left: 10vw;
+            margin-top: 60px;
+            border-left: 0.1px solid #A0A4B8;
+            position: relative;
+            top: 0;
+            transition: width 0.4s, margin-left 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            max-height: calc(100vh - 60px);
+        }
+
+        h1 {
+            margin-top: 2em;
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #031738;
+            text-align: center;
+        }
+
+        #history-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .main-content.expanded {
+            width: calc(100% - 60px);
+            margin-left: 60px;
         }
 
         .taskbar a {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12px;
+            margin-bottom: 10px;
             width: 100%;
-            padding: 12px 0;
-            text-align: center;
+            height: 48px;
+            font-family: "Montserrat", sans-serif;
             text-decoration: none;
             color: #031738;
             background-color: transparent;
@@ -69,10 +154,7 @@
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
             font-weight: 600;
             font-size: 1.1em;
-        }
-
-        .taskbar.minimized a span {
-            display: none;
+            box-sizing: border-box;
         }
 
         .taskbar a:hover {
@@ -81,38 +163,24 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Main Content Styling */
-        .main-content {
-            width: 85%;
-            padding: 3em;
-            background-color: #F2F6FA;
-            margin-left: 15%;
-            margin-top: 60px;
-            border-left: 0.1px solid #A0A4B8;
-            transition: width 0.3s ease, margin-left 0.3s ease;
-        }
-
-        .main-content.expanded {
-            margin-left: 60px;
-            width: calc(100% - 60px);
-        }
-
-        /* Toggle Button Styling */
         #toggle-taskbar {
-            background-color: transparent;
-            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 12px;
+            margin-bottom: 10px;
             color: #031738;
+            background-color: transparent;
+            border-radius: 8px;
+            transition: color 0.3s ease;
             cursor: pointer;
             font-size: 1.2em;
-            margin-bottom: 1em;
-            transition: color 0.3s ease;
         }
 
         #toggle-taskbar:hover {
             color: #7FC29B;
         }
 
-        /* Flashcard Project Styling */
         .flashcard-project {
             margin-bottom: 20px;
             padding: 20px;
@@ -140,25 +208,51 @@
             background-color: #7FC29B;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
+
+        .clear-history-btn {
+            background-color: #031738;
+            color: #e6e5e7;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .clear-history-btn:hover {
+            background-color: #7FC29B;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 
 <body>
 
-    <!-- Top Taskbar Section -->
     <div class="top-taskbar">
-        <!-- future logo -->
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbYAAAC4CAMAAAC4qjmGAAAAAXNSR0IB2cksfwAAAAlwSFlzAAAOxAAADsQBlSsOGwAAApRQTFRFAAAAWFhYUVFRZGRkSkpK2tracnJyJiYmERERGBgYMDAwb29vvb29Pz8/GhoaWVlZ2dnZU1NTExMTUlJSiIiILS0thYWF2dnZPz8/NDQ0bGxsHBwcFhYWZ2dnhISEMDAwVVVVUFBQMTExhISEhISEvb292traHx8fYGBgLi4uoKCgOjo6MjIySkpKIyMjlZWVZWVlvr6+29vbQEBALy8vW1tbWlpaS0tLsrKyLS0tV1dX2tran5+fSEhIMzMzZ2dnaGholZWVHx8fVVVVvLy8ODg4PT09hISEiYmJiYmJJiYmSkpK2traT09PNzc3b29vampqsrKyg4ODZ2dnn5+fMzMzSEhIvb29enp6LS0tVlZW2dnZIiIiXl5eREREMjIyhISE2traY2NjcXFxoaGhKysrRkZGvLy8UlJSPT09mJiYTk5OLy8vbGxsISEhYWFhJycn2traV1dXHBwcioqKhoaGNDQ0R0dHhISETk5OMTExiIiIcHBwZWVlh4eHEhISSUlJvb29W1tbJCQkWVlZY2NjaWlpo6OjTk5OOzs7Hh4ej4+PUVFRuLi4XV1dMjIyi4uLKSkpdnZ22dnZg4ODNTU1paWlSUlJOzs7V1dXIyMjjIyMbGxsLCwsdXV12trawMDAVVVVJycnS0tLb29vGxsbT09PMjIyQUFBX19fLS0tmZmZwMDAHBwcGRkZPDw82traODg4Li4uQ0NDIiIieXl5KCgoFBQUV1dXqqqqMTExaGhoS0tLIiIi2dnZTExMQ0ND2traOjo6GxsbSkpKS0tLR0dHdnZ2kpKSWFhYT09PNjY2UVFR2traTExMZ2dnZWVloKCgqampLCwshISEw8PDdnZ22tradnZ22tra2tra2traCLVgBgAAANx0Uk5TAFK4wnUucPX//+OUKdv/2TKP/9tI8JEhyJmL/f9cKeDMrv8f///A9XD//9vWj/9Nrf+w3daPcP9X98cX/73/M/9h/3AU4Na1YSv3mQ/b1nBwK/+1H+vCFL3/M9D/mePCFNCPXC76mf/M8Hhc673/M+AIgPVmQvWtCq3wJGZwLv/CCqP1KUeeG8/g9WatGszxJfUp4HVSIdvWlPVHRfqteiPf1gp1/3rrwqb1UmT//3qgqNH69WH//7hv1hSZ+srhq7b/64UU4VKRrbjrXP/6KZkUa8Jcgx0ODzgFB0c7e10AAAypSURBVHic7Z17jFxVHcfvwbYpTW3SuOmQ7W7Npd3bh2gjce1KpRQUtEDEggRlo6QNCCm+asQKEiMaRGKNio8ItHGFitCUVouggmARNZU1IKS12i1StaA0oqQk1uyWrnvnzvmdc+553Htn7p47v+H3/aNzpvM75945n/me98yygIRQrOobIDUjwoZShA2lCBtKETaUImwoRdhQirChFGFDKcKGUoQNpQgbShE2lCJsKEXYUIqwoRRhQynChlKEDaUIG0oRNpQibChF2FCKsKEUYUMpwoZShA2lCBtKETaUImwoRdhQirChFGFDKcKGUoQNpQgbShE2lCJsKEXYUIqwoRRhQynChlKEDaUIG0oRNpQibCj1f3TMOwRs4vTkAAAAAElFTkSuQmCC">
     </div>
 
-    <!-- Taskbar Section (Left) -->
     <div class="taskbar" id="taskbar">
-        <button id="toggle-taskbar">☰</button>
-        <a href="/"><span>Home</span></a>
-        <br>
-        <a href="/history"><span>View History</span></a>
+        <a href="javascript:void(0)" id="toggle-taskbar">
+            <i class="fas fa-bars"></i>
+            <span>Toggle</span>
+        </a>
+        <a href="/">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="/history">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+        </a>
+        <a href="/practice">
+            <i class="fas fa-gamepad"></i>
+            <span>Practice</span>
+        </a>
     </div>
 
-    <!-- Main Content Section -->
     <div class="main-content" id="main-content">
         <h1>Flashcard History</h1>
         <div id="history-section">
@@ -172,20 +266,17 @@
             {% endfor %}
         </div>
 
-        <!-- Clear history button -->
         <form method="POST" action="/clear-history">
             <button type="submit" class="clear-history-btn">Clear All Flashcard History</button>
         </form>
     </div>
 
     <script>
-        const toggleButton = document.getElementById("toggle-taskbar");
-        const taskbar = document.getElementById("taskbar");
-        const mainContent = document.getElementById("main-content");
-
-        toggleButton.addEventListener("click", function () {
-            taskbar.classList.toggle("minimized");
-            mainContent.classList.toggle("expanded");
+        document.getElementById('toggle-taskbar').addEventListener('click', function () {
+            const taskbar = document.getElementById('taskbar');
+            const mainContent = document.getElementById('main-content');
+            taskbar.classList.toggle('minimized');
+            mainContent.classList.toggle('expanded');
         });
     </script>
 
