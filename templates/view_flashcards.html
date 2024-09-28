@@ -110,7 +110,7 @@
         let activeCardIndex = 0;
 
         // Use the flashcards data passed from Flask
-        const data = {{ completion | tojson }};
+        const { data } = {{ flashcard_set.flashcards | safe}};
 
         function renderFlashcards() {
             if (data.length === 0) {

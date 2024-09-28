@@ -12,7 +12,8 @@ if not os.environ.get("OPENAI_API_KEY"):
     sys.exit(1)
 
 
-def fetch_completion(content):
+def fetch_json_completion(content):
+    """fetches a json completion from openAI, content must contain the word json"""
     messages = [{"role": "user", "content": content}]
     headers = {"Authorization": f"Bearer {os.environ.get('OPENAI_API_KEY')}"}
     url = "https://api.openai.com/v1/chat/completions"
@@ -24,34 +25,31 @@ def fetch_completion(content):
         "response_format": {"type": "json_object"},
     }
 
-    response = requests.post(url, headers=headers, json=data, stream=True)
+    response = requests.post(url, headers=headers, json=data)
     response.raise_for_status()
     content = response.json()["choices"][0]["message"]["content"]
     return content
 
+
 def save_flashcards(content, flashcards):
-    file_path = 'flashcards_history.json'
+    file_path = "flashcards_history.json"
 
     # Check if the file exists, if not create an empty one
     if not os.path.exists(file_path):
-        with open(file_path, 'w') as file:
+        with open(file_path, "w") as file:
             json.dump([], file)
 
     # Load current history
-    with open(file_path, 'r') as file:
+    with open(file_path, "r") as file:
         history = json.load(file)
-    
+
     flashcard_id = str(uuid.uuid4())
 
     # Append new flashcards to the history
-    history.append({
-        "id": flashcard_id,
-        "input": content,
-        "flashcards": flashcards
-    })
+    history.append({"id": flashcard_id, "input": content, "flashcards": flashcards})
 
     # Save updated history
-    with open(file_path, 'w') as file:
+    with open(file_path, "w") as file:
         json.dump(history, file)
 
 
@@ -62,7 +60,7 @@ app = Flask(__name__)
 def index():
     user_message = request.form.get("question")
     if not user_message:
-        return render_template("index.html")
+        return render_template("index.html", completion = {"data":[]})
     content = f"""
 generate flashcards for the following text:
 
@@ -93,33 +91,43 @@ please return the following json structure:
 ```
 
     """
-    completion = fetch_completion(content)
+    completion = fetch_json_completion(content)
     save_flashcards(user_message, completion)
     return render_template("index.html", completion=completion)
+
+
+@app.route("/api/completion")
+def completion():
+    return fetch_json_completion("return the answer in json format: what is 5+5?")
+
 
 @app.route("/history")
 def history():
     flashcards_history = load_flashcard_history()
     return render_template("history.html", history=flashcards_history)
+
+
 @app.route("/practice")
 def practice():
     return render_template("practice.html")
 
+
 def load_flashcard_history():
-    file_path = 'flashcards_history.json'
+    file_path = "flashcards_history.json"
     if not os.path.exists(file_path):
         return []
-    
-    with open(file_path, 'r') as file:
+
+    with open(file_path, "r") as file:
         history = json.load(file)
-    
+
     return history
+
 
 @app.route("/clear-history", methods=["POST"])
 def clear_history():
-    file_path = 'flashcards_history.json'
+    file_path = "flashcards_history.json"
     if os.path.exists(file_path):
-        with open(file_path, 'w') as file:
+        with open(file_path, "w") as file:
             json.dump([], file)  # Clear history by writing an empty list
     return render_template("history.html", history=[])  # Return an empty history view
 
@@ -127,10 +135,13 @@ def clear_history():
 @app.route("/flashcards/<flashcard_id>")
 def view_flashcards(flashcard_id):
     flashcards_history = load_flashcard_history()
-    flashcard_set = next((entry for entry in flashcards_history if entry["id"] == flashcard_id), None)
+    flashcard_set = next(
+        (entry for entry in flashcards_history if entry["id"] == flashcard_id), None
+    )
     if not flashcard_set:
         return "Flashcards not found", 404
     return render_template("view_flashcards.html", flashcard_set=flashcard_set)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

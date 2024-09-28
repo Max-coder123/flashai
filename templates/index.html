@@ -369,6 +369,14 @@
             const nextButton = document.getElementById("nextCard");
             let activeCardIndex = 0;
         
+            document.querySelector("form").addEventListener("submit", (event) => {
+                // event.preventDefault()
+                fetch("/api/completion").then(response => {
+                return response.json()
+            }).then(data => {
+                console.log(data)
+            })
+            })
             const { data } = {{ completion | safe }};
         
             function renderFlashcards() {
