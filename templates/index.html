@@ -283,6 +283,89 @@
             border-radius: 50%;
         }
 
+        .shuffle-button-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            background-color: #d3d3d3;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            top: -10px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: none;
+        }
+
+        .shuffle-icon-button,
+        .flip-icon-button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            color: #b0b0b0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .shuffle-icon-button:hover,
+        .flip-icon-button:hover {
+            background-color: #d3d3d3;
+            color: #031738;
+            box-shadow: none;
+            border: none;
+            outline: none;
+        }
+
+        .shuffle-icon-button svg,
+        .flip-icon-button svg {
+            fill: currentColor;
+            width: 24px;
+            height: 24px;
+        }
+
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -60px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+
         .card-index {
             text-align: center;
             padding: 2em;
@@ -469,6 +552,27 @@
             <input type="submit" value="send">
         </form>
 
+        <div class="shuffle-button-container" id="buttonContainer">
+            <div class="tooltip">
+                <button class="shuffle-icon-button" id="shuffleButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M3.75 8l5.75 4-5.75 4V8zm7.75 0v8h8V8h-8z" />
+                    </svg>
+                </button>
+                <span class="tooltiptext">Shuffle Cards</span>
+            </div>
+
+            <div class="tooltip">
+                <button class="flip-icon-button" id="flipAllButton">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path
+                            d="M15.88 3.79L14.46 5.21c1.95 1.77 3.04 4.23 3.04 6.79s-1.09 5.02-3.04 6.79l1.42 1.42C17.88 17.89 19.2 14.55 19.2 12s-1.32-5.89-3.32-8.21zm-9.76 0C4.12 6.11 2.8 9.45 2.8 12s1.32 5.89 3.32 8.21l1.42-1.42C5.59 17.02 4.5 14.55 4.5 12s1.09-5.02 3.04-6.79L6.12 3.79z" />
+                    </svg>
+                </button>
+                <span class="tooltiptext">Flip Cards</span>
+            </div>
+        </div>
+
         <div class="flashcard-container">
             <button id="previousCard" class="previous-card" style="display: none;">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -539,7 +643,6 @@
         let activeCardIndex = 0;
 
         document.querySelector("form").addEventListener("submit", (event) => {
-            // event.preventDefault()
             fetch("/api/completion").then(response => {
                 return response.json()
             }).then(data => {
@@ -610,4 +713,93 @@
             updateCardIndex();
             cards[activeCardIndex].classList.add("active-card");
         });
+
+        document.getElementById('flipAllButton').addEventListener('click', () => {
+            const cards = document.querySelectorAll('.flashcard');
+            const shouldFlipToBack = !cards[0].classList.contains('flip');
+
+            cards.forEach(card => {
+                if (shouldFlipToBack) {
+                    card.classList.add('flip');
+                } else {
+                    card.classList.remove('flip');
+                }
+            });
+        });
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        document.getElementById("shuffleButton").addEventListener("click", () => {
+            const cardsArray = Array.from(document.querySelectorAll('.flashcard'));
+            shuffleArray(cardsArray);
+
+            const completionEl = document.getElementById("completion");
+            completionEl.innerHTML = "";
+
+            cardsArray.forEach((card) => {
+                completionEl.appendChild(card);
+                card.classList.remove("active-card");
+                card.style.opacity = 0;
+                card.style.transform = 'translateX(-25%)';
+            });
+
+            let activeCardIndex = 0;
+            cardsArray[activeCardIndex].classList.add("active-card");
+            cardsArray[activeCardIndex].style.opacity = 1;
+            cardsArray[activeCardIndex].style.transform = 'translateX(0)';
+
+            updateCardIndex(cardsArray);
+            reinitializeEventListeners(cardsArray);
+        });
+
+        function reinitializeEventListeners(cards) {
+            const nextButton = document.getElementById('nextCard');
+            const prevButton = document.getElementById('previousCard');
+
+            function nextCardHandler() {
+                const currentCard = cards[activeCardIndex];
+                currentCard.style.opacity = 0;
+                currentCard.style.transform = 'translateX(-25%)';
+
+                setTimeout(() => {
+                    currentCard.classList.remove("active-card");
+                    activeCardIndex++;
+                    if (activeCardIndex >= cards.length) {
+                        activeCardIndex = 0;
+                    }
+                    const nextCard = cards[activeCardIndex];
+                    nextCard.classList.add("active-card");
+                    nextCard.style.opacity = 1;
+                    nextCard.style.transform = 'translateX(0)';
+                }, 300);
+            }
+
+            function prevCardHandler() {
+                const currentCard = cards[activeCardIndex];
+                currentCard.style.opacity = 0;
+                currentCard.style.transform = 'translateX(25%)';
+
+                setTimeout(() => {
+                    currentCard.classList.remove("active-card");
+                    activeCardIndex--;
+                    if (activeCardIndex < 0) {
+                        activeCardIndex = cards.length - 1;
+                    }
+                    const prevCard = cards[activeCardIndex];
+                    prevCard.classList.add("active-card");
+                    prevCard.style.opacity = 1;
+                    prevCard.style.transform = 'translateX(0)';
+                }, 300);
+            }
+
+            nextButton.addEventListener("click", nextCardHandler);
+            prevButton.addEventListener("click", prevCardHandler);
+        }
+
+
     </script>
