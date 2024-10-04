@@ -1,7 +1,3 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -301,93 +297,266 @@
             display: block;
             max-width: 100%;
         }
+
+        .login-container {
+            margin-left: auto;
+            margin-right: 15px;
+        }
+
+        .login-button {
+            padding: 10px;
+            background-color: #031738;
+            color: white;
+            text-align: center;
+            border: none;
+            border-radius: 7.5px;
+            cursor: pointer;
+            margin-right: 15px;
+        }
+
+        .login-button:hover {
+            background-color: #031738;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .modal-content {
+            background-color: #f2f5f8;
+            padding: 20px;
+            border-radius: 10px;
+            width: 30%;
+            height: 80%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 50px;
+            cursor: pointer;
+            color: #031738;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #031738;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            background-color: #dee7ec;
+            color: #031738;
+            border-radius: 10px;
+            border: 2px solid #A0A4B8;
+            box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 1.1em;
+            outline: none;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        .submit-button {
+            padding: 12px 20px;
+            background-color: #031738;
+            color: #e6e5e7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #7FC29B;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #toggleForm {
+            color: #031738;
+            cursor: pointer;
+            font-size: 1em;
+            text-decoration: underline;
+        }
+
+        #toggleForm:hover {
+            color: #7FC29B;
+        }
     </style>
 </head>
 
 <body>
 
     <div class="top-taskbar">
-        <img src="data:image/png;base64,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" alt="FlashAI Logo" style="filter: brightness(0) invert(0);">
+        <img src="data:image/png;base64,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"
+            alt="FlashAI Logo" style="filter: brightness(0) invert(0);">
+        <div class="login-container">
+            <button id="open-modal" class="login-button">
+                <span>login</span>
+            </button>
         </div>
-        
-        <div class="taskbar" id="taskbar">
-            <a href="javascript:void(0)" id="toggle-taskbar">
-                <i class="fas fa-bars"></i>
-                <span>Toggle</span>
-            </a>
-            <a href="/">
-                <i class="fas fa-home"></i>
-                <span>Home</span>
-            </a>
-            <a href="/history">
-                <i class="fas fa-history"></i>
-                <span>History</span>
-            </a>
-            <a href="/practice">
-                <i class="fas fa-gamepad"></i>
-                <span>Practice</span>
-            </a>
-        </div>
-        
-        <div class="main-content" id="main-content">
-            <h1>flashcard generator</h1>
-            <p>paste in notes below</p>
-            <form method="POST">
-                <textarea name="question" placeholder="paste your text here..."></textarea>
-                <input type="submit" value="send">
+    </div>
+
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close" id="close-modal">&times;</span>
+            <h2 id="formTitle">Login</h2>
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="Enter your password">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="submit-button">Submit</button>
+                </div>
+                <span id="toggleForm">Don't have an account? <span class="highlight">Sign up</span></span>
             </form>
-        
-            <div class="flashcard-container">
-                <button id="previousCard" class="previous-card" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                    </svg>
-                </button>
-        
-                <div id="completion"></div>
-        
-                <button id="nextCard" class="next-card" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-                    </svg>
-                </button>
-            </div>
-        
-            <div class="card-index"></div>
         </div>
-        
-        <script>
-            document.getElementById('toggle-taskbar').addEventListener('click', function () {
-                const taskbar = document.getElementById('taskbar');
-                const mainContent = document.getElementById('main-content');
-                taskbar.classList.toggle('minimized');
-                mainContent.classList.toggle('expanded');
-            });
-        
-            const completionEl = document.getElementById("completion");
-            const prevButton = document.getElementById("previousCard");
-            const nextButton = document.getElementById("nextCard");
-            let activeCardIndex = 0;
-        
-            document.querySelector("form").addEventListener("submit", (event) => {
-                // event.preventDefault()
-                fetch("/api/completion").then(response => {
+    </div>
+
+    <div class="taskbar" id="taskbar">
+        <a href="javascript:void(0)" id="toggle-taskbar">
+            <i class="fas fa-bars"></i>
+            <span>Toggle</span>
+        </a>
+        <a href="/">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="/history">
+            <i class="fas fa-history"></i>
+            <span>History</span>
+        </a>
+        <a href="/practice">
+            <i class="fas fa-gamepad"></i>
+            <span>Practice</span>
+        </a>
+    </div>
+
+    <div class="main-content" id="main-content">
+        <h1>flashcard generator</h1>
+        <p>paste in notes below</p>
+        <form method="POST">
+            <textarea name="question" placeholder="paste your text here..."></textarea>
+            <input type="submit" value="send">
+        </form>
+
+        <div class="flashcard-container">
+            <button id="previousCard" class="previous-card" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+
+            <div id="completion"></div>
+
+            <button id="nextCard" class="next-card" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="card-index"></div>
+    </div>
+
+    <script>
+
+        const loginModal = document.getElementById('login-modal');
+        const openModalBtn = document.getElementById('open-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+        const toggleFormText = document.getElementById('toggleForm');
+        const formTitle = document.getElementById('formTitle');
+
+        let isLogin = true;
+
+        openModalBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        closeModalBtn.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        authForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            console.log("Form submitted:", document.getElementById('email').value, document.getElementById('password').value);
+        });
+
+        toggleFormText.addEventListener('click', () => {
+            if (isLogin) {
+                formTitle.textContent = 'Sign Up';
+                document.querySelector('.highlight').textContent = 'Login';
+                toggleFormText.innerHTML = 'Already have an account? <span class="highlight">Login</span>';
+                isLogin = false;
+            } else {
+                formTitle.textContent = 'Login';
+                document.querySelector('.highlight').textContent = 'Sign up';
+                toggleFormText.innerHTML = "Don't have an account? <span class=\"highlight\">Sign up</span>";
+                isLogin = true;
+            }
+        });
+
+
+
+        document.getElementById('toggle-taskbar').addEventListener('click', function () {
+            const taskbar = document.getElementById('taskbar');
+            const mainContent = document.getElementById('main-content');
+            taskbar.classList.toggle('minimized');
+            mainContent.classList.toggle('expanded');
+        });
+
+        const completionEl = document.getElementById("completion");
+        const prevButton = document.getElementById("previousCard");
+        const nextButton = document.getElementById("nextCard");
+        let activeCardIndex = 0;
+
+        document.querySelector("form").addEventListener("submit", (event) => {
+            // event.preventDefault()
+            fetch("/api/completion").then(response => {
                 return response.json()
             }).then(data => {
                 console.log(data)
             })
-            })
-            const { data } = {{ completion | safe }};
-        
-            function renderFlashcards() {
-                if (data.length === 0) {
-                    prevButton.style.display = "none";
-                    nextButton.style.display = "none";
-                } else {
-                    prevButton.style.display = "inline-block";
-                    nextButton.style.display = "inline-block";
-                    data.forEach((item, i) => {
-                        completionEl.innerHTML += `
+        })
+        const { data } = {{ completion | safe }};
+
+        function renderFlashcards() {
+            if (data.length === 0) {
+                prevButton.style.display = "none";
+                nextButton.style.display = "none";
+            } else {
+                prevButton.style.display = "inline-block";
+                nextButton.style.display = "inline-block";
+                data.forEach((item, i) => {
+                    completionEl.innerHTML += `
                         <div class="flashcard ${i === activeCardIndex ? "active-card" : ""}">
                             <div class="flashcard-inner">
                                 <div class="flashcard-front">
@@ -398,48 +567,47 @@
                                 </div>
                             </div>
                         </div>`;
-                    });
-                }
-        
-                const cards = document.querySelectorAll('.flashcard');
-        
-                cards.forEach((card, i) => {
-                    card.addEventListener('click', () => {
-                        card.classList.toggle('flip');
-                    });
                 });
             }
-        
-            const cardIndexEl = document.querySelector(".card-index");
-        
-            function updateCardIndex() {
-                cardIndexEl.textContent = `${activeCardIndex + 1}/${cards.length}`;
-            }
-        
-            renderFlashcards();
+
             const cards = document.querySelectorAll('.flashcard');
-            updateCardIndex(cards);
-        
-            document.querySelector(".next-card").addEventListener("click", () => {
-                const currentCard = cards[activeCardIndex];
-                currentCard.classList.remove("active-card");
-                activeCardIndex++;
-                if (activeCardIndex >= cards.length) {
-                    activeCardIndex = 0;
-                }
-                updateCardIndex();
-                cards[activeCardIndex].classList.add("active-card");
+
+            cards.forEach((card, i) => {
+                card.addEventListener('click', () => {
+                    card.classList.toggle('flip');
+                });
             });
-        
-            document.querySelector(".previous-card").addEventListener("click", () => {
-                const currentCard = cards[activeCardIndex];
-                currentCard.classList.remove("active-card");
-                activeCardIndex--;
-                if (activeCardIndex < 0) {
-                    activeCardIndex = cards.length - 1;
-                }
-                updateCardIndex();
-                cards[activeCardIndex].classList.add("active-card");
-            });
-        </script>
-        
+        }
+
+        const cardIndexEl = document.querySelector(".card-index");
+
+        function updateCardIndex() {
+            cardIndexEl.textContent = `${activeCardIndex + 1}/${cards.length}`;
+        }
+
+        renderFlashcards();
+        const cards = document.querySelectorAll('.flashcard');
+        updateCardIndex(cards);
+
+        document.querySelector(".next-card").addEventListener("click", () => {
+            const currentCard = cards[activeCardIndex];
+            currentCard.classList.remove("active-card");
+            activeCardIndex++;
+            if (activeCardIndex >= cards.length) {
+                activeCardIndex = 0;
+            }
+            updateCardIndex();
+            cards[activeCardIndex].classList.add("active-card");
+        });
+
+        document.querySelector(".previous-card").addEventListener("click", () => {
+            const currentCard = cards[activeCardIndex];
+            currentCard.classList.remove("active-card");
+            activeCardIndex--;
+            if (activeCardIndex < 0) {
+                activeCardIndex = cards.length - 1;
+            }
+            updateCardIndex();
+            cards[activeCardIndex].classList.add("active-card");
+        });
+    </script>
