@@ -712,7 +712,7 @@
                 });
             }
 
-            const cards = document.querySelectorAll('.flashcard');
+            cards = document.querySelectorAll('.flashcard');
 
             cards.forEach((card, i) => {
                 card.addEventListener('click', () => {
@@ -727,9 +727,9 @@
             cardIndexEl.textContent = `${activeCardIndex + 1}/${cards.length}`;
         }
 
+        let cards;
         renderFlashcards();
-        const cards = document.querySelectorAll('.flashcard');
-        updateCardIndex(cards);
+        updateCardIndex();
 
         document.querySelector(".next-card").addEventListener("click", () => {
             const currentCard = cards[activeCardIndex];
@@ -753,6 +753,7 @@
             cards[activeCardIndex].classList.add("active-card");
         });
 
+
         document.getElementById('flipAllButton').addEventListener('click', () => {
             const cards = document.querySelectorAll('.flashcard');
             const shouldFlipToBack = !cards[0].classList.contains('flip');
@@ -774,26 +775,14 @@
         }
 
         document.getElementById("shuffleButton").addEventListener("click", () => {
-            const cardsArray = Array.from(document.querySelectorAll('.flashcard'));
-            shuffleArray(cardsArray);
-
+            shuffleArray(data);
             const completionEl = document.getElementById("completion");
             completionEl.innerHTML = "";
 
-            cardsArray.forEach((card) => {
-                completionEl.appendChild(card);
-                card.classList.remove("active-card");
-                card.style.opacity = 0;
-                card.style.transform = 'translateX(-25%)';
-            });
-
-            let activeCardIndex = 0;
-            cardsArray[activeCardIndex].classList.add("active-card");
-            cardsArray[activeCardIndex].style.opacity = 1;
-            cardsArray[activeCardIndex].style.transform = 'translateX(0)';
-
-            updateCardIndex(cardsArray);
-            reinitializeEventListeners(cardsArray);
+            activeCardIndex = 0;
+            cards[activeCardIndex].classList.add("active-card");
+            renderFlashcards();
+            updateCardIndex();
         });
 
         function reinitializeEventListeners(cards) {
