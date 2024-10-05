@@ -100,11 +100,14 @@ please return the following json structure:
 def completion():
     return fetch_json_completion("return the answer in json format: what is 5+5?")
 
-
 @app.route("/history")
 def history():
     flashcards_history = load_flashcard_history()
     return render_template("history.html", history=flashcards_history)
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
 
 
 @app.route("/practice")
