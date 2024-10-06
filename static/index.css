@@ -1,0 +1,495 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-color: #F5F5F5;
+    display: flex;
+}
+
+.top-taskbar {
+    width: 100vw;
+    height: 60px;
+    background-color: #dee7ec;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 0px;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+    border-bottom: 0.1px solid #A0A4B8;
+}
+
+.top-taskbar img {
+    height: 80px;
+    margin-right: 20px;
+    filter: brightness(0) saturate(100%) invert(17%) sepia(86%) saturate(1226%) hue-rotate(179deg) brightness(90%) contrast(92%);
+}
+
+.taskbar {
+    width: 10vw;
+    background-color: #dee7ec;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-right: 0.01px grey;
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    height: calc(100vh - 60px);
+    transition: width 0.4s ease;
+}
+
+.taskbar.minimized {
+    width: 60px;
+    align-items: center;
+}
+
+.taskbar.minimized a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.taskbar.minimized a i {
+    font-size: 24px;
+    line-height: 60px;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+
+.taskbar.minimized a span {
+    display: none;
+}
+
+.main-content {
+    width: 90%;
+    padding: 3em;
+    overflow-y: auto;
+    background-color: #F2F6FA;
+    margin-left: 10%;
+    margin-top: 60px;
+    border-left: 0.1px solid #A0A4B8;
+    position: relative;
+    transition: width 0.4s, margin-left 0.4s ease;
+}
+
+.main-content.expanded {
+    width: calc(100% - 60px);
+    margin-left: 60px;
+}
+
+.taskbar a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: 48px;
+    font-family: "Montserrat", sans-serif;
+    text-decoration: none;
+    color: #031738;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-weight: 600;
+    font-size: 1.1em;
+    box-sizing: border-box;
+}
+
+.taskbar a:hover {
+    background-color: #031738;
+    color: #e6e5e7;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.taskbar svg {
+    margin-right: 5px;
+    vertical-align: middle;
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+
+#toggle-taskbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 12px;
+    margin-bottom: 10px;
+    color: #031738;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: color 0.3s ease;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+#toggle-taskbar:hover {
+    color: white;
+    background-color: #031738;
+}
+
+.taskbar.minimized #toggle-taskbar {
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #031738;
+}
+
+p {
+    text-align: center;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+    color: #031738;
+}
+
+textarea {
+    width: 100%;
+    height: 180px;
+    padding: 15px;
+    background-color: #dee7ec;
+    color: #031738;
+    border-radius: 10px;
+    border: 2px solid #A0A4B8;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+    resize: none;
+    outline: none;
+    font-size: 1.1em;
+}
+
+button,
+input[type="submit"] {
+    background-color: #031738;
+    color: #e6e5e7;
+    border: none;
+    padding: 0.8em 1.5em;
+    border-radius: 8px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+button:hover,
+input[type="submit"]:hover {
+    background-color: #7FC29B;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.flashcard-container {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    gap: 15px;
+}
+
+.flashcard {
+    perspective: 1000px;
+    width: 600px;
+    height: 375px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: rgba(0, 0, 0, 0.2);
+}
+
+.active-card {
+    display: flex;
+    position: relative;
+}
+
+.flashcard-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flashcard.flip .flashcard-inner {
+    transform: rotateX(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 1.5em;
+    background-color: #f2f5f8;
+    color: #031738;
+    border: 1.5px solid #031738;
+}
+
+.flashcard-back {
+    transform: rotateX(180deg);
+}
+
+.previous-card svg,
+.next-card svg {
+    width: 28px;
+    height: 28px;
+    fill: #F5F5F5;
+}
+
+.previous-card:hover,
+.next-card:hover {
+    background-color: #031738;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.previous-card {
+    margin-right: 20px;
+    background-color: #031738;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.next-card {
+    margin-left: 20px;
+    background-color: #031738;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.shuffle-button-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    top: -10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: none;
+}
+
+.shuffle-icon-button,
+.flip-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #b0b0b0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shuffle-icon-button:hover,
+.flip-icon-button:hover {
+    background-color: #d3d3d3;
+    color: #031738;
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+.shuffle-icon-button svg,
+.flip-icon-button svg {
+    fill: currentColor;
+    width: 24px;
+    height: 24px;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.card-index {
+    text-align: center;
+    padding: 2em;
+    font-size: 1.2em;
+    color: #031738;
+}
+
+.logo {
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    max-width: 100%;
+}
+
+.login-container {
+    margin-left: auto;
+    margin-right: 15px;
+}
+
+.login-button {
+    padding: 10px;
+    background-color: #031738;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 7.5px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+.login-button:hover {
+    background-color: #031738;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: #f2f5f8;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    height: 80%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: "Montserrat", sans-serif;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 50px;
+    cursor: pointer;
+    color: #031738;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #031738;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    background-color: #dee7ec;
+    color: #031738;
+    border-radius: 10px;
+    border: 2px solid #A0A4B8;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.1em;
+    outline: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+.submit-button {
+    padding: 12px 20px;
+    background-color: #031738;
+    color: #e6e5e7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #7FC29B;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#toggleForm {
+    color: #031738;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: underline;
+}
+
+#toggleForm:hover {
+    color: #7FC29B;
+}

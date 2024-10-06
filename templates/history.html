@@ -7,169 +7,12 @@
     <title>Flashcard History</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://fav.farm/⚙️" />
+    <link rel="stylesheet" href="static/global.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "Montserrat", sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #F5F5F5;
-            display: flex;
-        }
-
-        .top-taskbar {
-            width: 100vw;
-            height: 60px;
-            background-color: #dee7ec;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding-left: 0px;
-            position: fixed;
-            top: 0;
-            z-index: 10;
-            border-bottom: 0.1px solid #A0A4B8;
-        }
-
-        .top-taskbar img {
-            height: 80px;
-            margin-right: 20px;
-            filter: brightness(0) saturate(100%) invert(17%) sepia(86%) saturate(1226%) hue-rotate(179deg) brightness(90%) contrast(92%);
-        }
-
-        .taskbar {
-            width: 10vw;
-            background-color: #dee7ec;
-            padding: 1em;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            border-right: 0.01px grey;
-            position: fixed;
-            top: 60px;
-            bottom: 0;
-            height: calc(100vh - 60px);
-            transition: width 0.4s ease;
-        }
-
-        .taskbar.minimized {
-            width: 60px;
-            align-items: center;
-        }
-
-        .taskbar.minimized a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .taskbar.minimized a i {
-            font-size: 24px;
-            line-height: 60px;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-            display: block;
-        }
-
-        .taskbar.minimized a span {
-            display: none;
-        }
-
-
-        .taskbar a {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 12px;
-            margin-bottom: 10px;
-            width: 100%;
-            height: 48px;
-            font-family: "Montserrat", sans-serif;
-            text-decoration: none;
-            color: #031738;
-            background-color: transparent;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
-            font-weight: 600;
-            font-size: 1.1em;
-            box-sizing: border-box;
-        }
-
-        .taskbar a:hover {
-            background-color: #031738;
-            color: #e6e5e7;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .taskbar svg {
-            margin-right: 5px;
-            vertical-align: middle;
-            display: block;
-            width: 24px;
-            height: 24px;
-        }
-
-
-        #toggle-taskbar {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 12px;
-            margin-bottom: 10px;
-            color: #031738;
-            background-color: transparent;
-            border-radius: 8px;
-            transition: color 0.3s ease;
-            cursor: pointer;
-            font-size: 1.2em;
-        }
-
-        #toggle-taskbar:hover {
-            color: white;
-            background-color: #031738;
-        }
-
-        .taskbar.minimized #toggle-taskbar {
-            justify-content: center;
-        }
-
-        html,
-        body {
+        html {
             height: 100%;
             overflow: hidden;
-        }
-
-        .main-content {
-            width: calc(100% - 10vw);
-            padding-bottom: 2em;
-            padding-top: 2em;
-            background-color: #F2F6FA;
-            margin-left: 10vw;
-            margin-top: 60px;
-            border-left: 0.1px solid #A0A4B8;
-            position: relative;
-            top: 0;
-            transition: width 0.4s, margin-left 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow-y: auto;
-            max-height: calc(100vh - 60px);
         }
 
         h1 {
@@ -190,11 +33,6 @@
 
         form {
             margin-top: 20px;
-        }
-
-        .main-content.expanded {
-            width: calc(100% - 60px);
-            margin-left: 60px;
         }
 
 
@@ -243,13 +81,6 @@
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .logo {
-            height: 150px;
-            margin: 0;
-            padding: 0;
-            display: block;
-            max-width: 100%;
-        }
     </style>
 </head>
 
