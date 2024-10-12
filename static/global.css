@@ -181,7 +181,7 @@ html, body {
     width: auto;
     height: 60px;
     margin-left: auto;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 
 
@@ -289,4 +289,18 @@ html, body {
 
 #toggleForm:hover {
     color: #7FC29B;
+}
+
+.user-icon {
+    fill:#031738;
+    width: 48px;
+    height: 48px;
+
+}
+
+.user-icon:hover {
+    fill:#031738;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
 }
