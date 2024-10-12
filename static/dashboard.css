@@ -1,0 +1,282 @@
+.main-content {
+    width: 90%;
+    padding: 3em;
+    background-color: #F2F6FA;
+    margin-left: 10%;
+    margin-top: 60px;
+    border-left: 0.1px solid #A0A4B8;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    transition: width 0.4s ease, margin-left 0.4s ease;
+}
+
+
+.add-course-card {
+    width: 40%;
+    max-width: 600px;
+    height: 120px;
+    background-color: #dee7ec;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 30px;
+    border: 2px solid #031738;
+    box-sizing: border-box;
+}
+
+.add-course-card:hover {
+    background-color: #031738;
+    color: #e6e5e7;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.add-course-card:hover .add-course-icon {
+    color: #e6e5e7;
+}
+
+.add-course-card:hover svg {
+    fill: #e6e5e7;
+}
+
+.add-course-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #031738;
+}
+
+.add-course-icon svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+
+.add-course-icon p {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #f2f5f8;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 30px;
+    cursor: pointer;
+    color: #031738;
+}
+
+.course-card {
+    width: 75%;
+    height: 120px;
+    background-color: #dee7ec;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    border: 2px solid #031738;
+    position: relative;
+    cursor: pointer;
+}
+
+.delete-icon,
+.cancel-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #031738;
+    transition: fill 0.3s ease, color 0.3s ease;
+}
+
+.delete-icon svg,
+.cancel-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: #031738;
+}
+
+.delete-icon:hover svg {
+    color: red;
+    fill: red;
+}
+
+.cancel-icon:hover svg {
+    color: green;
+    fill: green;
+}
+
+.course-card:hover {
+    background-color: #031738;
+    color: #e6e5e7;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.course-card:hover .delete-icon svg {
+    fill: white;
+}
+
+.course-card:hover .cancel-icon svg {
+    fill: white;
+}
+
+.course-card .course-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.course-card .course-icon svg {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+
+
+
+.courses-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.add-course-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    color: #031738;
+    text-align: center;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.add-course-card:hover .add-course-text {
+    color: #e6e5e7;
+}
+
+.course-text {
+    font-size: 1.1em;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+    color: #031738;
+    text-align: center;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+
+.course-card:hover .course-text {
+    color: #e6e5e7;
+}
+
+/* Form styling */
+#addCourseForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #F2F6FA;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1.5px solid #A0A4B8;
+}
+
+#addCourseForm label {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #031738;
+    margin-bottom: 10px;
+    font-family: "Montserrat", sans-serif;
+}
+
+#addCourseForm select {
+    width: 100%;
+    padding: 12px;
+    background-color: #dee7ec;
+    color: #031738;
+    border-radius: 10px;
+    border: 2px solid #A0A4B8;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.1em;
+    font-family: "Montserrat", sans-serif;
+    margin-bottom: 20px;
+}
+
+#addCourseForm button {
+    padding: 12px 20px;
+    background-color: #031738;
+    color: #e6e5e7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#addCourseForm button:hover {
+    background-color: #7FC29B;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Modal adjustments */
+#courseModal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#courseModal .modal-content {
+    background-color: #F2F6FA;
+    padding: 20px;
+    border-radius: 12px;
+    border: 2px solid #A0A4B8;
+    width: 40%;
+    text-align: center;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: "Montserrat", sans-serif;
+}
+
+#courseModal .modal-content h2 {
+    font-size: 1.5em;
+    color: #031738;
+    margin-bottom: 20px;
+    font-weight: 700;
+}

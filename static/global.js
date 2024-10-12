@@ -41,3 +41,10 @@ if (toggleFormText) {
         }
     });
 }
+
+document.getElementById('toggle-taskbar').addEventListener('click', function () {
+    const taskbar = document.getElementById('taskbar');
+    const mainContent = document.getElementById('main-content');
+    taskbar.classList.toggle('minimized');
+    mainContent.classList.toggle('expanded');
+});
