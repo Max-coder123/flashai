@@ -114,6 +114,10 @@ def dashboard():
 def practice():
     return render_template("practice.html")
 
+@app.route("/studyguide")
+def studyguide():
+    return render_template("studyguide.html")
+
 
 def load_flashcard_history():
     file_path = "flashcards_history.json"

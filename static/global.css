@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900&display=swap');
 
 * {
     box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
 }
 
 body {
@@ -19,13 +20,15 @@ body {
     background-color: #dee7ec;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
-    padding-left: 0;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
     position: fixed;
     top: 0;
     z-index: 10;
     border-bottom: 0.1px solid #A0A4B8;
 }
+
 
 .top-taskbar img {
     height: 80px;
@@ -65,7 +68,6 @@ body {
 }
 
 .taskbar.minimized a i {
-    font-size: 24px;
     line-height: 60px;
     text-align: center;
     width: 100%;
@@ -94,7 +96,7 @@ body {
     border-radius: 8px;
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
     font-weight: 600;
-    font-size: 1.1em;
+    font-size: 0.9em;
     box-sizing: border-box;
 }
 
@@ -123,7 +125,7 @@ body {
     border-radius: 8px;
     transition: color 0.3s ease;
     cursor: pointer;
-    font-size: 1.2em;
+    font-size: 0.9em;
 }
 
 #toggle-taskbar:hover {
@@ -157,4 +159,121 @@ body {
 .main-content.expanded {
     width: calc(100% - 60px);
     margin-left: 60px;
+}
+
+.login-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: auto;
+    height: 60px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+
+
+.login-button {
+    padding: 10px 20px;
+    background-color: #031738;
+    color: white;
+    text-align: center;
+    border: none;
+    border-radius: 7.5px;
+    cursor: pointer;
+    font-size: 1.1em;
+    margin-right: 15px;
+}
+
+.login-button:hover {
+    background-color: #031738;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal-content {
+    background-color: #f2f5f8;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+    height: 80%;
+    text-align: center;
+    position: relative;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+    font-family: "Montserrat", sans-serif;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 50px;
+    cursor: pointer;
+    color: #031738;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    color: #031738;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 15px;
+    background-color: #dee7ec;
+    color: #031738;
+    border-radius: 10px;
+    border: 2px solid #A0A4B8;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+    font-size: 1.1em;
+    outline: none;
+    font-family: "Montserrat", sans-serif;
+}
+
+.submit-button {
+    padding: 12px 20px;
+    background-color: #031738;
+    color: #e6e5e7;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1em;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #7FC29B;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#toggleForm {
+    color: #031738;
+    cursor: pointer;
+    font-size: 1em;
+    text-decoration: underline;
+}
+
+#toggleForm:hover {
+    color: #7FC29B;
 }
