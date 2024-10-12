@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="static/global.css">
     <style>
+
         .logo {
             height: 150px;
             margin: 0;
@@ -16,6 +17,25 @@
             display: block;
             max-width: 100%;
         }
+
+        #study-guide-container {
+        width: 70%; /* Adjust the width as needed to make the container narrower */
+        margin: 0 auto; /* Center the container horizontally */
+        padding-bottom: 50px;
+        text-align: left; /* Keep the text left-aligned */
+    }
+
+    h1, h2, h3 {
+        text-align: left; /* Ensure headings are also left-aligned */
+        margin-bottom: 20px;
+    }
+
+    ul {
+        list-style-position: inside; /* Keep bullet points aligned with text */
+        padding-left: 20px; /* Add some padding for lists */
+    }
+        
+        
     </style>
 </head>
 
@@ -119,12 +139,14 @@
 
 
         document.addEventListener('DOMContentLoaded', function () {
-            const courseId = localStorage.getItem('selectedCourseId');
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('course');
+
             if (courseId) {
-                fetch('/path/to/study_guide.json')
+                fetch('/static/study_guides.json')
                     .then(response => response.json())
                     .then(data => {
-                        const studyGuide = data.courses.find(course => course.id === courseId);
+                        const studyGuide = data.find(course => course.courseId === courseId);
                         if (studyGuide) {
                             displayStudyGuide(studyGuide);
                         } else {
@@ -136,36 +158,38 @@
         });
 
         function displayStudyGuide(studyGuide) {
-            const guideContainer = document.getElementById('study-guide-container');
-            guideContainer.innerHTML = `
+    const guideContainer = document.getElementById('study-guide-container');
+
+    if (!studyGuide.units || !Array.isArray(studyGuide.units)) {
+        guideContainer.innerHTML = '<p>No units available for this course.</p>';
+        return;
+    }
+
+    guideContainer.innerHTML = `
         <h1>${studyGuide.courseName}</h1>
         ${studyGuide.units.map(unit => `
             <div class="unit">
-                <h2>${unit.unitTitle}</h2>
-                <ul>
-                    ${unit.topics.map(topic => `<li>${topic}</li>`).join('')}
-                </ul>
+                <h2>${unit.unitName}</h2>
+                ${
+                    unit.sections
+                        ? unit.sections.map(section => `
+                            <h3>${section.sectionName}</h3>
+                            <ul>
+                                ${section.topics.map(topic => `<li>${topic}</li>`).join('')}
+                            </ul>
+                        `).join('')
+                        : `
+                            <ul>
+                                ${unit.topics.map(topic => `<li>${topic}</li>`).join('')}
+                            </ul>
+                        `
+                }
             </div>
         `).join('')}
     `;
-        }
+}
 
 
-
-        function displayStudyGuide(studyGuide) {
-            const guideContainer = document.getElementById('study-guide-container');
-            guideContainer.innerHTML = `
-        <h1>${studyGuide.courseName}</h1>
-        ${studyGuide.units.map(unit => `
-            <div class="unit">
-                <h2>${unit.unitTitle}</h2>
-                <ul>
-                    ${unit.topics.map(topic => `<li>${topic}</li>`).join('')}
-                </ul>
-            </div>
-        `).join('')}
-    `;
-        }
 
     </script>
 </body>

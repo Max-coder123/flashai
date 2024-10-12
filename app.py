@@ -60,7 +60,7 @@ app = Flask(__name__)
 def index():
     user_message = request.form.get("question")
     if not user_message:
-        return render_template("index.html", completion = {"data":[]})
+        return render_template("index.html", completion={"data": []})
     content = f"""
 generate flashcards for the following text:
 
@@ -100,10 +100,12 @@ please return the following json structure:
 def completion():
     return fetch_json_completion("return the answer in json format: what is 5+5?")
 
+
 @app.route("/history")
 def history():
     flashcards_history = load_flashcard_history()
     return render_template("history.html", history=flashcards_history)
+
 
 @app.route("/dashboard")
 def dashboard():
@@ -114,9 +116,15 @@ def dashboard():
 def practice():
     return render_template("practice.html")
 
+
 @app.route("/studyguide")
 def studyguide():
     return render_template("studyguide.html")
+
+
+@app.route("/study_guide.json")
+def study_guide():
+    return app.send_static_file("study_guides.json")
 
 
 def load_flashcard_history():
@@ -135,8 +143,8 @@ def clear_history():
     file_path = "flashcards_history.json"
     if os.path.exists(file_path):
         with open(file_path, "w") as file:
-            json.dump([], file)  # Clear history by writing an empty list
-    return render_template("history.html", history=[])  # Return an empty history view
+            json.dump([], file)  
+    return render_template("history.html", history=[])  
 
 
 @app.route("/flashcards/<flashcard_id>")

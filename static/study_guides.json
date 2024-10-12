@@ -1,0 +1,296 @@
+[
+  {
+    "courseId": "apcalc",
+    "courseName": "AP Calculus BC",
+    "units": [
+      {
+        "unitId": "unit_1",
+        "unitName": "Unit 1: Limits and Continuity",
+        "topics": [
+          "Understanding limits graphically, numerically, and algebraically.",
+          "Properties of limits and L'Hopital's Rule.",
+          "Continuity and types of discontinuities."
+        ]
+      },
+      {
+        "unitId": "unit_2",
+        "unitName": "Unit 2: Differentiation - Definition and Basic Derivative Rules",
+        "topics": [
+          "Definition of the derivative.",
+          "Rules of differentiation (power rule, product rule, quotient rule, chain rule).",
+          "Implicit differentiation and higher-order derivatives."
+        ]
+      },
+      {
+        "unitId": "unit_3",
+        "unitName": "Unit 3: Differentiation - Composite, Implicit, and Inverse Functions",
+        "topics": [
+          "The chain rule for composite functions.",
+          "Implicit differentiation and related rates.",
+          "Derivatives of inverse functions, including inverse trigonometric functions."
+        ]
+      },
+      {
+        "unitId": "unit_4",
+        "unitName": "Unit 4: Contextual Applications of Differentiation",
+        "topics": [
+          "Using derivatives to analyze functions (increasing/decreasing, concavity, and points of inflection).",
+          "Optimization problems and curve sketching.",
+          "Modeling rates of change in applied contexts (related rates)."
+        ]
+      },
+      {
+        "unitId": "unit_5",
+        "unitName": "Unit 5: Analytical Applications of Differentiation",
+        "topics": [
+          "Mean Value Theorem and Rolle's Theorem.",
+          "Finding critical points, maxima, minima, and using first/second derivative tests.",
+          "Using the derivative to solve problems involving motion and particle movement."
+        ]
+      },
+      {
+        "unitId": "unit_6",
+        "unitName": "Unit 6: Integration and Accumulation of Change",
+        "topics": [
+          "Definite integrals and the Fundamental Theorem of Calculus.",
+          "Riemann sums, trapezoidal sums, and approximation methods for integrals.",
+          "Indefinite integrals and solving differential equations."
+        ]
+      },
+      {
+        "unitId": "unit_7",
+        "unitName": "Unit 7: Differential Equations",
+        "topics": [
+          "Slope fields and solutions to differential equations.",
+          "Separable differential equations and exponential growth/decay.",
+          "Euler's method and solving first-order differential equations."
+        ]
+      },
+      {
+        "unitId": "unit_8",
+        "unitName": "Unit 8: Applications of Integration",
+        "topics": [
+          "Using integrals to calculate areas under curves and between curves.",
+          "Volumes of solids of revolution (disk, washer, and shell methods).",
+          "Arc length, surface area, and work done by a variable force."
+        ]
+      },
+      {
+        "unitId": "unit_9",
+        "unitName": "Unit 9: Parametric Equations, Polar Coordinates, and Vector-Valued Functions",
+        "topics": [
+          "Derivatives and integrals of parametric functions.",
+          "Polar coordinates and calculus in polar form (area and arc length).",
+          "Vector-valued functions and motion in the plane (velocity, acceleration, and speed)."
+        ]
+      },
+      {
+        "unitId": "unit_10",
+        "unitName": "Unit 10: Infinite Sequences and Series",
+        "topics": [
+          "Sequences and limits of sequences.",
+          "Convergence and divergence of infinite series.",
+          "Power series, Taylor series, and Maclaurin series."
+        ]
+      }
+    ]
+  },
+  {
+    "courseId": "apphysicsc_mechanics",
+    "courseName": "AP Physics C: Mechanics",
+    "units": [
+      {
+        "unitId": "unit_1",
+        "unitName": "Unit 1: Kinematics",
+        "sections": [
+          {
+            "sectionName": "Motion in One Dimension",
+            "topics": [
+              "Position, Velocity, and Acceleration: Describing motion in one dimension.",
+              "Kinematic Equations: Equations for uniformly accelerated motion.",
+              "Free Fall and Gravity: Motion under gravitational acceleration."
+            ]
+          },
+          {
+            "sectionName": "Motion in Two Dimensions",
+            "topics": [
+              "Projectile Motion: Two-dimensional motion under gravity.",
+              "Relative Velocity: Motion relative to a reference frame."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_2",
+        "unitName": "Unit 2: Newton’s Laws of Motion",
+        "sections": [
+          {
+            "sectionName": "Forces and Newton's Laws",
+            "topics": [
+              "Newton's First, Second, and Third Laws: Laws of force and motion.",
+              "Free-Body Diagrams and Forces: Analyzing forces acting on objects.",
+              "Friction, Tension, and Normal Force: Types of contact forces."
+            ]
+          },
+          {
+            "sectionName": "Applications of Newton’s Laws",
+            "topics": [
+              "Circular Motion and Centripetal Forces: Motion in curved paths."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_3",
+        "unitName": "Unit 3: Work, Energy, and Power",
+        "sections": [
+          {
+            "sectionName": "Work and Energy",
+            "topics": [
+              "Work-Energy Theorem: Relationship between work and energy.",
+              "Conservation of Mechanical Energy: Energy conservation in systems.",
+              "Power and Efficiency: Rate of energy transfer and system efficiency."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_4",
+        "unitName": "Unit 4: Momentum",
+        "sections": [
+          {
+            "sectionName": "Linear Momentum",
+            "topics": [
+              "Impulse and Momentum: Force applied over time.",
+              "Conservation of Linear Momentum: Momentum conserved in isolated systems.",
+              "Elastic and Inelastic Collisions: Types of collisions and energy transfer."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_5",
+        "unitName": "Unit 5: Rotation",
+        "sections": [
+          {
+            "sectionName": "Rotational Motion",
+            "topics": [
+              "Angular Kinematics and Angular Velocity: Rotational equivalents of linear motion.",
+              "Torque and Rotational Inertia: Forces causing rotational motion.",
+              "Conservation of Angular Momentum: Angular momentum conserved in systems."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_6",
+        "unitName": "Unit 6: Gravitation",
+        "sections": [
+          {
+            "sectionName": "Gravitational Physics",
+            "topics": [
+              "Newton’s Law of Universal Gravitation: Gravitation between masses.",
+              "Gravitational Potential Energy: Energy due to gravitational force.",
+              "Orbits and Kepler’s Laws: Motion of planets and satellites."
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "courseId": "apphysicsc_electricity",
+    "courseName": "AP Physics C: Electricity and Magnetism",
+    "units": [
+      {
+        "unitId": "unit_1",
+        "unitName": "Unit 1: Electrostatics",
+        "sections": [
+          {
+            "sectionName": "Electric Charge",
+            "topics": [
+              "Electric Charge and Conservation: Charge conserved in interactions.",
+              "Coulomb’s Law: Force between charged particles."
+            ]
+          },
+          {
+            "sectionName": "Electric Fields and Potential",
+            "topics": [
+              "Electric Field Lines: Representation of electric fields.",
+              "Electric Potential Energy: Energy due to electric forces.",
+              "Gauss’s Law and Applications: Flux through surfaces and charge distribution."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_2",
+        "unitName": "Unit 2: Capacitors and Dielectrics",
+        "sections": [
+          {
+            "sectionName": "Capacitance",
+            "topics": [
+              "Capacitance and Energy Storage: Ability to store electric energy.",
+              "Parallel Plate Capacitors: Capacitance of parallel plates.",
+              "Dielectrics and Their Effects: Effect of materials on capacitance."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_3",
+        "unitName": "Unit 3: Electric Circuits",
+        "sections": [
+          {
+            "sectionName": "Ohm’s Law and Resistance",
+            "topics": [
+              "Series and Parallel Circuits: Current flow in different circuits.",
+              "Kirchhoff’s Laws: Conservation of charge and energy.",
+              "RC Circuits (Charging and Discharging): Behavior of resistors and capacitors."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_4",
+        "unitName": "Unit 4: Magnetic Fields",
+        "sections": [
+          {
+            "sectionName": "Magnetic Forces",
+            "topics": [
+              "Magnetic Force on Moving Charges: Force on charges in a magnetic field.",
+              "Motion of a Charged Particle: Charged particle motion in magnetic fields."
+            ]
+          },
+          {
+            "sectionName": "Magnetic Fields Due to Currents",
+            "topics": [
+              "Biot-Savart Law: Magnetic field from currents.",
+              "Ampere’s Law: Magnetic fields in conductors."
+            ]
+          }
+        ]
+      },
+      {
+        "unitId": "unit_5",
+        "unitName": "Unit 5: Electromagnetic Induction",
+        "sections": [
+          {
+            "sectionName": "Faraday's Law",
+            "topics": [
+              "Electromagnetic Induction: Inducing EMF through changing magnetic fields.",
+              "Induced EMF and Faraday’s Law: EMF generated from flux change.",
+              "Lenz's Law: Direction of induced current."
+            ]
+          },
+          {
+            "sectionName": "Inductors",
+            "topics": [
+              "Inductors and Self-Inductance: Energy stored in magnetic fields."
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

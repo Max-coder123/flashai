@@ -12,6 +12,7 @@ body {
     height: 100vh;
     background-color: #F5F5F5;
     display: flex;
+    
 }
 
 .top-taskbar {
@@ -49,6 +50,7 @@ body {
     bottom: 0;
     height: calc(100vh - 60px);
     transition: width 0.4s ease;
+    min-height: calc(100vh - 60px);
 }
 
 .taskbar.minimized {
@@ -98,6 +100,7 @@ body {
     font-weight: 600;
     font-size: 0.9em;
     box-sizing: border-box;
+    border-right: 0.01px grey;
 }
 
 .taskbar a:hover {
@@ -137,6 +140,13 @@ body {
     justify-content: center;
 }
 
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    background-color: #F2F6FA;
+}
+
+
 .logo {
     height: 150px;
     margin: 0;
@@ -151,9 +161,12 @@ body {
     background-color: #F2F6FA;
     margin-left: 10%;
     margin-top: 60px;
+    min-height: 100vh;
     border-left: 0.1px solid #A0A4B8;
     position: relative;
     transition: width 0.4s, margin-left 0.4s ease;
+    border-left: 0.1px solid #A0A4B8;
+    overflow-y: auto;
 }
 
 .main-content.expanded {

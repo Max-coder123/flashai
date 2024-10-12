@@ -215,6 +215,82 @@
         .course-card:hover .course-text {
             color: #e6e5e7;
         }
+
+        /* Form styling */
+        #addCourseForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #F2F6FA;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border: 1.5px solid #A0A4B8;
+        }
+
+        #addCourseForm label {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #031738;
+            margin-bottom: 10px;
+            font-family: "Montserrat", sans-serif;
+        }
+
+        #addCourseForm select {
+            width: 100%;
+            padding: 12px;
+            background-color: #dee7ec;
+            color: #031738;
+            border-radius: 10px;
+            border: 2px solid #A0A4B8;
+            box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 1.1em;
+            font-family: "Montserrat", sans-serif;
+            margin-bottom: 20px;
+        }
+
+        #addCourseForm button {
+            padding: 12px 20px;
+            background-color: #031738;
+            color: #e6e5e7;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        #addCourseForm button:hover {
+            background-color: #7FC29B;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modal adjustments */
+        #courseModal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #courseModal .modal-content {
+            background-color: #F2F6FA;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid #A0A4B8;
+            width: 40%;
+            text-align: center;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            font-family: "Montserrat", sans-serif;
+        }
+
+        #courseModal .modal-content h2 {
+            font-size: 1.5em;
+            color: #031738;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
     </style>
 </head>
 
@@ -318,13 +394,13 @@
 
 
         <div class="courses-container" id="coursesContainer">
-            
+
         </div>
 
 
     </div>
 
-    <div class="modal" id="courseModal">
+    <div class="modal" id="courseModal" style="display: none;">
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
             <h2>Add a Course</h2>
@@ -333,15 +409,20 @@
                 <select id="availableCourses">
                     <option value="apush">AP U.S. History</option>
                     <option value="apcalc">AP Calculus BC</option>
+                    <option value="apphysicsc_mechanics">AP Physics C: Mechanics</option>
+                    <option value="apphysicsc_electricity">AP Physics C: Electricity and Magnetism</option>
                 </select>
                 <button type="submit" class="submit-button">Add Course</button>
-            </form>     
+            </form>
         </div>
     </div>
+    
 
     <script src="/static/global.js"></script>
 
     <script>
+
+        
         document.getElementById('toggle-taskbar').addEventListener('click', function () {
             const taskbar = document.getElementById('taskbar');
             const mainContent = document.getElementById('main-content');
@@ -351,6 +432,7 @@
 
         document.getElementById('addCourseButton').addEventListener('click', function () {
             document.getElementById('courseModal').style.display = 'flex';
+            
         });
 
         document.getElementById('closeModal').addEventListener('click', function () {
@@ -370,20 +452,32 @@
             document.getElementById('courseModal').style.display = 'none';
         });
 
-
         document.addEventListener('DOMContentLoaded', function () {
-            const savedCourses = JSON.parse(localStorage.getItem('courses')) || [];
-            savedCourses.forEach(courseName => {
-                createCourseCard(courseName);
-            });
-        });
+    // Ensures modal is hidden by default
+    document.getElementById('courseModal').style.display = 'none'; 
 
-        function createCourseCard(courseName) {
+    const savedCourses = JSON.parse(localStorage.getItem('courses')) || [];
+    savedCourses.forEach(courseName => {
+        createCourseCard(courseName);
+    });
+});
+
+
+        const courseData = {
+            "apcalc": "AP Calculus BC",
+            "apphysicsc_mechanics": "AP Physics C: Mechanics",
+            "apphysicsc_electricity": "AP Physics C: Electricity and Magnetism",
+            "apush": "AP U.S. History"
+        };
+
+        function createCourseCard(courseId) {
             const courseBox = document.createElement('div');
             courseBox.classList.add('course-card');
+            courseBox.setAttribute('data-course-id', courseId);
+
             courseBox.innerHTML = `
         <div class="course-icon">
-            <div class="course-text">${courseName}</div>
+            <div class="course-text">${getCourseName(courseId)}</div>
         </div>
         <button class="delete-icon" title="Delete Course">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
@@ -394,70 +488,58 @@
 
             document.getElementById('coursesContainer').appendChild(courseBox);
 
-            const deleteIcon = courseBox.querySelector('.delete-icon');
-            deleteIcon.addEventListener('click', function (e) {
-                e.stopPropagation();
-                enterRemoveMode(courseBox, courseName);
+            let isDeleting = false;
+
+            courseBox.addEventListener('click', function () {
+                if (!isDeleting) {
+                    window.location.href = `/studyguide?course=${courseId}`;
+                } else {
+                    removeCourse(courseId, courseBox); 
+                }
+            });
+
+            courseBox.querySelector('.delete-icon').addEventListener('click', function (e) {
+                e.stopPropagation(); 
+
+                if (!isDeleting) {
+                    isDeleting = true;
+                    courseBox.querySelector('.course-text').textContent = "Delete Course?";
+                    this.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
+                    <path d="M19 13H5v-2h14v2z"/>
+                </svg>
+            `; 
+                } else {
+                    isDeleting = false;
+                    courseBox.querySelector('.course-text').textContent = getCourseName(courseId);
+                    this.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/>
+                </svg>
+            `; 
+                }
             });
         }
 
-        function enterRemoveMode(courseBox, originalCourseName) {
-            const courseText = courseBox.querySelector('.course-text');
-            const deleteButton = courseBox.querySelector('.delete-icon');
-
-            courseText.innerText = "Remove course?";
-            deleteButton.style.display = 'none';
-
-            const cancelButton = document.createElement('button');
-            cancelButton.classList.add('cancel-icon');
-            cancelButton.innerHTML = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
-        </svg>
-    `;
-            courseBox.appendChild(cancelButton);
-
-            cancelButton.addEventListener('click', function (e) {
-                e.stopPropagation();
-                cancelRemoveMode(courseBox, originalCourseName, deleteButton, cancelButton);
-            });
-
-            courseBox.addEventListener('click', confirmRemoval);
-            function confirmRemoval() {
-                courseBox.remove();
-                let courses = JSON.parse(localStorage.getItem('courses')) || [];
-                courses = courses.filter(course => course !== originalCourseName);
-                localStorage.setItem('courses', JSON.stringify(courses));
-                courseBox.removeEventListener('click', confirmRemoval);
-            }
-        }
-
-        function cancelRemoveMode(courseBox, originalCourseName, deleteButton, cancelButton) {
-            const courseText = courseBox.querySelector('.course-text');
-            courseText.innerText = originalCourseName;
-            deleteButton.style.display = 'block';
-            cancelButton.remove();
+        function getCourseName(courseId) {
+            const courses = {
+                apcalc: 'AP Calculus BC',
+                apush: 'AP U.S. History',
+                apphysicsc_mechanics: 'AP Physics C: Mechanics',
+                apphysicsc_electricity: 'AP Physics C: Electricity and Magnetism'
+            };
+            return courses[courseId] || courseId;
         }
 
 
-    </script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const courseCards = document.querySelectorAll('.course-card');
+        function removeCourse(courseId, courseBox) {
+            let courses = JSON.parse(localStorage.getItem('courses')) || [];
+            courses = courses.filter(course => course !== courseId);
+            localStorage.setItem('courses', JSON.stringify(courses));
+            courseBox.remove();
+        }
 
-            courseCards.forEach(card => {
-                const courseId = card.getAttribute('data-course-id');
-                card.querySelector('.view-study-guide').addEventListener('click', function () {
-                    localStorage.setItem('selectedCourseId', courseId);
-                    window.location.href = `/studyguide`;
-                });
-            });
-        });
-
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const courseId = urlParams.get('courseId');
     </script>
 
 
