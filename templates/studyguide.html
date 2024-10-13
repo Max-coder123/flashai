@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="static/global.css">
     <style>
+
+        
         .unit-taskbar {
             width: 200px;
             border-right: 1px solid #ccc;
@@ -192,6 +194,7 @@
 
 document.addEventListener('DOMContentLoaded', function () {
     const taskbar = document.getElementById('taskbar');
+    const mainContent = document.getElementById('main-content');
     const unitTaskbar = document.getElementById('unit-list');
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get('course');
@@ -199,11 +202,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Automatically minimize the taskbar if on the study guide page
     if (courseId) {
         taskbar.classList.add('minimized');
+        mainContent.classList.add('expanded');
     }
 
     // Allow user to toggle the taskbar
     document.getElementById('toggle-taskbar').addEventListener('click', function () {
         taskbar.classList.toggle('minimized');
+        mainContent.classList.toggle('expanded');
     });
 
     // Fetch and display the study guide data
@@ -230,6 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error loading study guide:', error));
     }
 
+    // Ensure units display correctly in the taskbar
     function populateUnitTaskbar(units) {
         if (!units || !Array.isArray(units)) return;
         unitTaskbar.innerHTML = units.map(unit => `
@@ -237,6 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `).join('');
     }
 
+    // Display the entire study guide or selected unit
     function displayStudyGuide(studyGuide) {
         const guideContainer = document.getElementById('study-guide-container');
 
@@ -261,6 +268,7 @@ document.addEventListener('DOMContentLoaded', function () {
         `;
     }
 
+    // Load and display selected unit when clicked
     function loadUnit(unitId, studyGuide) {
         const unit = studyGuide.units.find(u => u.unitId === unitId);
         const guideContainer = document.getElementById('study-guide-container');
@@ -279,6 +287,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
 
 
 
