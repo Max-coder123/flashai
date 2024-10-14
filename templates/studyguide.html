@@ -287,40 +287,69 @@
         return;
     }
 
+    // Log each unit to inspect where it might be breaking
+    studyGuide.units.forEach((unit, index) => {
+        console.log(`Unit ${index + 1}:`, unit); // This will log each unit one by one
+    });
+    
     guideContainer.innerHTML = `
         <h1>${studyGuide.courseName}</h1>
         ${studyGuide.units.map(unit => `
             <div class="unit">
                 <h2>${unit.unitName}</h2>
-                ${unit.topics && Array.isArray(unit.topics) ? unit.topics.map(topic => `
-                    <h3>${topic.title}</h3>
-                    <ul>
-                        ${topic.details.map(detail => `<li>${detail}</li>`).join('')}
-                    </ul>
-                `).join('') : '<p>No topics available for this unit.</p>'}
+                ${unit.sections && unit.sections.length > 0 
+                    ? unit.sections.map(section => `
+                        <h3>${section.sectionName}</h3>
+                        ${section.topics && section.topics.length > 0
+                            ? section.topics.map(topic => `
+                                <h4>${topic.topicName}</h4>
+                                <ul>
+                                    ${topic.details && topic.details.length > 0 
+                                        ? topic.details.map(detail => `<li>${detail}</li>`).join('') 
+                                        : '<li>No details available for this topic.</li>'
+                                    }
+                                </ul>
+                            `).join('')
+                            : '<p>No topics available for this section.</p>'
+                        }
+                    `).join('')
+                    : '<p>No sections available for this unit.</p>'
+                }
             </div>
         `).join('')}
     `;
 }
 
-    
-                function loadUnit(unitId, studyGuide) {
-                    const unit = studyGuide.units.find(u => u.unitId === unitId);
-                    const guideContainer = document.getElementById('study-guide-container');
-    
-                    if (unit) {
-                        guideContainer.innerHTML = `
-                            <h2>${unit.unitName}</h2>
-                            ${unit.topics
-                                ? unit.topics.map(topic => `
-                                    <h3>${topic.title}</h3>
-                                    <ul>${topic.details.map(detail => `<li>${detail}</li>`).join('')}</ul>
-                                `).join('')
-                                : `<ul>${unit.topics.map(topic => `<li>${topic}</li>`).join('')}</ul>`
-                            }
-                        `;
+function loadUnit(unitId, studyGuide) {
+    const unit = studyGuide.units.find(u => u.unitId === unitId);
+    const guideContainer = document.getElementById('study-guide-container');
+
+    if (unit) {
+        guideContainer.innerHTML = `
+            <h2>${unit.unitName}</h2>
+            ${unit.sections && unit.sections.length > 0
+                ? unit.sections.map(section => `
+                    <h3>${section.sectionName}</h3>
+                    ${section.topics && section.topics.length > 0
+                        ? section.topics.map(topic => `
+                            <h4>${topic.topicName}</h4>
+                            <ul>
+                                ${topic.details && topic.details.length > 0 
+                                    ? topic.details.map(detail => `<li>${detail}</li>`).join('')
+                                    : '<li>No details available for this topic.</li>'
+                                }
+                            </ul>
+                        `).join('')
+                        : '<p>No topics available for this section.</p>'
                     }
-                }
+                `).join('')
+                : '<p>No sections available for this unit.</p>'
+            }
+        `;
+    }
+}
+
+
             });
         </script>
     </body>
