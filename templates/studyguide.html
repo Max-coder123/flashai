@@ -9,10 +9,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="static/global.css">
     <style>
+        #study-guide-container {
+            width: 70%;
+            margin: 0 auto;
+            padding-left: 100px;
+            /* Increase padding on the left by 50px (originally 50px) */
+            padding-bottom: 50px;
+            text-align: left;
+        }
 
-        
         .unit-taskbar {
-            width: 200px;
+            width: 350px;
             border-right: 1px solid #ccc;
             padding: 20px;
             height: 100vh;
@@ -32,7 +39,7 @@
         }
 
         .taskbar:not(.minimized)+.main-content .unit-taskbar {
-            left: 250px;
+            left: 350px;
             /* Adjust this based on taskbar width when expanded */
         }
 
@@ -42,18 +49,59 @@
         }
 
         .unit-taskbar li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-            width: 80%;
-            /* Only 80% wide lines */
-            margin: 0 auto;
-            text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    width: 95%;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column; /* Stack the unit number and title vertically */
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.unit-taskbar li:hover {
+    background-color: #f2f2f2;
+}
+
+.unit-number {
+    color: grey;
+    font-size: 75%;
+    font-weight: 650;
+    display: block;
+}
+
+.unit-title {
+    color: black;
+    font-size: 100%;
+    font-weight: 400;
+    margin-left: 0;
+    display: block;
+}
+
+       
+
+        .unit-taskbar li .unit-number {
+            color: grey;
+            font-size: 75%;
+            font-weight: 650;
         }
 
-        .unit-taskbar li:hover {
-            background-color: #f2f2f2;
+        .unit-taskbar li .unit-title {
+            color: black;
+            font-size: 100%;
+            font-weight: 400;
+            margin-left: 0;
+            display: inline;
         }
+
+        .unit-button span {
+            pointer-events: none;
+        }
+
+
+
 
         .logo {
             height: 150px;
@@ -192,67 +240,77 @@
     <script>
 
 
-document.addEventListener('DOMContentLoaded', function () {
-    const taskbar = document.getElementById('taskbar');
-    const mainContent = document.getElementById('main-content');
-    const unitTaskbar = document.getElementById('unit-list');
-    const urlParams = new URLSearchParams(window.location.search);
-    const courseId = urlParams.get('course');
+        document.addEventListener('DOMContentLoaded', function () {
+            const taskbar = document.getElementById('taskbar');
+            const mainContent = document.getElementById('main-content');
+            const unitTaskbar = document.getElementById('unit-list');
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('course');
 
-    // Automatically minimize the taskbar if on the study guide page
-    if (courseId) {
-        taskbar.classList.add('minimized');
-        mainContent.classList.add('expanded');
-    }
+            // Automatically minimize the taskbar if on the study guide page
+            if (courseId) {
+                taskbar.classList.add('minimized');
+                mainContent.classList.add('expanded');
+            }
 
-    // Allow user to toggle the taskbar
-    document.getElementById('toggle-taskbar').addEventListener('click', function () {
-        taskbar.classList.toggle('minimized');
-        mainContent.classList.toggle('expanded');
-    });
+            // Allow user to toggle the taskbar
+            document.getElementById('toggle-taskbar').addEventListener('click', function () {
+                taskbar.classList.toggle('minimized');
+                mainContent.classList.toggle('expanded');
+            });
 
-    // Fetch and display the study guide data
-    if (courseId) {
-        fetch('/static/study_guides.json')
-            .then(response => response.json())
-            .then(data => {
-                const studyGuide = data.find(course => course.courseId === courseId);
-                if (studyGuide) {
-                    populateUnitTaskbar(studyGuide.units);
-                    displayStudyGuide(studyGuide);
+            // Fetch and display the study guide data
+            if (courseId) {
+                fetch('/static/study_guides.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const studyGuide = data.find(course => course.courseId === courseId);
+                        if (studyGuide) {
+                            populateUnitTaskbar(studyGuide.units);
+                            displayStudyGuide(studyGuide);
 
-                    // Event listener for clicking units in the units sidebar
-                    document.getElementById('unit-taskbar').addEventListener('click', function (e) {
-                        if (e.target.classList.contains('unit-button')) {
-                            const unitId = e.target.dataset.unitId;
-                            loadUnit(unitId, studyGuide);
+                            // Event listener for clicking units in the units sidebar
+                            document.getElementById('unit-taskbar').addEventListener('click', function (e) {
+                                if (e.target.classList.contains('unit-button')) {
+                                    const unitId = e.target.dataset.unitId;
+                                    loadUnit(unitId, studyGuide);
+                                }
+                            });
+                        } else {
+                            console.error('Study guide not found for courseId:', courseId);
                         }
-                    });
-                } else {
-                    console.error('Study guide not found for courseId:', courseId);
+                    })
+                    .catch(error => console.error('Error loading study guide:', error));
+            }
+
+            function populateUnitTaskbar(units) {
+    if (!units || !Array.isArray(units)) return;
+    unitTaskbar.innerHTML = units.map(unit => {
+        const unitNumber = unit.unitId.replace(/\D/g, '');
+        const unitTitle = unit.unitName.replace(/unit\s?\d*:/i, '').trim();
+
+        return `
+            <li class="unit-button" data-unit-id="${unit.unitId}" style="cursor: pointer;">
+                <div class="unit-number">UNIT ${unitNumber}</div>
+                <div class="unit-title">${unitTitle}</div>
+            </li>
+        `;
+    }).join('');
+}
+
+
+
+
+            // Display the entire study guide or selected unit
+            function displayStudyGuide(studyGuide) {
+                const guideContainer = document.getElementById('study-guide-container');
+
+                if (!studyGuide.units || !Array.isArray(studyGuide.units)) {
+                    guideContainer.innerHTML = '<p>No units available for this course.</p>';
+                    return;
                 }
-            })
-            .catch(error => console.error('Error loading study guide:', error));
-    }
 
-    // Ensure units display correctly in the taskbar
-    function populateUnitTaskbar(units) {
-        if (!units || !Array.isArray(units)) return;
-        unitTaskbar.innerHTML = units.map(unit => `
-            <li class="unit-button" data-unit-id="${unit.unitId}">${unit.unitName}</li>
-        `).join('');
-    }
-
-    // Display the entire study guide or selected unit
-    function displayStudyGuide(studyGuide) {
-        const guideContainer = document.getElementById('study-guide-container');
-
-        if (!studyGuide.units || !Array.isArray(studyGuide.units)) {
-            guideContainer.innerHTML = '<p>No units available for this course.</p>';
-            return;
-        }
-
-        guideContainer.innerHTML = `
+                guideContainer.innerHTML = `
             <h1>${studyGuide.courseName}</h1>
             ${studyGuide.units.map(unit => `
                 <div class="unit">
@@ -266,27 +324,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 </div>
             `).join('')}
         `;
-    }
+            }
 
-    // Load and display selected unit when clicked
-    function loadUnit(unitId, studyGuide) {
-        const unit = studyGuide.units.find(u => u.unitId === unitId);
-        const guideContainer = document.getElementById('study-guide-container');
+            // Load and display selected unit when clicked
+            function loadUnit(unitId, studyGuide) {
+                const unit = studyGuide.units.find(u => u.unitId === unitId);
+                const guideContainer = document.getElementById('study-guide-container');
 
-        if (unit) {
-            guideContainer.innerHTML = `
+                if (unit) {
+                    guideContainer.innerHTML = `
                 <h2>${unit.unitName}</h2>
                 ${unit.sections
-                    ? unit.sections.map(section => `
+                            ? unit.sections.map(section => `
                         <h3>${section.sectionName}</h3>
                         <ul>${section.topics.map(topic => `<li>${topic}</li>`).join('')}</ul>
                     `).join('')
-                    : `<ul>${unit.topics.map(topic => `<li>${topic}</li>`).join('')}</ul>`
-                }
+                            : `<ul>${unit.topics.map(topic => `<li>${topic}</li>`).join('')}</ul>`
+                        }
             `;
-        }
-    }
-});
+                }
+            }
+        });
 
 
 
