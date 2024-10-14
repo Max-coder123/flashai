@@ -8,7 +8,7 @@
         "unitName": "Period 1: 1491-1607 - Native American Societies and European Exploration",
         "topics": [
           {
-            "title": "Pre-Columbian Native American Societies",
+            "topicName": "Pre-Columbian Native American Societies",
             "details": [
               "Diverse societies across North America, including nomadic tribes and agricultural communities.",
               "Innovations in agriculture, such as the 'Three Sisters' farming technique (corn, beans, squash).",
@@ -17,7 +17,7 @@
             ]
           },
           {
-            "title": "The Columbian Exchange",
+            "topicName": "The Columbian Exchange",
             "details": [
               "Widespread exchange of plants, animals, diseases, and technologies between the Americas, Europe, and Africa.",
               "Introduction of crops like potatoes and maize to Europe, which significantly impacted European diets and populations.",
@@ -26,7 +26,7 @@
             ]
           },
           {
-            "title": "Spanish Colonization and the Encomienda System",
+            "topicName": "Spanish Colonization and the Encomienda System",
             "details": [
               "Spanish exploration led to the conquest of large territories in the Americas, including the Aztec and Inca Empires.",
               "The encomienda system granted Spanish settlers control over indigenous labor in exchange for the promise of protection and Christianization.",
@@ -34,7 +34,7 @@
             ]
           },
           {
-            "title": "Impact of European Exploration on Native Americans",
+            "topicName": "Impact of European Exploration on Native Americans",
             "details": [
               "European colonization led to widespread displacement and violence against Native American tribes.",
               "The introduction of European diseases decimated indigenous populations, leading to a demographic collapse.",
@@ -42,7 +42,7 @@
             ]
           },
           {
-            "title": "Debates Over the Treatment of Native Americans",
+            "topicName": "Debates Over the Treatment of Native Americans",
             "details": [
               "The Valladolid Debate (1550-1551) between Bartolomé de las Casas and Juan Ginés de Sepúlveda focused on the moral and legal justification of Spanish colonization and the treatment of Native Americans.",
               "Las Casas advocated for better treatment of Native Americans, arguing that they were rational beings capable of conversion to Christianity.",
@@ -56,7 +56,7 @@
         "unitName": "Period 2: 1607-1754 - Colonial America",
         "topics": [
           {
-            "title": "Settlement of Jamestown and the Chesapeake Colonies",
+            "topicName": "Settlement of Jamestown and the Chesapeake Colonies",
             "details": [
               "Jamestown, founded in 1607, was the first permanent English settlement in North America.",
               "The colony struggled with disease, famine, and conflict with Native Americans.",
@@ -64,7 +64,7 @@
             ]
           },
           {
-            "title": "Puritan New England: Society, Religion, and Governance",
+            "topicName": "Puritan New England: Society, Religion, and Governance",
             "details": [
               "The Puritans settled in New England, seeking religious freedom from persecution in England.",
               "Their society was based on strict religious principles, with governance closely tied to the church.",
@@ -72,7 +72,7 @@
             ]
           },
           {
-            "title": "Middle Colonies: Diverse Populations and Economies",
+            "topicName": "Middle Colonies: Diverse Populations and Economies",
             "details": [
               "The middle colonies (New York, Pennsylvania, New Jersey, Delaware) were known for their diversity in terms of ethnicity and religion.",
               "These colonies had mixed economies, including farming, trade, and manufacturing.",
@@ -80,7 +80,7 @@
             ]
           },
           {
-            "title": "Transatlantic Trade and the Development of the Atlantic World",
+            "topicName": "Transatlantic Trade and the Development of the Atlantic World",
             "details": [
               "Colonies participated in a complex system of trade, exchanging raw materials for manufactured goods from Europe.",
               "The triangular trade system included the transatlantic slave trade, which brought African slaves to the Americas.",
@@ -88,7 +88,7 @@
             ]
           },
           {
-            "title": "Colonial Resistance to Imperial Control",
+            "topicName": "Colonial Resistance to Imperial Control",
             "details": [
               "Tensions between the colonies and England grew due to economic and political restrictions imposed by the Crown.",
               "Colonial assemblies began to assert their autonomy, challenging the authority of royal governors.",
@@ -102,7 +102,7 @@
         "unitName": "Period 3: 1754-1800 - American Revolution and Early Republic",
         "topics": [
           {
-            "title": "French and Indian War (1754-1763)",
+            "topicName": "French and Indian War (1754-1763)",
             "details": [
               "The war between Britain and France in North America was part of the larger Seven Years' War.",
               "British victory led to increased territorial claims in North America but also significant debt, prompting new taxes on the colonies.",
@@ -110,7 +110,7 @@
             ]
           },
           {
-            "title": "Causes of the American Revolution",
+            "topicName": "Causes of the American Revolution",
             "details": [
               "British policies, including the Stamp Act (1765) and the Townshend Acts (1767), angered colonists, leading to widespread protests.",
               "Enlightenment ideas, such as John Locke's theories of natural rights, inspired colonial leaders to challenge British rule.",
@@ -118,7 +118,7 @@
             ]
           },
           {
-            "title": "Key Battles and Figures of the American Revolution",
+            "topicName": "Key Battles and Figures of the American Revolution",
             "details": [
               "Important battles included the Battle of Lexington and Concord (1775), the Battle of Saratoga (1777), and the Siege of Yorktown (1781).",
               "George Washington, the commander-in-chief of the Continental Army, played a crucial role in the eventual American victory.",
@@ -126,7 +126,7 @@
             ]
           },
           {
-            "title": "The Articles of Confederation and Constitutional Convention",
+            "topicName": "The Articles of Confederation and Constitutional Convention",
             "details": [
               "The Articles of Confederation (1781) established a weak central government with limited powers.",
               "The inability of the government to address economic and political challenges (e.g., Shays' Rebellion) led to calls for a stronger federal system.",
@@ -134,7 +134,7 @@
             ]
           },
           {
-            "title": "The Constitution and the Bill of Rights",
+            "topicName": "The Constitution and the Bill of Rights",
             "details": [
               "The U.S. Constitution was ratified in 1788, creating a federal system with separate executive, legislative, and judicial branches.",
               "The Bill of Rights (1791) guaranteed individual liberties, such as freedom of speech, religion, and the press.",
@@ -150,7 +150,7 @@
     "unitName": "Period 4: 1800-1848 - The Growth of Democracy and Market Revolution",
     "topics": [
       {
-        "title": "The Jeffersonian Presidency and Expansion of Executive Power",
+        "topicName": "The Jeffersonian Presidency and Expansion of Executive Power",
         "details": [
           "Thomas Jefferson's presidency (1801-1809) marked a shift towards Democratic-Republican ideals of limited government.",
           "The Louisiana Purchase (1803) doubled the size of the United States, expanding westward and increasing executive power.",
@@ -158,7 +158,7 @@
         ]
       },
       {
-        "title": "The War of 1812 and American Nationalism",
+        "topicName": "The War of 1812 and American Nationalism",
         "details": [
           "The War of 1812 was fought between the U.S. and Britain due to trade restrictions and impressment of American sailors.",
           "The Treaty of Ghent (1814) ended the war in a stalemate, but the U.S. victory at the Battle of New Orleans (1815) bolstered American nationalism.",
@@ -166,7 +166,7 @@
         ]
       },
       {
-        "title": "The Rise of Political Parties",
+        "topicName": "The Rise of Political Parties",
         "details": [
           "The early 19th century saw the solidification of political parties: the Federalists and the Democratic-Republicans.",
           "The Federalist Party declined after the War of 1812, leading to the 'Era of Good Feelings' under James Monroe.",
@@ -174,7 +174,7 @@
         ]
       },
       {
-        "title": "Market Revolution: Industrialization and Transportation",
+        "topicName": "Market Revolution: Industrialization and Transportation",
         "details": [
           "The Market Revolution transformed the U.S. economy, with advancements in transportation (e.g., canals, railroads) and communication (telegraphs).",
           "Textile mills and factories in the North contributed to industrialization, while the South remained reliant on cotton and slavery.",
@@ -182,7 +182,7 @@
         ]
       },
       {
-        "title": "Jacksonian Democracy and Its Impact",
+        "topicName": "Jacksonian Democracy and Its Impact",
         "details": [
           "Andrew Jackson's presidency (1829-1837) was marked by the expansion of voting rights for white men and an emphasis on the 'common man.'",
           "The Nullification Crisis and the Indian Removal Act highlighted Jackson's use of federal power to enforce national policies.",
@@ -196,7 +196,7 @@
     "unitName": "Period 5: 1844-1877 - The Civil War and Reconstruction",
     "topics": [
       {
-        "title": "Manifest Destiny and Westward Expansion",
+        "topicName": "Manifest Destiny and Westward Expansion",
         "details": [
           "Manifest Destiny was the belief that the U.S. was destined to expand across the North American continent.",
           "Westward expansion led to conflicts with Native Americans and the Mexican-American War (1846-1848), which resulted in the acquisition of new territories.",
@@ -204,7 +204,7 @@
         ]
       },
       {
-        "title": "Causes of the Civil War",
+        "topicName": "Causes of the Civil War",
         "details": [
           "The Civil War was precipitated by deep-seated divisions over slavery, states' rights, and economic differences between the North and South.",
           "The Compromise of 1850, the Kansas-Nebraska Act, and the Dred Scott decision further polarized the nation.",
@@ -212,7 +212,7 @@
         ]
       },
       {
-        "title": "Key Battles and Strategies of the Civil War",
+        "topicName": "Key Battles and Strategies of the Civil War",
         "details": [
           "Major battles included Gettysburg, Antietam, and the siege of Vicksburg, which were turning points in the war.",
           "Union strategies, such as the Anaconda Plan and Sherman's March to the Sea, aimed to suffocate the Confederacy's resources.",
@@ -220,7 +220,7 @@
         ]
       },
       {
-        "title": "Reconstruction: Successes and Failures",
+        "topicName": "Reconstruction: Successes and Failures",
         "details": [
           "Reconstruction (1865-1877) aimed to reintegrate the Southern states into the Union and rebuild the South after the Civil War.",
           "The Radical Republicans in Congress passed the 13th, 14th, and 15th Amendments, which abolished slavery, granted citizenship, and extended voting rights to African Americans.",
@@ -234,7 +234,7 @@
     "unitName": "Period 6: 1865-1898 - Industrialization and the Gilded Age",
     "topics": [
       {
-        "title": "The Rise of Big Business and Industrialization",
+        "topicName": "The Rise of Big Business and Industrialization",
         "details": [
           "The Gilded Age was characterized by rapid industrial growth, driven by figures like Andrew Carnegie (steel) and John D. Rockefeller (oil).",
           "The development of railroads, steel, and oil industries transformed the American economy and led to the rise of monopolies.",
@@ -242,7 +242,7 @@
         ]
       },
       {
-        "title": "Urbanization and Immigration",
+        "topicName": "Urbanization and Immigration",
         "details": [
           "The rapid growth of cities, fueled by immigration, created new social and economic challenges, including overcrowding, sanitation issues, and labor conflicts.",
           "Immigrants from Europe and Asia arrived in large numbers, seeking economic opportunities, but often faced discrimination and poor living conditions.",
@@ -250,7 +250,7 @@
         ]
       },
       {
-        "title": "Labor Movements and Workers' Rights",
+        "topicName": "Labor Movements and Workers' Rights",
         "details": [
           "Workers responded to poor conditions with strikes and the formation of labor unions.",
           "Significant labor events included the Haymarket Riot (1886) and the Pullman Strike (1894), which highlighted tensions between labor and industry.",
@@ -258,7 +258,7 @@
         ]
       },
       {
-        "title": "Populism and Farmers' Struggles",
+        "topicName": "Populism and Farmers' Struggles",
         "details": [
           "Farmers in the West and South faced falling crop prices and high railroad rates, leading to widespread discontent.",
           "The Populist Party, formed in the 1890s, called for reforms such as bimetallism, government regulation of railroads, and direct election of senators.",
@@ -266,7 +266,7 @@
         ]
       },
       {
-        "title": "Social and Political Reform Movements",
+        "topicName": "Social and Political Reform Movements",
         "details": [
           "The Progressive movement emerged in response to the excesses of the Gilded Age, advocating for social reforms and government regulation of business.",
           "Key reforms included the Sherman Antitrust Act (1890) to combat monopolies and the establishment of settlement houses to aid the urban poor.",
@@ -280,7 +280,7 @@
     "unitName": "Period 7: 1890-1945 - The Progressive Era and World Wars",
     "topics": [
       {
-        "title": "Progressive Reforms at Local, State, and Federal Levels",
+        "topicName": "Progressive Reforms at Local, State, and Federal Levels",
         "details": [
           "The Progressive Era (1890-1920) sought to address the problems caused by industrialization, urbanization, and political corruption.",
           "Key reforms included trust-busting by Theodore Roosevelt, labor laws protecting workers, and the establishment of the Federal Reserve System.",
@@ -288,7 +288,7 @@
         ]
       },
       {
-        "title": "U.S. Imperialism and the Spanish-American War",
+        "topicName": "U.S. Imperialism and the Spanish-American War",
         "details": [
           "In the late 19th century, the U.S. pursued an imperialist policy, seeking to expand its influence globally.",
           "The Spanish-American War (1898) resulted in U.S. control over territories like Puerto Rico, Guam, and the Philippines, marking the U.S. as a global power.",
@@ -296,7 +296,7 @@
         ]
       },
       {
-        "title": "World War I: Causes and Effects on American Society",
+        "topicName": "World War I: Causes and Effects on American Society",
         "details": [
           "The U.S. initially remained neutral in World War I, but entered the conflict in 1917 due to German submarine warfare and the Zimmerman Telegram.",
           "The war effort led to increased government intervention in the economy and propaganda efforts to support the war through the Committee on Public Information.",
@@ -304,7 +304,7 @@
         ]
       },
       {
-        "title": "The Great Depression and the New Deal",
+        "topicName": "The Great Depression and the New Deal",
         "details": [
           "The stock market crash of 1929 triggered the Great Depression, leading to widespread unemployment, poverty, and economic instability.",
           "Franklin D. Roosevelt's New Deal (1933-1939) aimed to provide relief, recovery, and reform through programs like Social Security, the Civilian Conservation Corps (CCC), and the Works Progress Administration (WPA).",
@@ -312,7 +312,7 @@
         ]
       },
       {
-        "title": "World War II and Its Global Impact",
+        "topicName": "World War II and Its Global Impact",
         "details": [
           "The U.S. entered World War II after the Japanese attack on Pearl Harbor in 1941, joining the Allies in the fight against the Axis powers.",
           "World War II transformed the U.S. economy, ending the Great Depression through war production and leading to advancements in technology and industry.",
@@ -326,7 +326,7 @@
     "unitName": "Period 8: 1945-1980 - The Cold War and Postwar America",
     "topics": [
       {
-        "title": "The Origins and Early Years of the Cold War",
+        "topicName": "The Origins and Early Years of the Cold War",
         "details": [
           "The Cold War began after World War II as tensions rose between the U.S. and the Soviet Union over ideological and geopolitical differences.",
           "Key events include the Marshall Plan (1948) to rebuild Europe, the Berlin Airlift (1948-1949), and the formation of NATO (1949).",
@@ -334,7 +334,7 @@
         ]
       },
       {
-        "title": "The Red Scare and McCarthyism",
+        "topicName": "The Red Scare and McCarthyism",
         "details": [
           "The early Cold War years were marked by fears of communist infiltration in the U.S., leading to the Red Scare.",
           "Senator Joseph McCarthy became the face of anti-communism, accusing government officials and others of being communists in a campaign of fear and accusation known as McCarthyism.",
@@ -342,7 +342,7 @@
         ]
       },
       {
-        "title": "The Civil Rights Movement",
+        "topicName": "The Civil Rights Movement",
         "details": [
           "The postwar period saw the rise of the Civil Rights Movement, as African Americans and their allies fought to end segregation and racial injustice.",
           "Key events included the Brown v. Board of Education decision (1954), which declared segregation in public schools unconstitutional, and the Montgomery Bus Boycott (1955-1956), led by Martin Luther King Jr.",
@@ -350,7 +350,7 @@
         ]
       },
       {
-        "title": "The Vietnam War and Its Impact on American Society",
+        "topicName": "The Vietnam War and Its Impact on American Society",
         "details": [
           "The U.S. escalated its involvement in Vietnam in the 1960s to prevent the spread of communism, leading to widespread protests and opposition at home.",
           "The Tet Offensive (1968) shocked the American public and contributed to growing disillusionment with the war effort.",
@@ -358,10 +358,10 @@
         ]
       },
       {
-        "title": "Social and Cultural Changes of the 1960s and 1970s",
+        "topicName": "Social and Cultural Changes of the 1960s and 1970s",
         "details": [
           "The 1960s and 1970s saw a wave of social and cultural change, including the rise of the counterculture movement, second-wave feminism, and environmentalism.",
-          "The women's rights movement achieved significant gains with the passage of Title IX (1972) and the legalization of abortion through Roe v. Wade (1973).",
+          "The women's rights movement achieved significant gains with the passage of topicName IX (1972) and the legalization of abortion through Roe v. Wade (1973).",
           "The environmental movement led to the establishment of Earth Day (1970) and the passage of key legislation, including the Clean Air Act (1970) and the Endangered Species Act (1973)."
         ]
       }
@@ -372,7 +372,7 @@
     "unitName": "Period 9: 1980-Present - Contemporary America",
     "topics": [
       {
-        "title": "The Reagan Presidency and the Rise of Conservatism",
+        "topicName": "The Reagan Presidency and the Rise of Conservatism",
         "details": [
           "Ronald Reagan's presidency (1981-1989) marked a resurgence of conservative values, focusing on reducing the size of government and cutting taxes.",
           "Reagan's economic policies, known as 'Reaganomics,' emphasized supply-side economics, which aimed to stimulate growth by cutting taxes and reducing regulation.",
@@ -380,7 +380,7 @@
         ]
       },
       {
-        "title": "The End of the Cold War and the Collapse of the Soviet Union",
+        "topicName": "The End of the Cold War and the Collapse of the Soviet Union",
         "details": [
           "The Cold War ended in 1991 with the collapse of the Soviet Union, following reforms by Soviet leader Mikhail Gorbachev (glasnost and perestroika).",
           "Key events included the fall of the Berlin Wall (1989), the reunification of Germany, and the dissolution of the Warsaw Pact.",
@@ -388,7 +388,7 @@
         ]
       },
       {
-        "title": "The War on Terror and U.S. Foreign Policy",
+        "topicName": "The War on Terror and U.S. Foreign Policy",
         "details": [
           "The September 11, 2001, terrorist attacks led to the U.S. launching the War on Terror, with invasions of Afghanistan (2001) and Iraq (2003).",
           "The Iraq War, justified by claims of weapons of mass destruction (WMDs), became highly controversial due to the absence of such weapons and the prolonged conflict that followed.",
@@ -396,7 +396,7 @@
         ]
       },
       {
-        "title": "Economic and Social Changes in the Late 20th and Early 21st Centuries",
+        "topicName": "Economic and Social Changes in the Late 20th and Early 21st Centuries",
         "details": [
           "The U.S. economy shifted from manufacturing to services and technology, leading to the rise of the information age and globalization.",
           "Economic inequality grew, with debates over the role of government in addressing issues like healthcare, education, and income disparity.",
@@ -404,7 +404,7 @@
         ]
       },
       {
-        "title": "Environmental Issues and Climate Change",
+        "topicName": "Environmental Issues and Climate Change",
         "details": [
           "In the 21st century, climate change became a central issue, with debates over the role of fossil fuels, renewable energy, and international agreements like the Paris Agreement (2015).",
           "Environmental movements called for stronger regulations to combat global warming and protect natural resources.",
@@ -723,55 +723,30 @@
       {
         "unitId": "unit_1",
         "unitName": "Unit 1: Kinematics",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Motion in One Dimension",
-            "topics": [
-              {
-                "topicName": "Position, Velocity, and Acceleration",
-                "details": [
-                  "Position: A vector quantity that describes the location of an object at a particular point in time.",
-                  "Velocity: The rate of change of position with respect to time, a vector quantity.",
-                  "Acceleration: The rate of change of velocity over time."
-                ]
-              },
-              {
-                "topicName": "Kinematic Equations",
-                "details": [
-                  "Equations that describe uniformly accelerated motion, including:",
-                  "v = u + at (final velocity in terms of initial velocity, acceleration, and time).",
-                  "s = ut + ½at² (displacement in terms of initial velocity, time, and acceleration).",
-                  "v² = u² + 2as (final velocity squared in terms of initial velocity, acceleration, and displacement)."
-                ]
-              },
-              {
-                "topicName": "Free Fall and Gravity",
-                "details": [
-                  "Understanding free fall motion as a special case of uniform acceleration under gravity.",
-                  "Gravitational acceleration (g) is approximately 9.8 m/s² on Earth, and is considered constant near Earth's surface.",
-                  "Analyzing problems involving objects in free fall, taking downward as the positive direction or applying a negative acceleration for gravity."
-                ]
-              }
+            "topicName": "Position, Velocity, and Acceleration",
+            "details": [
+              "Position: A vector quantity that describes the location of an object at a particular point in time.",
+              "Velocity: The rate of change of position with respect to time, a vector quantity.",
+              "Acceleration: The rate of change of velocity over time."
             ]
           },
           {
-            "sectionName": "Motion in Two Dimensions",
-            "topics": [
-              {
-                "topicName": "Projectile Motion",
-                "details": [
-                  "Understanding that projectile motion consists of two independent components of motion: horizontal and vertical.",
-                  "Horizontal motion has constant velocity (ignoring air resistance), and vertical motion has constant acceleration due to gravity.",
-                  "Equations of motion can be applied independently to both components to analyze projectiles."
-                ]
-              },
-              {
-                "topicName": "Relative Velocity",
-                "details": [
-                  "Understanding relative velocity as the velocity of one object as observed from another moving object.",
-                  "Application of vector addition and subtraction to find the relative velocity between two objects."
-                ]
-              }
+            "topicName": "Kinematic Equations",
+            "details": [
+              "Equations that describe uniformly accelerated motion, including:",
+              "v = u + at (final velocity in terms of initial velocity, acceleration, and time).",
+              "s = ut + ½at² (displacement in terms of initial velocity, time, and acceleration).",
+              "v² = u² + 2as (final velocity squared in terms of initial velocity, acceleration, and displacement)."
+            ]
+          },
+          {
+            "topicName": "Free Fall and Gravity",
+            "details": [
+              "Understanding free fall motion as a special case of uniform acceleration under gravity.",
+              "Gravitational acceleration (g) is approximately 9.8 m/s² on Earth, and is considered constant near Earth's surface.",
+              "Analyzing problems involving objects in free fall, taking downward as the positive direction or applying a negative acceleration for gravity."
             ]
           }
         ]
@@ -779,70 +754,43 @@
       {
         "unitId": "unit_2",
         "unitName": "Unit 2: Newton’s Laws of Motion",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Forces and Newton's Laws",
-            "topics": [
-              {
-                "topicName": "Newton's First Law (Law of Inertia)",
-                "details": [
-                  "An object at rest stays at rest, and an object in motion continues in motion with the same speed and in the same direction unless acted upon by a net external force.",
-                  "Inertia: The resistance of any physical object to any change in its state of motion."
-                ]
-              },
-              {
-                "topicName": "Newton's Second Law",
-                "details": [
-                  "The net force acting on an object is equal to the product of its mass and its acceleration (F = ma).",
-                  "Applications include understanding how forces cause changes in motion and acceleration."
-                ]
-              },
-              {
-                "topicName": "Newton's Third Law",
-                "details": [
-                  "For every action, there is an equal and opposite reaction.",
-                  "The force exerted by object A on object B is equal in magnitude but opposite in direction to the force exerted by object B on object A."
-                ]
-              }
+            "topicName": "Newton's First Law (Law of Inertia)",
+            "details": [
+              "An object at rest stays at rest, and an object in motion continues in motion with the same speed and in the same direction unless acted upon by a net external force.",
+              "Inertia: The resistance of any physical object to any change in its state of motion."
             ]
           },
           {
-            "sectionName": "Applications of Newton’s Laws",
-            "topics": [
-              {
-                "topicName": "Free-Body Diagrams",
-                "details": [
-                  "Free-body diagrams are used to represent the forces acting on an object.",
-                  "They help in solving problems involving Newton's Laws by visualizing all forces (gravity, normal force, tension, friction, etc.)."
-                ]
-              },
-              {
-                "topicName": "Friction, Tension, and Normal Force",
-                "details": [
-                  "Friction: A force that opposes the relative motion or tendency of such motion of two surfaces in contact.",
-                  "Tension: The pulling force exerted by a string, rope, or cable.",
-                  "Normal Force: The perpendicular contact force exerted by a surface on another object."
-                ]
-              },
-              {
-                "topicName": "Circular Motion and Centripetal Force",
-                "details": [
-                  "In uniform circular motion, the direction of the velocity changes constantly, which results in an acceleration towards the center of the circle (centripetal acceleration).",
-                  "Centripetal force is the net force that causes centripetal acceleration, directed toward the center of the circular path."
-                ]
-              }
+            "topicName": "Newton's Second Law",
+            "details": [
+              "The net force acting on an object is equal to the product of its mass and its acceleration (F = ma).",
+              "Applications include understanding how forces cause changes in motion and acceleration."
+            ]
+          },
+          {
+            "topicName": "Newton's Third Law",
+            "details": [
+              "For every action, there is an equal and opposite reaction.",
+              "The force exerted by object A on object B is equal in magnitude but opposite in direction to the force exerted by object B on object A."
+            ]
+          },
+          {
+            "topicName": "Applications of Newton’s Laws",
+            "details": [
+              "Free-body diagrams are used to represent the forces acting on an object.",
+              "They help in solving problems involving Newton's Laws by visualizing all forces (gravity, normal force, tension, friction, etc.).",
+              "Friction: A force that opposes the relative motion or tendency of such motion of two surfaces in contact.",
+              "Tension: The pulling force exerted by a string, rope, or cable.",
+              "Normal Force: The perpendicular contact force exerted by a surface on another object."
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_3",
-    "unitName": "Unit 3: Work, Energy, and Power",
-    "sections": [
+      },
       {
-        "sectionName": "Work and Energy",
+        "unitId": "unit_3",
+        "unitName": "Unit 3: Work, Energy, and Power",
         "topics": [
           {
             "topicName": "Work-Energy Theorem",
@@ -869,15 +817,10 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_4",
-    "unitName": "Unit 4: Momentum",
-    "sections": [
+      },
       {
-        "sectionName": "Linear Momentum",
+        "unitId": "unit_4",
+        "unitName": "Unit 4: Momentum",
         "topics": [
           {
             "topicName": "Impulse and Momentum",
@@ -902,15 +845,10 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_5",
-    "unitName": "Unit 5: Rotation",
-    "sections": [
+      },
       {
-        "sectionName": "Rotational Motion",
+        "unitId": "unit_5",
+        "unitName": "Unit 5: Rotation",
         "topics": [
           {
             "topicName": "Angular Kinematics and Angular Velocity",
@@ -937,15 +875,10 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_6",
-    "unitName": "Unit 6: Gravitation",
-    "sections": [
+      },
       {
-        "sectionName": "Gravitational Physics",
+        "unitId": "unit_6",
+        "unitName": "Unit 6: Gravitation",
         "topics": [
           {
             "topicName": "Newton’s Law of Universal Gravitation",
@@ -971,15 +904,10 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_7",
-    "unitName": "Unit 7: Oscillations and Simple Harmonic Motion",
-    "sections": [
+      },
       {
-        "sectionName": "Simple Harmonic Motion (SHM)",
+        "unitId": "unit_7",
+        "unitName": "Unit 7: Oscillations and Simple Harmonic Motion",
         "topics": [
           {
             "topicName": "Definition and Characteristics of SHM",
@@ -1007,6 +935,7 @@
       }
     ]
   },
+  
   {
     "courseId": "apphysicsc_electricity",
     "courseName": "AP Physics C: Electricity and Magnetism",
@@ -1014,50 +943,30 @@
       {
         "unitId": "unit_1",
         "unitName": "Unit 1: Electrostatics",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Electric Charge and Coulomb’s Law",
-            "topics": [
-              {
-                "topicName": "Electric Charge",
-                "details": [
-                  "Electric charge is a fundamental property of matter that causes it to experience a force in an electric field.",
-                  "There are two types of charge: positive and negative. Like charges repel, and opposite charges attract.",
-                  "Charge is conserved in a closed system, meaning the total charge remains constant.",
-                  "The unit of charge is the coulomb (C), and the elementary charge is approximately 1.6 x 10⁻¹⁹ C."
-                ]
-              },
-              {
-                "topicName": "Coulomb’s Law",
-                "details": [
-                  "Coulomb’s Law describes the force between two point charges.",
-                  "The force is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance between them.",
-                  "The formula is F = k * |q₁q₂| / r², where k is Coulomb’s constant (8.99 x 10⁹ N m²/C²).",
-                  "The force is attractive if the charges are of opposite sign and repulsive if they are the same."
-                ]
-              }
+            "topicName": "Electric Charge and Coulomb’s Law",
+            "details": [
+              "Electric charge is a fundamental property of matter that causes it to experience a force in an electric field.",
+              "There are two types of charge: positive and negative. Like charges repel, and opposite charges attract.",
+              "Charge is conserved in a closed system, meaning the total charge remains constant.",
+              "The unit of charge is the coulomb (C), and the elementary charge is approximately 1.6 x 10⁻¹⁹ C.",
+              "Coulomb’s Law describes the force between two point charges.",
+              "The force is directly proportional to the product of the magnitudes of the charges and inversely proportional to the square of the distance between them.",
+              "The formula is F = k * |q₁q₂| / r², where k is Coulomb’s constant (8.99 x 10⁹ N m²/C²).",
+              "The force is attractive if the charges are of opposite sign and repulsive if they are the same."
             ]
           },
           {
-            "sectionName": "Electric Fields",
-            "topics": [
-              {
-                "topicName": "Electric Field Definition",
-                "details": [
-                  "An electric field is a region around a charged particle where other charges experience a force.",
-                  "The strength of the electric field (E) is defined as the force per unit charge: E = F/q.",
-                  "Electric field lines point away from positive charges and toward negative charges.",
-                  "The SI unit of the electric field is newtons per coulomb (N/C) or volts per meter (V/m)."
-                ]
-              },
-              {
-                "topicName": "Electric Field of a Point Charge",
-                "details": [
-                  "The electric field due to a point charge is given by E = k * |q| / r², where q is the charge and r is the distance from the charge.",
-                  "The field decreases with the square of the distance from the charge.",
-                  "Field lines radiate outward for positive charges and inward for negative charges."
-                ]
-              }
+            "topicName": "Electric Fields",
+            "details": [
+              "An electric field is a region around a charged particle where other charges experience a force.",
+              "The strength of the electric field (E) is defined as the force per unit charge: E = F/q.",
+              "Electric field lines point away from positive charges and toward negative charges.",
+              "The SI unit of the electric field is newtons per coulomb (N/C) or volts per meter (V/m).",
+              "The electric field due to a point charge is given by E = k * |q| / r², where q is the charge and r is the distance from the charge.",
+              "The field decreases with the square of the distance from the charge.",
+              "Field lines radiate outward for positive charges and inward for negative charges."
             ]
           }
         ]
@@ -1065,47 +974,37 @@
       {
         "unitId": "unit_2",
         "unitName": "Unit 2: Capacitors and Dielectrics",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Capacitance",
-            "topics": [
-              {
-                "topicName": "Definition of Capacitance",
-                "details": [
-                  "Capacitance is the ability of a system to store electric charge.",
-                  "It is defined as the ratio of the charge (Q) on each conductor to the potential difference (V) between them: C = Q/V.",
-                  "The unit of capacitance is the farad (F), where 1 F = 1 coulomb per volt (C/V)."
-                ]
-              },
-              {
-                "topicName": "Parallel Plate Capacitor",
-                "details": [
-                  "A parallel plate capacitor consists of two conducting plates separated by a distance, with an insulating material (dielectric) in between.",
-                  "The capacitance is given by C = ε₀ * A / d, where A is the area of the plates, d is the separation, and ε₀ is the permittivity of free space.",
-                  "Adding a dielectric increases the capacitance because the dielectric reduces the electric field, allowing more charge to be stored for the same potential difference."
-                ]
-              }
+            "topicName": "Definition of Capacitance",
+            "details": [
+              "Capacitance is the ability of a system to store electric charge.",
+              "It is defined as the ratio of the charge (Q) on each conductor to the potential difference (V) between them: C = Q/V.",
+              "The unit of capacitance is the farad (F), where 1 F = 1 coulomb per volt (C/V)."
             ]
           },
           {
-            "sectionName": "Dielectrics",
-            "topics": [
-              {
-                "topicName": "Role of Dielectrics in Capacitors",
-                "details": [
-                  "Dielectrics are insulating materials placed between the plates of a capacitor to increase its capacitance.",
-                  "They polarize in the presence of an electric field, reducing the effective field inside the capacitor.",
-                  "The capacitance with a dielectric is given by C = κ * C₀, where κ is the dielectric constant and C₀ is the capacitance without the dielectric."
-                ]
-              },
-              {
-                "topicName": "Dielectric Breakdown",
-                "details": [
-                  "When the electric field inside a dielectric becomes too strong, the material can undergo dielectric breakdown, where it becomes conductive.",
-                  "This can lead to the failure of the capacitor.",
-                  "The breakdown strength of a dielectric is the maximum electric field it can withstand without breaking down."
-                ]
-              }
+            "topicName": "Parallel Plate Capacitor",
+            "details": [
+              "A parallel plate capacitor consists of two conducting plates separated by a distance, with an insulating material (dielectric) in between.",
+              "The capacitance is given by C = ε₀ * A / d, where A is the area of the plates, d is the separation, and ε₀ is the permittivity of free space.",
+              "Adding a dielectric increases the capacitance because the dielectric reduces the electric field, allowing more charge to be stored for the same potential difference."
+            ]
+          },
+          {
+            "topicName": "Role of Dielectrics in Capacitors",
+            "details": [
+              "Dielectrics are insulating materials placed between the plates of a capacitor to increase its capacitance.",
+              "They polarize in the presence of an electric field, reducing the effective field inside the capacitor.",
+              "The capacitance with a dielectric is given by C = κ * C₀, where κ is the dielectric constant and C₀ is the capacitance without the dielectric."
+            ]
+          },
+          {
+            "topicName": "Dielectric Breakdown",
+            "details": [
+              "When the electric field inside a dielectric becomes too strong, the material can undergo dielectric breakdown, where it becomes conductive.",
+              "This can lead to the failure of the capacitor.",
+              "The breakdown strength of a dielectric is the maximum electric field it can withstand without breaking down."
             ]
           }
         ]
@@ -1113,67 +1012,42 @@
       {
         "unitId": "unit_3",
         "unitName": "Unit 3: Electric Circuits",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Ohm's Law and Resistance",
-            "topics": [
-              {
-                "topicName": "Ohm's Law",
-                "details": [
-                  "Ohm's Law defines the relationship between voltage (V), current (I), and resistance (R) in a circuit: V = IR.",
-                  "This law is fundamental in understanding how electric circuits operate, as it explains how current flows through a conductor.",
-                  "The resistance in a conductor determines how easily current can pass through the material."
-                ]
-              },
-              {
-                "topicName": "Resistors in Series and Parallel",
-                "details": [
-                  "In a series circuit, resistors are connected end-to-end, and the total resistance is the sum of the individual resistances: R_total = R₁ + R₂ + ... + Rn.",
-                  "In a parallel circuit, resistors are connected across the same two points, and the total resistance is given by: 1/R_total = 1/R₁ + 1/R₂ + ... + 1/Rn.",
-                  "Series circuits have the same current passing through all components, while parallel circuits have the same voltage across each component."
-                ]
-              }
+            "topicName": "Ohm's Law and Resistance",
+            "details": [
+              "Ohm's Law defines the relationship between voltage (V), current (I), and resistance (R) in a circuit: V = IR.",
+              "This law is fundamental in understanding how electric circuits operate, as it explains how current flows through a conductor.",
+              "The resistance in a conductor determines how easily current can pass through the material."
             ]
           },
           {
-            "sectionName": "Kirchhoff's Laws",
-            "topics": [
-              {
-                "topicName": "Kirchhoff's Current Law (KCL)",
-                "details": [
-                  "KCL states that the total current entering a junction is equal to the total current leaving the junction.",
-                  "This law is based on the principle of conservation of charge.",
-                  "It is used to analyze complex circuits with multiple branches."
-                ]
-              },
-              {
-                "topicName": "Kirchhoff's Voltage Law (KVL)",
-                "details": [
-                  "KVL states that the sum of the electromotive forces (emf) and the potential differences in any closed loop of a circuit is equal to zero.",
-                  "This law is based on the conservation of energy and is used to calculate unknown voltages in a circuit."
-                ]
-              }
+            "topicName": "Resistors in Series and Parallel",
+            "details": [
+              "In a series circuit, resistors are connected end-to-end, and the total resistance is the sum of the individual resistances: R_total = R₁ + R₂ + ... + Rn.",
+              "In a parallel circuit, resistors are connected across the same two points, and the total resistance is given by: 1/R_total = 1/R₁ + 1/R₂ + ... + 1/Rn.",
+              "Series circuits have the same current passing through all components, while parallel circuits have the same voltage across each component."
             ]
           },
           {
-            "sectionName": "RC Circuits (Charging and Discharging)",
-            "topics": [
-              {
-                "topicName": "Charging a Capacitor",
-                "details": [
-                  "In an RC circuit, a capacitor charges over time when connected to a voltage source.",
-                  "The voltage across the capacitor increases exponentially as it approaches the source voltage, following the equation V(t) = V₀(1 - e^(-t/RC)).",
-                  "The time constant, τ = RC, determines how quickly the capacitor charges."
-                ]
-              },
-              {
-                "topicName": "Discharging a Capacitor",
-                "details": [
-                  "When the voltage source is removed, the capacitor discharges, and the voltage across it decreases exponentially: V(t) = V₀e^(-t/RC).",
-                  "The same time constant (τ = RC) governs the rate at which the capacitor discharges.",
-                  "These equations are essential for understanding how energy is stored and released in capacitive circuits."
-                ]
-              }
+            "topicName": "Kirchhoff's Laws",
+            "details": [
+              "Kirchhoff's Current Law (KCL) states that the total current entering a junction is equal to the total current leaving the junction.",
+              "This law is based on the principle of conservation of charge.",
+              "It is used to analyze complex circuits with multiple branches.",
+              "Kirchhoff's Voltage Law (KVL) states that the sum of the electromotive forces (emf) and the potential differences in any closed loop of a circuit is equal to zero.",
+              "This law is based on the conservation of energy and is used to calculate unknown voltages in a circuit."
+            ]
+          },
+          {
+            "topicName": "RC Circuits (Charging and Discharging)",
+            "details": [
+              "In an RC circuit, a capacitor charges over time when connected to a voltage source.",
+              "The voltage across the capacitor increases exponentially as it approaches the source voltage, following the equation V(t) = V₀(1 - e^(-t/RC)).",
+              "The time constant, τ = RC, determines how quickly the capacitor charges.",
+              "When the voltage source is removed, the capacitor discharges, and the voltage across it decreases exponentially: V(t) = V₀e^(-t/RC).",
+              "The same time constant (τ = RC) governs the rate at which the capacitor discharges.",
+              "These equations are essential for understanding how energy is stored and released in capacitive circuits."
             ]
           }
         ]
@@ -1181,47 +1055,31 @@
       {
         "unitId": "unit_4",
         "unitName": "Unit 4: Magnetic Fields",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Magnetic Forces",
-            "topics": [
-              {
-                "topicName": "Magnetic Force on Moving Charges",
-                "details": [
-                  "When a charged particle moves through a magnetic field, it experiences a force perpendicular to both its velocity and the magnetic field direction, as described by the equation: F = qvBsin(θ), where F is the force, q is the charge, v is the velocity, and B is the magnetic field strength.",
-                  "The direction of the force is given by the right-hand rule, which helps determine how charged particles, such as electrons, move in a magnetic field.",
-                  "This force is responsible for the circular or spiral motion of charged particles in magnetic fields."
-                ]
-              },
-              {
-                "topicName": "Magnetic Force on Current-Carrying Wires",
-                "details": [
-                  "A current-carrying wire in a magnetic field also experiences a force, following the equation: F = ILBsin(θ), where I is the current, L is the length of the wire, and B is the magnetic field strength.",
-                  "The direction of the force is determined by the right-hand rule, with the thumb pointing along the current and the fingers pointing in the direction of the magnetic field.",
-                  "This principle is used in devices such as electric motors, where magnetic forces cause rotational motion."
-                ]
-              }
+            "topicName": "Magnetic Forces",
+            "details": [
+              "When a charged particle moves through a magnetic field, it experiences a force perpendicular to both its velocity and the magnetic field direction, as described by the equation: F = qvBsin(θ), where F is the force, q is the charge, v is the velocity, and B is the magnetic field strength.",
+              "The direction of the force is given by the right-hand rule, which helps determine how charged particles, such as electrons, move in a magnetic field.",
+              "This force is responsible for the circular or spiral motion of charged particles in magnetic fields."
             ]
           },
           {
-            "sectionName": "Magnetic Fields Due to Currents",
-            "topics": [
-              {
-                "topicName": "Biot-Savart Law",
-                "details": [
-                  "The Biot-Savart Law describes the magnetic field produced by a small segment of current-carrying wire. It states that the magnetic field dB at a point is directly proportional to the current element IdL and inversely proportional to the square of the distance from the current element.",
-                  "The direction of the magnetic field follows the right-hand rule, circling around the current-carrying wire.",
-                  "This law is essential for calculating the magnetic fields in more complex configurations such as loops and solenoids."
-                ]
-              },
-              {
-                "topicName": "Ampere’s Law",
-                "details": [
-                  "Ampere’s Law relates the magnetic field around a closed loop to the current passing through the loop. It is expressed as ∮B·dl = μ₀I, where B is the magnetic field, dl is an infinitesimal length of the loop, and I is the current enclosed.",
-                  "This law is useful for calculating magnetic fields in systems with high symmetry, such as solenoids or toroids.",
-                  "It simplifies the calculation of magnetic fields when the system exhibits symmetry in its current distribution."
-                ]
-              }
+            "topicName": "Magnetic Force on Current-Carrying Wires",
+            "details": [
+              "A current-carrying wire in a magnetic field also experiences a force, following the equation: F = ILBsin(θ), where I is the current, L is the length of the wire, and B is the magnetic field strength.",
+              "The direction of the force is determined by the right-hand rule, with the thumb pointing along the current and the fingers pointing in the direction of the magnetic field.",
+              "This principle is used in devices such as electric motors, where magnetic forces cause rotational motion."
+            ]
+          },
+          {
+            "topicName": "Magnetic Fields Due to Currents",
+            "details": [
+              "The Biot-Savart Law describes the magnetic field produced by a small segment of current-carrying wire. It states that the magnetic field dB at a point is directly proportional to the current element IdL and inversely proportional to the square of the distance from the current element.",
+              "The direction of the magnetic field follows the right-hand rule, circling around the current-carrying wire.",
+              "Ampere’s Law relates the magnetic field around a closed loop to the current passing through the loop. It is expressed as ∮B·dl = μ₀I, where B is the magnetic field, dl is an infinitesimal length of the loop, and I is the current enclosed.",
+              "This law is useful for calculating magnetic fields in systems with high symmetry, such as solenoids or toroids.",
+              "It simplifies the calculation of magnetic fields when the system exhibits symmetry in its current distribution."
             ]
           }
         ]
@@ -1229,39 +1087,29 @@
       {
         "unitId": "unit_5",
         "unitName": "Unit 5: Electromagnetic Induction",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Faraday's Law",
-            "topics": [
-              {
-                "topicName": "Electromagnetic Induction",
-                "details": [
-                  "Electromagnetic induction occurs when a change in magnetic flux through a loop induces an electromotive force (EMF) in the loop.",
-                  "This is described by Faraday’s Law, which states that the induced EMF is equal to the negative rate of change of magnetic flux: EMF = -dΦB/dt.",
-                  "Applications of electromagnetic induction include electric generators, transformers, and induction cooktops."
-                ]
-              },
-              {
-                "topicName": "Lenz's Law",
-                "details": [
-                  "Lenz's Law states that the direction of the induced EMF and current will oppose the change in magnetic flux that caused it, as a consequence of the conservation of energy.",
-                  "This law ensures that induced currents work against the change in the magnetic environment that creates them.",
-                  "Lenz's Law is used in electromagnetic braking systems and is fundamental in understanding the behavior of inductors."
-                ]
-              }
+            "topicName": "Faraday's Law",
+            "details": [
+              "Electromagnetic induction occurs when a change in magnetic flux through a loop induces an electromotive force (EMF) in the loop.",
+              "This is described by Faraday’s Law, which states that the induced EMF is equal to the negative rate of change of magnetic flux: EMF = -dΦB/dt.",
+              "Applications of electromagnetic induction include electric generators, transformers, and induction cooktops."
             ]
           },
           {
-            "sectionName": "Inductors",
-            "topics": [
-              {
-                "topicName": "Inductors and Self-Inductance",
-                "details": [
-                  "An inductor stores energy in a magnetic field when electric current flows through it. The self-inductance of an inductor, L, is a measure of how much EMF is induced by a change in current.",
-                  "The EMF induced in an inductor is given by EMF = -L (dI/dt), where dI/dt is the rate of change of current.",
-                  "Inductors are used in circuits to smooth out current changes and are essential in AC circuits, transformers, and filters."
-                ]
-              }
+            "topicName": "Lenz's Law",
+            "details": [
+              "Lenz's Law states that the direction of the induced EMF and current will oppose the change in magnetic flux that caused it, as a consequence of the conservation of energy.",
+              "This law ensures that induced currents work against the change in the magnetic environment that creates them.",
+              "Lenz's Law is used in electromagnetic braking systems and is fundamental in understanding the behavior of inductors."
+            ]
+          },
+          {
+            "topicName": "Inductors and Self-Inductance",
+            "details": [
+              "An inductor stores energy in a magnetic field when electric current flows through it. The self-inductance of an inductor, L, is a measure of how much EMF is induced by a change in current.",
+              "The EMF induced in an inductor is given by EMF = -L (dI/dt), where dI/dt is the rate of change of current.",
+              "Inductors are used in circuits to smooth out current changes and are essential in AC circuits, transformers, and filters."
             ]
           }
         ]
@@ -1269,49 +1117,35 @@
       {
         "unitId": "unit_6",
         "unitName": "Unit 6: Electromagnetic Waves",
-        "sections": [
+        "topics": [
           {
-            "sectionName": "Properties of Electromagnetic Waves",
-            "topics": [
-              {
-                "topicName": "Electromagnetic Spectrum",
-                "details": [
-                  "Electromagnetic waves are transverse waves that consist of oscillating electric and magnetic fields.",
-                  "They travel at the speed of light (c = 3.00 x 10⁸ m/s) in a vacuum and do not require a medium to propagate.",
-                  "The electromagnetic spectrum includes a range of wavelengths, from radio waves (longest wavelength) to gamma rays (shortest wavelength), with visible light in the middle.",
-                  "Different wavelengths correspond to different energies, with shorter wavelengths (higher frequencies) carrying more energy."
-                ]
-              },
-              {
-                "topicName": "Wave Equation",
-                "details": [
-                  "The wave equation for electromagnetic waves in a vacuum is given by c = λf, where λ is the wavelength, f is the frequency, and c is the speed of light.",
-                  "Electromagnetic waves obey the principles of wave behavior, including reflection, refraction, diffraction, and interference."
-                ]
-              }
+            "topicName": "Properties of Electromagnetic Waves",
+            "details": [
+              "Electromagnetic waves are transverse waves that consist of oscillating electric and magnetic fields.",
+              "They travel at the speed of light (c = 3.00 x 10⁸ m/s) in a vacuum and do not require a medium to propagate.",
+              "The electromagnetic spectrum includes a range of wavelengths, from radio waves (longest wavelength) to gamma rays (shortest wavelength), with visible light in the middle.",
+              "Different wavelengths correspond to different energies, with shorter wavelengths (higher frequencies) carrying more energy."
             ]
           },
           {
-            "sectionName": "Energy in Electromagnetic Waves",
-            "topics": [
-              {
-                "topicName": "Poynting Vector",
-                "details": [
-                  "The Poynting vector represents the rate of energy transfer per unit area in an electromagnetic wave. It is given by S = E x B / μ₀, where E is the electric field, B is the magnetic field, and μ₀ is the permeability of free space.",
-                  "The magnitude of the Poynting vector indicates the power per unit area, which is proportional to the product of the electric and magnetic field intensities."
-                ]
-              },
-              {
-                "topicName": "Radiation Pressure",
-                "details": [
-                  "Electromagnetic waves exert pressure when they strike a surface, known as radiation pressure.",
-                  "The radiation pressure is given by P = S/c for a perfectly absorbing surface, where S is the magnitude of the Poynting vector and c is the speed of light."
-                ]
-              }
+            "topicName": "Wave Equation",
+            "details": [
+              "The wave equation for electromagnetic waves in a vacuum is given by c = λf, where λ is the wavelength, f is the frequency, and c is the speed of light.",
+              "Electromagnetic waves obey the principles of wave behavior, including reflection, refraction, diffraction, and interference."
+            ]
+          },
+          {
+            "topicName": "Energy in Electromagnetic Waves",
+            "details": [
+              "The Poynting vector represents the rate of energy transfer per unit area in an electromagnetic wave. It is given by S = E x B / μ₀, where E is the electric field, B is the magnetic field, and μ₀ is the permeability of free space.",
+              "The magnitude of the Poynting vector indicates the power per unit area, which is proportional to the product of the electric and magnetic field intensities.",
+              "Electromagnetic waves exert pressure when they strike a surface, known as radiation pressure.",
+              "The radiation pressure is given by P = S/c for a perfectly absorbing surface, where S is the magnitude of the Poynting vector and c is the speed of light."
             ]
           }
         ]
       }
     ]
   }
+  
 ]

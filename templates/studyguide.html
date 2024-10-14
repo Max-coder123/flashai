@@ -265,21 +265,22 @@
                 }
     
                 function populateUnitTaskbar(units) {
-                    if (!units || !Array.isArray(units)) return;
-                    unitTaskbar.innerHTML = units.map(unit => {
-                        const unitNumber = unit.unitId.replace(/\D/g, '');
-                        const unitTitle = unit.unitName.replace(/unit\s?\d*:/i, '').trim();
+    if (!units || !Array.isArray(units)) return;
+    unitTaskbar.innerHTML = units.map(unit => {
+        const unitNumber = unit.unitId.replace(/\D/g, '');
+        const unitTitle = unit.unitName.replace(/unit\s?\d*:/i, '').trim();
+
+        return `
+            <li class="unit-button" data-unit-id="${unit.unitId}" style="cursor: pointer;">
+                <div class="unit-number">UNIT ${unitNumber}</div>
+                <div class="unit-title">${unitTitle}</div>
+            </li>
+        `;
+    }).join('');
+}
+
     
-                        return `
-                            <li class="unit-button" data-unit-id="${unit.unitId}" style="cursor: pointer;">
-                                <div class="unit-number">UNIT ${unitNumber}</div>
-                                <div class="unit-title">${unitTitle}</div>
-                            </li>
-                        `;
-                    }).join('');
-                }
-    
-                function displayStudyGuide(studyGuide) {
+function displayStudyGuide(studyGuide) {
     const guideContainer = document.getElementById('study-guide-container');
 
     if (!studyGuide.units || !Array.isArray(studyGuide.units)) {
@@ -287,38 +288,28 @@
         return;
     }
 
-    // Log each unit to inspect where it might be breaking
-    studyGuide.units.forEach((unit, index) => {
-        console.log(`Unit ${index + 1}:`, unit); // This will log each unit one by one
-    });
-    
     guideContainer.innerHTML = `
         <h1>${studyGuide.courseName}</h1>
         ${studyGuide.units.map(unit => `
             <div class="unit">
                 <h2>${unit.unitName}</h2>
-                ${unit.sections && unit.sections.length > 0 
-                    ? unit.sections.map(section => `
-                        <h3>${section.sectionName}</h3>
-                        ${section.topics && section.topics.length > 0
-                            ? section.topics.map(topic => `
-                                <h4>${topic.topicName}</h4>
-                                <ul>
-                                    ${topic.details && topic.details.length > 0 
-                                        ? topic.details.map(detail => `<li>${detail}</li>`).join('') 
-                                        : '<li>No details available for this topic.</li>'
-                                    }
-                                </ul>
-                            `).join('')
-                            : '<p>No topics available for this section.</p>'
-                        }
+                ${unit.topics && unit.topics.length > 0 
+                    ? unit.topics.map(topic => `
+                        <h3>${topic.topicName}</h3>
+                        <ul>
+                            ${topic.details && topic.details.length > 0 
+                                ? topic.details.map(detail => `<li>${detail}</li>`).join('') 
+                                : '<li>No details available for this topic.</li>'
+                            }
+                        </ul>
                     `).join('')
-                    : '<p>No sections available for this unit.</p>'
+                    : '<p>No topics available for this unit.</p>'
                 }
             </div>
         `).join('')}
     `;
 }
+
 
 function loadUnit(unitId, studyGuide) {
     const unit = studyGuide.units.find(u => u.unitId === unitId);
@@ -327,27 +318,22 @@ function loadUnit(unitId, studyGuide) {
     if (unit) {
         guideContainer.innerHTML = `
             <h2>${unit.unitName}</h2>
-            ${unit.sections && unit.sections.length > 0
-                ? unit.sections.map(section => `
-                    <h3>${section.sectionName}</h3>
-                    ${section.topics && section.topics.length > 0
-                        ? section.topics.map(topic => `
-                            <h4>${topic.topicName}</h4>
-                            <ul>
-                                ${topic.details && topic.details.length > 0 
-                                    ? topic.details.map(detail => `<li>${detail}</li>`).join('')
-                                    : '<li>No details available for this topic.</li>'
-                                }
-                            </ul>
-                        `).join('')
-                        : '<p>No topics available for this section.</p>'
-                    }
+            ${unit.topics && unit.topics.length > 0
+                ? unit.topics.map(topic => `
+                    <h3>${topic.topicName}</h3>
+                    <ul>
+                        ${topic.details && topic.details.length > 0 
+                            ? topic.details.map(detail => `<li>${detail}</li>`).join('')
+                            : '<li>No details available for this topic.</li>'
+                        }
+                    </ul>
                 `).join('')
-                : '<p>No sections available for this unit.</p>'
+                : '<p>No topics available for this unit.</p>'
             }
         `;
     }
 }
+
 
 
             });
