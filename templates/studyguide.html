@@ -13,7 +13,6 @@
             width: 70%;
             margin: 0 auto;
             padding-left: 100px;
-            /* Increase padding on the left by 50px (originally 50px) */
             padding-bottom: 50px;
             text-align: left;
         }
@@ -27,20 +26,16 @@
             position: fixed;
             top: 60px;
             left: 60px;
-            /* Initially next to the minimized taskbar */
             background-color: transparent;
             transition: left 0.3s ease;
-            /* Smooth transition for taskbar */
         }
 
         .taskbar.minimized+.main-content .unit-taskbar {
             left: 60px;
-            /* Position when the taskbar is minimized */
         }
 
         .taskbar:not(.minimized)+.main-content .unit-taskbar {
             left: 350px;
-            /* Adjust this based on taskbar width when expanded */
         }
 
         .unit-taskbar ul {
@@ -49,38 +44,43 @@
         }
 
         .unit-taskbar li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-    width: 95%;
-    margin: 0 auto;
-    text-align: left;
-    display: flex;
-    flex-direction: column; /* Stack the unit number and title vertically */
-    justify-content: center;
-    align-items: flex-start;
-}
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            width: 95%;
+            margin: 0 auto;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            user-select: none;
+        }
 
-.unit-taskbar li:hover {
-    background-color: #f2f2f2;
-}
+        .unit-taskbar li:hover {
+            background-color: #f2f2f2;
+        }
 
-.unit-number {
-    color: grey;
-    font-size: 75%;
-    font-weight: 650;
-    display: block;
-}
+        .unit-number,
+        .unit-title {
+            color: black;
+            display: block;
+            pointer-events: none;
+        }
 
-.unit-title {
-    color: black;
-    font-size: 100%;
-    font-weight: 400;
-    margin-left: 0;
-    display: block;
-}
+        .unit-number {
+            font-size: 75%;
+            font-weight: 650;
+            color: grey;
+        }
 
-       
+        .unit-title {
+            font-size: 100%;
+            font-weight: 400;
+        }
+
+
+
 
         .unit-taskbar li .unit-number {
             color: grey;
@@ -113,27 +113,21 @@
 
         #study-guide-container {
             width: 70%;
-            /* Adjust the width as needed to make the container narrower */
             margin: 0 auto;
-            /* Center the container horizontally */
             padding-bottom: 50px;
             text-align: left;
-            /* Keep the text left-aligned */
         }
 
         h1,
         h2,
         h3 {
             text-align: left;
-            /* Ensure headings are also left-aligned */
             margin-bottom: 20px;
         }
 
         ul {
             list-style-position: inside;
-            /* Keep bullet points aligned with text */
             padding-left: 20px;
-            /* Add some padding for lists */
         }
     </style>
 </head>
@@ -229,7 +223,6 @@
 
     <div class="main-content" id="main-content">
         <div id="unit-taskbar" class="unit-taskbar">
-            <!-- Units/sections will be dynamically populated -->
             <ul id="unit-list"></ul>
         </div>
         <div id="study-guide-container"></div>
@@ -247,19 +240,16 @@
             const urlParams = new URLSearchParams(window.location.search);
             const courseId = urlParams.get('course');
 
-            // Automatically minimize the taskbar if on the study guide page
             if (courseId) {
                 taskbar.classList.add('minimized');
                 mainContent.classList.add('expanded');
             }
 
-            // Allow user to toggle the taskbar
             document.getElementById('toggle-taskbar').addEventListener('click', function () {
                 taskbar.classList.toggle('minimized');
                 mainContent.classList.toggle('expanded');
             });
 
-            // Fetch and display the study guide data
             if (courseId) {
                 fetch('/static/study_guides.json')
                     .then(response => response.json())
@@ -269,7 +259,6 @@
                             populateUnitTaskbar(studyGuide.units);
                             displayStudyGuide(studyGuide);
 
-                            // Event listener for clicking units in the units sidebar
                             document.getElementById('unit-taskbar').addEventListener('click', function (e) {
                                 if (e.target.classList.contains('unit-button')) {
                                     const unitId = e.target.dataset.unitId;
@@ -284,24 +273,23 @@
             }
 
             function populateUnitTaskbar(units) {
-    if (!units || !Array.isArray(units)) return;
-    unitTaskbar.innerHTML = units.map(unit => {
-        const unitNumber = unit.unitId.replace(/\D/g, '');
-        const unitTitle = unit.unitName.replace(/unit\s?\d*:/i, '').trim();
+                if (!units || !Array.isArray(units)) return;
+                unitTaskbar.innerHTML = units.map(unit => {
+                    const unitNumber = unit.unitId.replace(/\D/g, '');
+                    const unitTitle = unit.unitName.replace(/unit\s?\d*:/i, '').trim();
 
-        return `
+                    return `
             <li class="unit-button" data-unit-id="${unit.unitId}" style="cursor: pointer;">
                 <div class="unit-number">UNIT ${unitNumber}</div>
                 <div class="unit-title">${unitTitle}</div>
             </li>
         `;
-    }).join('');
-}
+                }).join('');
+            }
 
 
 
 
-            // Display the entire study guide or selected unit
             function displayStudyGuide(studyGuide) {
                 const guideContainer = document.getElementById('study-guide-container');
 
@@ -326,7 +314,6 @@
         `;
             }
 
-            // Load and display selected unit when clicked
             function loadUnit(unitId, studyGuide) {
                 const unit = studyGuide.units.find(u => u.unitId === unitId);
                 const guideContainer = document.getElementById('study-guide-container');
