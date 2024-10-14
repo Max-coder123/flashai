@@ -142,273 +142,273 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_4",
-    "unitName": "Period 4: 1800-1848 - The Growth of Democracy and Market Revolution",
-    "topics": [
+      },
       {
-        "topicName": "The Jeffersonian Presidency and Expansion of Executive Power",
-        "details": [
-          "Thomas Jefferson's presidency (1801-1809) marked a shift towards Democratic-Republican ideals of limited government.",
-          "The Louisiana Purchase (1803) doubled the size of the United States, expanding westward and increasing executive power.",
-          "Jefferson's Embargo Act (1807) aimed to avoid war with Britain and France but had significant economic repercussions on the U.S. economy."
+        "unitId": "unit_4",
+        "unitName": "Period 4: 1800-1848 - The Growth of Democracy and Market Revolution",
+        "topics": [
+          {
+            "topicName": "The Jeffersonian Presidency and Expansion of Executive Power",
+            "details": [
+              "Thomas Jefferson's presidency (1801-1809) marked a shift towards Democratic-Republican ideals of limited government.",
+              "The Louisiana Purchase (1803) doubled the size of the United States, expanding westward and increasing executive power.",
+              "Jefferson's Embargo Act (1807) aimed to avoid war with Britain and France but had significant economic repercussions on the U.S. economy."
+            ]
+          },
+          {
+            "topicName": "The War of 1812 and American Nationalism",
+            "details": [
+              "The War of 1812 was fought between the U.S. and Britain due to trade restrictions and impressment of American sailors.",
+              "The Treaty of Ghent (1814) ended the war in a stalemate, but the U.S. victory at the Battle of New Orleans (1815) bolstered American nationalism.",
+              "The war solidified the U.S. presence in North America and diminished Native American resistance in the Northwest."
+            ]
+          },
+          {
+            "topicName": "The Rise of Political Parties",
+            "details": [
+              "The early 19th century saw the solidification of political parties: the Federalists and the Democratic-Republicans.",
+              "The Federalist Party declined after the War of 1812, leading to the 'Era of Good Feelings' under James Monroe.",
+              "Political divisions re-emerged with the rise of Andrew Jackson's Democratic Party, which emphasized populist policies."
+            ]
+          },
+          {
+            "topicName": "Market Revolution: Industrialization and Transportation",
+            "details": [
+              "The Market Revolution transformed the U.S. economy, with advancements in transportation (e.g., canals, railroads) and communication (telegraphs).",
+              "Textile mills and factories in the North contributed to industrialization, while the South remained reliant on cotton and slavery.",
+              "The creation of a national market linked regional economies, fostering westward expansion and urbanization."
+            ]
+          },
+          {
+            "topicName": "Jacksonian Democracy and Its Impact",
+            "details": [
+              "Andrew Jackson's presidency (1829-1837) was marked by the expansion of voting rights for white men and an emphasis on the 'common man.'",
+              "The Nullification Crisis and the Indian Removal Act highlighted Jackson's use of federal power to enforce national policies.",
+              "Jackson's dismantling of the Second Bank of the United States led to economic instability, culminating in the Panic of 1837."
+            ]
+          }
         ]
       },
       {
-        "topicName": "The War of 1812 and American Nationalism",
-        "details": [
-          "The War of 1812 was fought between the U.S. and Britain due to trade restrictions and impressment of American sailors.",
-          "The Treaty of Ghent (1814) ended the war in a stalemate, but the U.S. victory at the Battle of New Orleans (1815) bolstered American nationalism.",
-          "The war solidified the U.S. presence in North America and diminished Native American resistance in the Northwest."
+        "unitId": "unit_5",
+        "unitName": "Period 5: 1844-1877 - The Civil War and Reconstruction",
+        "topics": [
+          {
+            "topicName": "Manifest Destiny and Westward Expansion",
+            "details": [
+              "Manifest Destiny was the belief that the U.S. was destined to expand across the North American continent.",
+              "Westward expansion led to conflicts with Native Americans and the Mexican-American War (1846-1848), which resulted in the acquisition of new territories.",
+              "The question of whether new territories would permit slavery intensified sectional tensions between the North and the South."
+            ]
+          },
+          {
+            "topicName": "Causes of the Civil War",
+            "details": [
+              "The Civil War was precipitated by deep-seated divisions over slavery, states' rights, and economic differences between the North and South.",
+              "The Compromise of 1850, the Kansas-Nebraska Act, and the Dred Scott decision further polarized the nation.",
+              "The election of Abraham Lincoln in 1860, viewed by Southern states as a threat to slavery, led to the secession of Southern states and the formation of the Confederacy."
+            ]
+          },
+          {
+            "topicName": "Key Battles and Strategies of the Civil War",
+            "details": [
+              "Major battles included Gettysburg, Antietam, and the siege of Vicksburg, which were turning points in the war.",
+              "Union strategies, such as the Anaconda Plan and Sherman's March to the Sea, aimed to suffocate the Confederacy's resources.",
+              "The Emancipation Proclamation (1863) shifted the focus of the war to ending slavery, bolstering Union support."
+            ]
+          },
+          {
+            "topicName": "Reconstruction: Successes and Failures",
+            "details": [
+              "Reconstruction (1865-1877) aimed to reintegrate the Southern states into the Union and rebuild the South after the Civil War.",
+              "The Radical Republicans in Congress passed the 13th, 14th, and 15th Amendments, which abolished slavery, granted citizenship, and extended voting rights to African Americans.",
+              "Reconstruction faced significant resistance from Southern whites, leading to the rise of white supremacist groups like the Ku Klux Klan, and the eventual implementation of Jim Crow laws."
+            ]
+          }
         ]
       },
       {
-        "topicName": "The Rise of Political Parties",
-        "details": [
-          "The early 19th century saw the solidification of political parties: the Federalists and the Democratic-Republicans.",
-          "The Federalist Party declined after the War of 1812, leading to the 'Era of Good Feelings' under James Monroe.",
-          "Political divisions re-emerged with the rise of Andrew Jackson's Democratic Party, which emphasized populist policies."
+        "unitId": "unit_6",
+        "unitName": "Period 6: 1865-1898 - Industrialization and the Gilded Age",
+        "topics": [
+          {
+            "topicName": "The Rise of Big Business and Industrialization",
+            "details": [
+              "The Gilded Age was characterized by rapid industrial growth, driven by figures like Andrew Carnegie (steel) and John D. Rockefeller (oil).",
+              "The development of railroads, steel, and oil industries transformed the American economy and led to the rise of monopolies.",
+              "The U.S. shifted from an agrarian society to an industrial powerhouse, though this wealth was concentrated in the hands of a few."
+            ]
+          },
+          {
+            "topicName": "Urbanization and Immigration",
+            "details": [
+              "The rapid growth of cities, fueled by immigration, created new social and economic challenges, including overcrowding, sanitation issues, and labor conflicts.",
+              "Immigrants from Europe and Asia arrived in large numbers, seeking economic opportunities, but often faced discrimination and poor living conditions.",
+              "Labor unions, such as the Knights of Labor and the American Federation of Labor, emerged to advocate for workers' rights in response to poor working conditions."
+            ]
+          },
+          {
+            "topicName": "Labor Movements and Workers' Rights",
+            "details": [
+              "Workers responded to poor conditions with strikes and the formation of labor unions.",
+              "Significant labor events included the Haymarket Riot (1886) and the Pullman Strike (1894), which highlighted tensions between labor and industry.",
+              "Government responses to labor unrest were often harsh, with the use of federal troops to break strikes, leading to a slow path to labor reform."
+            ]
+          },
+          {
+            "topicName": "Populism and Farmers' Struggles",
+            "details": [
+              "Farmers in the West and South faced falling crop prices and high railroad rates, leading to widespread discontent.",
+              "The Populist Party, formed in the 1890s, called for reforms such as bimetallism, government regulation of railroads, and direct election of senators.",
+              "The Populist movement declined after the defeat of William Jennings Bryan in the 1896 presidential election."
+            ]
+          },
+          {
+            "topicName": "Social and Political Reform Movements",
+            "details": [
+              "The Progressive movement emerged in response to the excesses of the Gilded Age, advocating for social reforms and government regulation of business.",
+              "Key reforms included the Sherman Antitrust Act (1890) to combat monopolies and the establishment of settlement houses to aid the urban poor.",
+              "Progressive reformers also fought for women's suffrage and temperance, leading to significant changes in American society."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Market Revolution: Industrialization and Transportation",
-        "details": [
-          "The Market Revolution transformed the U.S. economy, with advancements in transportation (e.g., canals, railroads) and communication (telegraphs).",
-          "Textile mills and factories in the North contributed to industrialization, while the South remained reliant on cotton and slavery.",
-          "The creation of a national market linked regional economies, fostering westward expansion and urbanization."
+        "unitId": "unit_7",
+        "unitName": "Period 7: 1890-1945 - The Progressive Era and World Wars",
+        "topics": [
+          {
+            "topicName": "Progressive Reforms at Local, State, and Federal Levels",
+            "details": [
+              "The Progressive Era (1890-1920) sought to address the problems caused by industrialization, urbanization, and political corruption.",
+              "Key reforms included trust-busting by Theodore Roosevelt, labor laws protecting workers, and the establishment of the Federal Reserve System.",
+              "Progressives also pushed for women's suffrage, leading to the 19th Amendment (1920), and prohibition through the 18th Amendment (1919)."
+            ]
+          },
+          {
+            "topicName": "U.S. Imperialism and the Spanish-American War",
+            "details": [
+              "In the late 19th century, the U.S. pursued an imperialist policy, seeking to expand its influence globally.",
+              "The Spanish-American War (1898) resulted in U.S. control over territories like Puerto Rico, Guam, and the Philippines, marking the U.S. as a global power.",
+              "Debates over imperialism, including the Anti-Imperialist League's opposition, highlighted tensions about America's role on the world stage."
+            ]
+          },
+          {
+            "topicName": "World War I: Causes and Effects on American Society",
+            "details": [
+              "The U.S. initially remained neutral in World War I, but entered the conflict in 1917 due to German submarine warfare and the Zimmerman Telegram.",
+              "The war effort led to increased government intervention in the economy and propaganda efforts to support the war through the Committee on Public Information.",
+              "The Treaty of Versailles and the League of Nations divided public opinion, with the U.S. ultimately rejecting membership in the League."
+            ]
+          },
+          {
+            "topicName": "The Great Depression and the New Deal",
+            "details": [
+              "The stock market crash of 1929 triggered the Great Depression, leading to widespread unemployment, poverty, and economic instability.",
+              "Franklin D. Roosevelt's New Deal (1933-1939) aimed to provide relief, recovery, and reform through programs like Social Security, the Civilian Conservation Corps (CCC), and the Works Progress Administration (WPA).",
+              "Critics of the New Deal included conservatives who opposed government intervention and liberals who wanted more aggressive reforms."
+            ]
+          },
+          {
+            "topicName": "World War II and Its Global Impact",
+            "details": [
+              "The U.S. entered World War II after the Japanese attack on Pearl Harbor in 1941, joining the Allies in the fight against the Axis powers.",
+              "World War II transformed the U.S. economy, ending the Great Depression through war production and leading to advancements in technology and industry.",
+              "The war's conclusion, with the U.S. dropping atomic bombs on Hiroshima and Nagasaki, marked the beginning of the Cold War and reshaped global politics."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Jacksonian Democracy and Its Impact",
-        "details": [
-          "Andrew Jackson's presidency (1829-1837) was marked by the expansion of voting rights for white men and an emphasis on the 'common man.'",
-          "The Nullification Crisis and the Indian Removal Act highlighted Jackson's use of federal power to enforce national policies.",
-          "Jackson's dismantling of the Second Bank of the United States led to economic instability, culminating in the Panic of 1837."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_5",
-    "unitName": "Period 5: 1844-1877 - The Civil War and Reconstruction",
-    "topics": [
-      {
-        "topicName": "Manifest Destiny and Westward Expansion",
-        "details": [
-          "Manifest Destiny was the belief that the U.S. was destined to expand across the North American continent.",
-          "Westward expansion led to conflicts with Native Americans and the Mexican-American War (1846-1848), which resulted in the acquisition of new territories.",
-          "The question of whether new territories would permit slavery intensified sectional tensions between the North and the South."
-        ]
-      },
-      {
-        "topicName": "Causes of the Civil War",
-        "details": [
-          "The Civil War was precipitated by deep-seated divisions over slavery, states' rights, and economic differences between the North and South.",
-          "The Compromise of 1850, the Kansas-Nebraska Act, and the Dred Scott decision further polarized the nation.",
-          "The election of Abraham Lincoln in 1860, viewed by Southern states as a threat to slavery, led to the secession of Southern states and the formation of the Confederacy."
-        ]
-      },
-      {
-        "topicName": "Key Battles and Strategies of the Civil War",
-        "details": [
-          "Major battles included Gettysburg, Antietam, and the siege of Vicksburg, which were turning points in the war.",
-          "Union strategies, such as the Anaconda Plan and Sherman's March to the Sea, aimed to suffocate the Confederacy's resources.",
-          "The Emancipation Proclamation (1863) shifted the focus of the war to ending slavery, bolstering Union support."
-        ]
-      },
-      {
-        "topicName": "Reconstruction: Successes and Failures",
-        "details": [
-          "Reconstruction (1865-1877) aimed to reintegrate the Southern states into the Union and rebuild the South after the Civil War.",
-          "The Radical Republicans in Congress passed the 13th, 14th, and 15th Amendments, which abolished slavery, granted citizenship, and extended voting rights to African Americans.",
-          "Reconstruction faced significant resistance from Southern whites, leading to the rise of white supremacist groups like the Ku Klux Klan, and the eventual implementation of Jim Crow laws."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_6",
-    "unitName": "Period 6: 1865-1898 - Industrialization and the Gilded Age",
-    "topics": [
-      {
-        "topicName": "The Rise of Big Business and Industrialization",
-        "details": [
-          "The Gilded Age was characterized by rapid industrial growth, driven by figures like Andrew Carnegie (steel) and John D. Rockefeller (oil).",
-          "The development of railroads, steel, and oil industries transformed the American economy and led to the rise of monopolies.",
-          "The U.S. shifted from an agrarian society to an industrial powerhouse, though this wealth was concentrated in the hands of a few."
+        "unitId": "unit_8",
+        "unitName": "Period 8: 1945-1980 - The Cold War and Postwar America",
+        "topics": [
+          {
+            "topicName": "The Origins and Early Years of the Cold War",
+            "details": [
+              "The Cold War began after World War II as tensions rose between the U.S. and the Soviet Union over ideological and geopolitical differences.",
+              "Key events include the Marshall Plan (1948) to rebuild Europe, the Berlin Airlift (1948-1949), and the formation of NATO (1949).",
+              "The U.S. adopted a policy of containment to prevent the spread of communism, leading to involvement in conflicts like the Korean War (1950-1953)."
+            ]
+          },
+          {
+            "topicName": "The Red Scare and McCarthyism",
+            "details": [
+              "The early Cold War years were marked by fears of communist infiltration in the U.S., leading to the Red Scare.",
+              "Senator Joseph McCarthy became the face of anti-communism, accusing government officials and others of being communists in a campaign of fear and accusation known as McCarthyism.",
+              "McCarthyism led to widespread paranoia, blacklisting in Hollywood, and ruined careers before McCarthy's fall from grace in 1954."
+            ]
+          },
+          {
+            "topicName": "The Civil Rights Movement",
+            "details": [
+              "The postwar period saw the rise of the Civil Rights Movement, as African Americans and their allies fought to end segregation and racial injustice.",
+              "Key events included the Brown v. Board of Education decision (1954), which declared segregation in public schools unconstitutional, and the Montgomery Bus Boycott (1955-1956), led by Martin Luther King Jr.",
+              "The Civil Rights Act of 1964 and the Voting Rights Act of 1965 marked significant legislative victories, but the movement continued to face challenges from white supremacist groups and institutional racism."
+            ]
+          },
+          {
+            "topicName": "The Vietnam War and Its Impact on American Society",
+            "details": [
+              "The U.S. escalated its involvement in Vietnam in the 1960s to prevent the spread of communism, leading to widespread protests and opposition at home.",
+              "The Tet Offensive (1968) shocked the American public and contributed to growing disillusionment with the war effort.",
+              "The war deeply divided American society and led to questions about U.S. foreign policy, ultimately ending in 1975 with the fall of Saigon and the unification of Vietnam under communist control."
+            ]
+          },
+          {
+            "topicName": "Social and Cultural Changes of the 1960s and 1970s",
+            "details": [
+              "The 1960s and 1970s saw a wave of social and cultural change, including the rise of the counterculture movement, second-wave feminism, and environmentalism.",
+              "The women's rights movement achieved significant gains with the passage of topicName IX (1972) and the legalization of abortion through Roe v. Wade (1973).",
+              "The environmental movement led to the establishment of Earth Day (1970) and the passage of key legislation, including the Clean Air Act (1970) and the Endangered Species Act (1973)."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Urbanization and Immigration",
-        "details": [
-          "The rapid growth of cities, fueled by immigration, created new social and economic challenges, including overcrowding, sanitation issues, and labor conflicts.",
-          "Immigrants from Europe and Asia arrived in large numbers, seeking economic opportunities, but often faced discrimination and poor living conditions.",
-          "Labor unions, such as the Knights of Labor and the American Federation of Labor, emerged to advocate for workers' rights in response to poor working conditions."
-        ]
-      },
-      {
-        "topicName": "Labor Movements and Workers' Rights",
-        "details": [
-          "Workers responded to poor conditions with strikes and the formation of labor unions.",
-          "Significant labor events included the Haymarket Riot (1886) and the Pullman Strike (1894), which highlighted tensions between labor and industry.",
-          "Government responses to labor unrest were often harsh, with the use of federal troops to break strikes, leading to a slow path to labor reform."
-        ]
-      },
-      {
-        "topicName": "Populism and Farmers' Struggles",
-        "details": [
-          "Farmers in the West and South faced falling crop prices and high railroad rates, leading to widespread discontent.",
-          "The Populist Party, formed in the 1890s, called for reforms such as bimetallism, government regulation of railroads, and direct election of senators.",
-          "The Populist movement declined after the defeat of William Jennings Bryan in the 1896 presidential election."
-        ]
-      },
-      {
-        "topicName": "Social and Political Reform Movements",
-        "details": [
-          "The Progressive movement emerged in response to the excesses of the Gilded Age, advocating for social reforms and government regulation of business.",
-          "Key reforms included the Sherman Antitrust Act (1890) to combat monopolies and the establishment of settlement houses to aid the urban poor.",
-          "Progressive reformers also fought for women's suffrage and temperance, leading to significant changes in American society."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_7",
-    "unitName": "Period 7: 1890-1945 - The Progressive Era and World Wars",
-    "topics": [
-      {
-        "topicName": "Progressive Reforms at Local, State, and Federal Levels",
-        "details": [
-          "The Progressive Era (1890-1920) sought to address the problems caused by industrialization, urbanization, and political corruption.",
-          "Key reforms included trust-busting by Theodore Roosevelt, labor laws protecting workers, and the establishment of the Federal Reserve System.",
-          "Progressives also pushed for women's suffrage, leading to the 19th Amendment (1920), and prohibition through the 18th Amendment (1919)."
-        ]
-      },
-      {
-        "topicName": "U.S. Imperialism and the Spanish-American War",
-        "details": [
-          "In the late 19th century, the U.S. pursued an imperialist policy, seeking to expand its influence globally.",
-          "The Spanish-American War (1898) resulted in U.S. control over territories like Puerto Rico, Guam, and the Philippines, marking the U.S. as a global power.",
-          "Debates over imperialism, including the Anti-Imperialist League's opposition, highlighted tensions about America's role on the world stage."
-        ]
-      },
-      {
-        "topicName": "World War I: Causes and Effects on American Society",
-        "details": [
-          "The U.S. initially remained neutral in World War I, but entered the conflict in 1917 due to German submarine warfare and the Zimmerman Telegram.",
-          "The war effort led to increased government intervention in the economy and propaganda efforts to support the war through the Committee on Public Information.",
-          "The Treaty of Versailles and the League of Nations divided public opinion, with the U.S. ultimately rejecting membership in the League."
-        ]
-      },
-      {
-        "topicName": "The Great Depression and the New Deal",
-        "details": [
-          "The stock market crash of 1929 triggered the Great Depression, leading to widespread unemployment, poverty, and economic instability.",
-          "Franklin D. Roosevelt's New Deal (1933-1939) aimed to provide relief, recovery, and reform through programs like Social Security, the Civilian Conservation Corps (CCC), and the Works Progress Administration (WPA).",
-          "Critics of the New Deal included conservatives who opposed government intervention and liberals who wanted more aggressive reforms."
-        ]
-      },
-      {
-        "topicName": "World War II and Its Global Impact",
-        "details": [
-          "The U.S. entered World War II after the Japanese attack on Pearl Harbor in 1941, joining the Allies in the fight against the Axis powers.",
-          "World War II transformed the U.S. economy, ending the Great Depression through war production and leading to advancements in technology and industry.",
-          "The war's conclusion, with the U.S. dropping atomic bombs on Hiroshima and Nagasaki, marked the beginning of the Cold War and reshaped global politics."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_8",
-    "unitName": "Period 8: 1945-1980 - The Cold War and Postwar America",
-    "topics": [
-      {
-        "topicName": "The Origins and Early Years of the Cold War",
-        "details": [
-          "The Cold War began after World War II as tensions rose between the U.S. and the Soviet Union over ideological and geopolitical differences.",
-          "Key events include the Marshall Plan (1948) to rebuild Europe, the Berlin Airlift (1948-1949), and the formation of NATO (1949).",
-          "The U.S. adopted a policy of containment to prevent the spread of communism, leading to involvement in conflicts like the Korean War (1950-1953)."
-        ]
-      },
-      {
-        "topicName": "The Red Scare and McCarthyism",
-        "details": [
-          "The early Cold War years were marked by fears of communist infiltration in the U.S., leading to the Red Scare.",
-          "Senator Joseph McCarthy became the face of anti-communism, accusing government officials and others of being communists in a campaign of fear and accusation known as McCarthyism.",
-          "McCarthyism led to widespread paranoia, blacklisting in Hollywood, and ruined careers before McCarthy's fall from grace in 1954."
-        ]
-      },
-      {
-        "topicName": "The Civil Rights Movement",
-        "details": [
-          "The postwar period saw the rise of the Civil Rights Movement, as African Americans and their allies fought to end segregation and racial injustice.",
-          "Key events included the Brown v. Board of Education decision (1954), which declared segregation in public schools unconstitutional, and the Montgomery Bus Boycott (1955-1956), led by Martin Luther King Jr.",
-          "The Civil Rights Act of 1964 and the Voting Rights Act of 1965 marked significant legislative victories, but the movement continued to face challenges from white supremacist groups and institutional racism."
-        ]
-      },
-      {
-        "topicName": "The Vietnam War and Its Impact on American Society",
-        "details": [
-          "The U.S. escalated its involvement in Vietnam in the 1960s to prevent the spread of communism, leading to widespread protests and opposition at home.",
-          "The Tet Offensive (1968) shocked the American public and contributed to growing disillusionment with the war effort.",
-          "The war deeply divided American society and led to questions about U.S. foreign policy, ultimately ending in 1975 with the fall of Saigon and the unification of Vietnam under communist control."
-        ]
-      },
-      {
-        "topicName": "Social and Cultural Changes of the 1960s and 1970s",
-        "details": [
-          "The 1960s and 1970s saw a wave of social and cultural change, including the rise of the counterculture movement, second-wave feminism, and environmentalism.",
-          "The women's rights movement achieved significant gains with the passage of topicName IX (1972) and the legalization of abortion through Roe v. Wade (1973).",
-          "The environmental movement led to the establishment of Earth Day (1970) and the passage of key legislation, including the Clean Air Act (1970) and the Endangered Species Act (1973)."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_9",
-    "unitName": "Period 9: 1980-Present - Contemporary America",
-    "topics": [
-      {
-        "topicName": "The Reagan Presidency and the Rise of Conservatism",
-        "details": [
-          "Ronald Reagan's presidency (1981-1989) marked a resurgence of conservative values, focusing on reducing the size of government and cutting taxes.",
-          "Reagan's economic policies, known as 'Reaganomics,' emphasized supply-side economics, which aimed to stimulate growth by cutting taxes and reducing regulation.",
-          "The Reagan administration also increased defense spending, contributing to the end of the Cold War, and took a tough stance on the Soviet Union, famously calling it the 'evil empire.'"
-        ]
-      },
-      {
-        "topicName": "The End of the Cold War and the Collapse of the Soviet Union",
-        "details": [
-          "The Cold War ended in 1991 with the collapse of the Soviet Union, following reforms by Soviet leader Mikhail Gorbachev (glasnost and perestroika).",
-          "Key events included the fall of the Berlin Wall (1989), the reunification of Germany, and the dissolution of the Warsaw Pact.",
-          "The U.S. emerged as the world's sole superpower, but the post-Cold War world saw new challenges, including ethnic conflicts and the rise of new geopolitical tensions."
-        ]
-      },
-      {
-        "topicName": "The War on Terror and U.S. Foreign Policy",
-        "details": [
-          "The September 11, 2001, terrorist attacks led to the U.S. launching the War on Terror, with invasions of Afghanistan (2001) and Iraq (2003).",
-          "The Iraq War, justified by claims of weapons of mass destruction (WMDs), became highly controversial due to the absence of such weapons and the prolonged conflict that followed.",
-          "The War on Terror reshaped U.S. foreign policy, with a focus on counterterrorism and efforts to promote democracy in the Middle East."
-        ]
-      },
-      {
-        "topicName": "Economic and Social Changes in the Late 20th and Early 21st Centuries",
-        "details": [
-          "The U.S. economy shifted from manufacturing to services and technology, leading to the rise of the information age and globalization.",
-          "Economic inequality grew, with debates over the role of government in addressing issues like healthcare, education, and income disparity.",
-          "Social changes included the legalization of same-sex marriage (2015) and ongoing debates over immigration, race relations, and environmental policy."
-        ]
-      },
-      {
-        "topicName": "Environmental Issues and Climate Change",
-        "details": [
-          "In the 21st century, climate change became a central issue, with debates over the role of fossil fuels, renewable energy, and international agreements like the Paris Agreement (2015).",
-          "Environmental movements called for stronger regulations to combat global warming and protect natural resources.",
-          "The U.S. government and private sector have faced pressure to address climate change while balancing economic growth and energy needs."
+        "unitId": "unit_9",
+        "unitName": "Period 9: 1980-Present - Contemporary America",
+        "topics": [
+          {
+            "topicName": "The Reagan Presidency and the Rise of Conservatism",
+            "details": [
+              "Ronald Reagan's presidency (1981-1989) marked a resurgence of conservative values, focusing on reducing the size of government and cutting taxes.",
+              "Reagan's economic policies, known as 'Reaganomics,' emphasized supply-side economics, which aimed to stimulate growth by cutting taxes and reducing regulation.",
+              "The Reagan administration also increased defense spending, contributing to the end of the Cold War, and took a tough stance on the Soviet Union, famously calling it the 'evil empire.'"
+            ]
+          },
+          {
+            "topicName": "The End of the Cold War and the Collapse of the Soviet Union",
+            "details": [
+              "The Cold War ended in 1991 with the collapse of the Soviet Union, following reforms by Soviet leader Mikhail Gorbachev (glasnost and perestroika).",
+              "Key events included the fall of the Berlin Wall (1989), the reunification of Germany, and the dissolution of the Warsaw Pact.",
+              "The U.S. emerged as the world's sole superpower, but the post-Cold War world saw new challenges, including ethnic conflicts and the rise of new geopolitical tensions."
+            ]
+          },
+          {
+            "topicName": "The War on Terror and U.S. Foreign Policy",
+            "details": [
+              "The September 11, 2001, terrorist attacks led to the U.S. launching the War on Terror, with invasions of Afghanistan (2001) and Iraq (2003).",
+              "The Iraq War, justified by claims of weapons of mass destruction (WMDs), became highly controversial due to the absence of such weapons and the prolonged conflict that followed.",
+              "The War on Terror reshaped U.S. foreign policy, with a focus on counterterrorism and efforts to promote democracy in the Middle East."
+            ]
+          },
+          {
+            "topicName": "Economic and Social Changes in the Late 20th and Early 21st Centuries",
+            "details": [
+              "The U.S. economy shifted from manufacturing to services and technology, leading to the rise of the information age and globalization.",
+              "Economic inequality grew, with debates over the role of government in addressing issues like healthcare, education, and income disparity.",
+              "Social changes included the legalization of same-sex marriage (2015) and ongoing debates over immigration, race relations, and environmental policy."
+            ]
+          },
+          {
+            "topicName": "Environmental Issues and Climate Change",
+            "details": [
+              "In the 21st century, climate change became a central issue, with debates over the role of fossil fuels, renewable energy, and international agreements like the Paris Agreement (2015).",
+              "Environmental movements called for stronger regulations to combat global warming and protect natural resources.",
+              "The U.S. government and private sector have faced pressure to address climate change while balancing economic growth and energy needs."
+            ]
+          }
         ]
       }
     ]
@@ -473,245 +473,245 @@
             ]
           }
         ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_3",
-    "unitName": "Unit 3: Differentiation - Composite, Implicit, and Inverse Functions",
-    "topics": [
+      },
       {
-        "topicName": "The Chain Rule",
-        "details": [
-          "The chain rule is used to differentiate composite functions, where one function is nested inside another.",
-          "It states that the derivative of a composite function is the derivative of the outer function times the derivative of the inner function.",
-          "This rule is essential for complex functions such as trigonometric, exponential, or logarithmic compositions."
+        "unitId": "unit_3",
+        "unitName": "Unit 3: Differentiation - Composite, Implicit, and Inverse Functions",
+        "topics": [
+          {
+            "topicName": "The Chain Rule",
+            "details": [
+              "The chain rule is used to differentiate composite functions, where one function is nested inside another.",
+              "It states that the derivative of a composite function is the derivative of the outer function times the derivative of the inner function.",
+              "This rule is essential for complex functions such as trigonometric, exponential, or logarithmic compositions."
+            ]
+          },
+          {
+            "topicName": "Implicit Differentiation",
+            "details": [
+              "Implicit differentiation is used when functions are not given explicitly as y = f(x) but instead are presented in a form where both variables x and y are mixed.",
+              "It involves differentiating both sides of the equation with respect to x while treating y as an implicit function of x.",
+              "This technique is often used for finding the slope of tangents to curves defined by equations that cannot easily be solved for y."
+            ]
+          },
+          {
+            "topicName": "Derivatives of Inverse Functions",
+            "details": [
+              "To find the derivative of an inverse function, you use the rule: if f and g are inverse functions, then g'(x) = 1 / f'(g(x)).",
+              "This is applied to inverse trigonometric functions such as arcsin, arccos, and arctan, and inverse exponential and logarithmic functions."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Implicit Differentiation",
-        "details": [
-          "Implicit differentiation is used when functions are not given explicitly as y = f(x) but instead are presented in a form where both variables x and y are mixed.",
-          "It involves differentiating both sides of the equation with respect to x while treating y as an implicit function of x.",
-          "This technique is often used for finding the slope of tangents to curves defined by equations that cannot easily be solved for y."
+        "unitId": "unit_4",
+        "unitName": "Unit 4: Contextual Applications of Differentiation",
+        "topics": [
+          {
+            "topicName": "Analyzing Functions Using Derivatives",
+            "details": [
+              "Derivatives are used to find critical points, which help identify where functions increase, decrease, or have relative maxima and minima.",
+              "First and second derivative tests provide methods for determining the behavior of a function and its concavity.",
+              "This analysis is useful for graphing functions and understanding their behavior at different intervals."
+            ]
+          },
+          {
+            "topicName": "Optimization Problems",
+            "details": [
+              "Optimization involves finding the maximum or minimum values of a function, often subject to constraints.",
+              "These problems arise in real-world situations like minimizing cost or maximizing efficiency.",
+              "The process involves taking the derivative to find critical points and then using second derivative tests to confirm maxima or minima."
+            ]
+          },
+          {
+            "topicName": "Related Rates",
+            "details": [
+              "Related rates problems involve finding how different quantities change with respect to time when they are related by some equation.",
+              "To solve these problems, implicit differentiation is often used to relate the rates of change of the different variables.",
+              "A diagram and careful organization of known rates can help in solving these often complex problems."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Derivatives of Inverse Functions",
-        "details": [
-          "To find the derivative of an inverse function, you use the rule: if f and g are inverse functions, then g'(x) = 1 / f'(g(x)).",
-          "This is applied to inverse trigonometric functions such as arcsin, arccos, and arctan, and inverse exponential and logarithmic functions."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_4",
-    "unitName": "Unit 4: Contextual Applications of Differentiation",
-    "topics": [
-      {
-        "topicName": "Analyzing Functions Using Derivatives",
-        "details": [
-          "Derivatives are used to find critical points, which help identify where functions increase, decrease, or have relative maxima and minima.",
-          "First and second derivative tests provide methods for determining the behavior of a function and its concavity.",
-          "This analysis is useful for graphing functions and understanding their behavior at different intervals."
-        ]
-      },
-      {
-        "topicName": "Optimization Problems",
-        "details": [
-          "Optimization involves finding the maximum or minimum values of a function, often subject to constraints.",
-          "These problems arise in real-world situations like minimizing cost or maximizing efficiency.",
-          "The process involves taking the derivative to find critical points and then using second derivative tests to confirm maxima or minima."
-        ]
-      },
-      {
-        "topicName": "Related Rates",
-        "details": [
-          "Related rates problems involve finding how different quantities change with respect to time when they are related by some equation.",
-          "To solve these problems, implicit differentiation is often used to relate the rates of change of the different variables.",
-          "A diagram and careful organization of known rates can help in solving these often complex problems."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_5",
-    "unitName": "Unit 5: Analytical Applications of Differentiation",
-    "topics": [
-      {
-        "topicName": "The Mean Value Theorem",
-        "details": [
-          "The Mean Value Theorem (MVT) states that for a continuous and differentiable function, there is at least one point on the curve where the tangent is parallel to the secant line connecting two points.",
-          "This theorem helps in analyzing the behavior of functions and provides information about their increasing or decreasing behavior.",
-          "In applied contexts, MVT can help understand changes in velocity, population growth, or other time-related quantities."
+        "unitId": "unit_5",
+        "unitName": "Unit 5: Analytical Applications of Differentiation",
+        "topics": [
+          {
+            "topicName": "The Mean Value Theorem",
+            "details": [
+              "The Mean Value Theorem (MVT) states that for a continuous and differentiable function, there is at least one point on the curve where the tangent is parallel to the secant line connecting two points.",
+              "This theorem helps in analyzing the behavior of functions and provides information about their increasing or decreasing behavior.",
+              "In applied contexts, MVT can help understand changes in velocity, population growth, or other time-related quantities."
+            ]
+          },
+          {
+            "topicName": "First and Second Derivative Tests",
+            "details": [
+              "The first derivative test helps determine where a function is increasing or decreasing and the location of relative maxima and minima.",
+              "The second derivative test determines concavity and points of inflection, providing more detailed information about the shape of the graph.",
+              "Both tests are essential for thoroughly analyzing and sketching the graph of a function."
+            ]
+          },
+          {
+            "topicName": "Motion and Particle Movement",
+            "details": [
+              "Derivatives are used to describe the motion of particles in terms of position, velocity, and acceleration.",
+              "Velocity is the derivative of position, and acceleration is the derivative of velocity.",
+              "These applications are used in physics and other sciences to model real-world phenomena such as falling objects or projectiles."
+            ]
+          }
         ]
       },
       {
-        "topicName": "First and Second Derivative Tests",
-        "details": [
-          "The first derivative test helps determine where a function is increasing or decreasing and the location of relative maxima and minima.",
-          "The second derivative test determines concavity and points of inflection, providing more detailed information about the shape of the graph.",
-          "Both tests are essential for thoroughly analyzing and sketching the graph of a function."
+        "unitId": "unit_6",
+        "unitName": "Unit 6: Integration and Accumulation of Change",
+        "topics": [
+          {
+            "topicName": "The Definite Integral",
+            "details": [
+              "The definite integral represents the accumulation of quantities, such as area under a curve or total distance traveled.",
+              "It is evaluated using the Fundamental Theorem of Calculus, which connects differentiation and integration.",
+              "This concept is essential for solving problems involving accumulated change over intervals, such as calculating displacement or net change."
+            ]
+          },
+          {
+            "topicName": "Riemann Sums and Trapezoidal Rule",
+            "details": [
+              "Riemann sums are used to approximate the value of a definite integral by dividing the area under a curve into small rectangles.",
+              "The trapezoidal rule improves this approximation by using trapezoids instead of rectangles to estimate areas more accurately.",
+              "Both methods are useful for understanding how integration works and for approximating integrals when an exact answer is difficult to find."
+            ]
+          },
+          {
+            "topicName": "Fundamental Theorem of Calculus",
+            "details": [
+              "The Fundamental Theorem of Calculus (FTC) links the concept of a derivative with that of an integral.",
+              "Part 1 of the FTC states that the definite integral of a function can be found using its antiderivative.",
+              "Part 2 explains that the derivative of an integral function is the original function itself.",
+              "The FTC provides the foundation for many calculus applications in physics, engineering, and other fields."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Motion and Particle Movement",
-        "details": [
-          "Derivatives are used to describe the motion of particles in terms of position, velocity, and acceleration.",
-          "Velocity is the derivative of position, and acceleration is the derivative of velocity.",
-          "These applications are used in physics and other sciences to model real-world phenomena such as falling objects or projectiles."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_6",
-    "unitName": "Unit 6: Integration and Accumulation of Change",
-    "topics": [
-      {
-        "topicName": "The Definite Integral",
-        "details": [
-          "The definite integral represents the accumulation of quantities, such as area under a curve or total distance traveled.",
-          "It is evaluated using the Fundamental Theorem of Calculus, which connects differentiation and integration.",
-          "This concept is essential for solving problems involving accumulated change over intervals, such as calculating displacement or net change."
-        ]
-      },
-      {
-        "topicName": "Riemann Sums and Trapezoidal Rule",
-        "details": [
-          "Riemann sums are used to approximate the value of a definite integral by dividing the area under a curve into small rectangles.",
-          "The trapezoidal rule improves this approximation by using trapezoids instead of rectangles to estimate areas more accurately.",
-          "Both methods are useful for understanding how integration works and for approximating integrals when an exact answer is difficult to find."
-        ]
-      },
-      {
-        "topicName": "Fundamental Theorem of Calculus",
-        "details": [
-          "The Fundamental Theorem of Calculus (FTC) links the concept of a derivative with that of an integral.",
-          "Part 1 of the FTC states that the definite integral of a function can be found using its antiderivative.",
-          "Part 2 explains that the derivative of an integral function is the original function itself.",
-          "The FTC provides the foundation for many calculus applications in physics, engineering, and other fields."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_7",
-    "unitName": "Unit 7: Differential Equations",
-    "topics": [
-      {
-        "topicName": "Slope Fields",
-        "details": [
-          "Slope fields provide a graphical representation of differential equations, showing the slopes of solutions at various points.",
-          "By sketching slope fields, students can visualize solutions to differential equations without actually solving them.",
-          "Slope fields are especially useful for understanding the behavior of solutions over different intervals."
+        "unitId": "unit_7",
+        "unitName": "Unit 7: Differential Equations",
+        "topics": [
+          {
+            "topicName": "Slope Fields",
+            "details": [
+              "Slope fields provide a graphical representation of differential equations, showing the slopes of solutions at various points.",
+              "By sketching slope fields, students can visualize solutions to differential equations without actually solving them.",
+              "Slope fields are especially useful for understanding the behavior of solutions over different intervals."
+            ]
+          },
+          {
+            "topicName": "Separable Differential Equations",
+            "details": [
+              "Separable differential equations can be solved by separating variables and integrating both sides.",
+              "These types of equations often appear in modeling real-world situations, such as population growth or cooling processes.",
+              "Once variables are separated, integration allows us to find general or particular solutions to the differential equation."
+            ]
+          },
+          {
+            "topicName": "Exponential Growth and Decay",
+            "details": [
+              "Exponential growth and decay models describe situations where the rate of change of a quantity is proportional to the quantity itself.",
+              "This concept is used to model population growth, radioactive decay, and other processes where change happens continuously over time.",
+              "These differential equations typically result in exponential functions as solutions."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Separable Differential Equations",
-        "details": [
-          "Separable differential equations can be solved by separating variables and integrating both sides.",
-          "These types of equations often appear in modeling real-world situations, such as population growth or cooling processes.",
-          "Once variables are separated, integration allows us to find general or particular solutions to the differential equation."
+        "unitId": "unit_8",
+        "unitName": "Applications of Integration",
+        "topics": [
+          {
+            "topicName": "Area Between Curves",
+            "details": [
+              "The area between two curves can be found by integrating the difference between the top and bottom functions.",
+              "This technique is useful for finding the exact area of regions bounded by curves, especially in applied problems like economics or physics.",
+              "Understanding how to set up and evaluate these integrals is essential for solving real-world area problems."
+            ]
+          },
+          {
+            "topicName": "Volumes of Solids of Revolution",
+            "details": [
+              "Volumes of solids of revolution are calculated using the disk and washer methods.",
+              "The disk method is used when revolving a region around an axis, while the washer method is used when the region has a hole in it.",
+              "These techniques are applied in various fields, including engineering and design, to calculate the volumes of 3D objects."
+            ]
+          },
+          {
+            "topicName": "Arc Length",
+            "details": [
+              "Arc length is the distance along a curve, found by integrating the square root of 1 plus the derivative squared.",
+              "This concept is used to calculate the length of paths, curves, or trajectories in real-world applications.",
+              "Finding arc length involves setting up and solving a specific integral that depends on the derivative of the function."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Exponential Growth and Decay",
-        "details": [
-          "Exponential growth and decay models describe situations where the rate of change of a quantity is proportional to the quantity itself.",
-          "This concept is used to model population growth, radioactive decay, and other processes where change happens continuously over time.",
-          "These differential equations typically result in exponential functions as solutions."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_8",
-    "unitName": "Applications of Integration",
-    "topics": [
-      {
-        "topicName": "Area Between Curves",
-        "details": [
-          "The area between two curves can be found by integrating the difference between the top and bottom functions.",
-          "This technique is useful for finding the exact area of regions bounded by curves, especially in applied problems like economics or physics.",
-          "Understanding how to set up and evaluate these integrals is essential for solving real-world area problems."
-        ]
-      },
-      {
-        "topicName": "Volumes of Solids of Revolution",
-        "details": [
-          "Volumes of solids of revolution are calculated using the disk and washer methods.",
-          "The disk method is used when revolving a region around an axis, while the washer method is used when the region has a hole in it.",
-          "These techniques are applied in various fields, including engineering and design, to calculate the volumes of 3D objects."
-        ]
-      },
-      {
-        "topicName": "Arc Length",
-        "details": [
-          "Arc length is the distance along a curve, found by integrating the square root of 1 plus the derivative squared.",
-          "This concept is used to calculate the length of paths, curves, or trajectories in real-world applications.",
-          "Finding arc length involves setting up and solving a specific integral that depends on the derivative of the function."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_9",
-    "unitName": "Unit 9: Parametric Equations, Polar Coordinates, and Vector-Valued Functions",
-    "topics": [
-      {
-        "topicName": "Derivatives of Parametric Functions",
-        "details": [
-          "Parametric equations express the coordinates of points on a curve as functions of a parameter, often time.",
-          "The derivative of a parametric function involves taking the derivative of both the x and y components with respect to the parameter.",
-          "Applications include calculating the rate of change and velocity in systems described by parametric functions."
+        "unitId": "unit_9",
+        "unitName": "Unit 9: Parametric Equations, Polar Coordinates, and Vector-Valued Functions",
+        "topics": [
+          {
+            "topicName": "Derivatives of Parametric Functions",
+            "details": [
+              "Parametric equations express the coordinates of points on a curve as functions of a parameter, often time.",
+              "The derivative of a parametric function involves taking the derivative of both the x and y components with respect to the parameter.",
+              "Applications include calculating the rate of change and velocity in systems described by parametric functions."
+            ]
+          },
+          {
+            "topicName": "Calculus with Polar Coordinates",
+            "details": [
+              "In polar coordinates, points are defined by a distance from the origin and an angle from the positive x-axis.",
+              "Calculus in polar form involves finding areas and lengths of curves using polar integrals.",
+              "Converting between Cartesian and polar coordinates is a crucial skill for solving problems."
+            ]
+          },
+          {
+            "topicName": "Vector-Valued Functions",
+            "details": [
+              "Vector-valued functions describe motion in two or three dimensions by providing a function for each spatial component (x, y, z).",
+              "Derivatives of vector-valued functions give velocity, and second derivatives give acceleration.",
+              "Applications include physics problems involving projectile motion and forces."
+            ]
+          }
         ]
       },
       {
-        "topicName": "Calculus with Polar Coordinates",
-        "details": [
-          "In polar coordinates, points are defined by a distance from the origin and an angle from the positive x-axis.",
-          "Calculus in polar form involves finding areas and lengths of curves using polar integrals.",
-          "Converting between Cartesian and polar coordinates is a crucial skill for solving problems."
-        ]
-      },
-      {
-        "topicName": "Vector-Valued Functions",
-        "details": [
-          "Vector-valued functions describe motion in two or three dimensions by providing a function for each spatial component (x, y, z).",
-          "Derivatives of vector-valued functions give velocity, and second derivatives give acceleration.",
-          "Applications include physics problems involving projectile motion and forces."
-        ]
-      }
-    ]
-  },
-  {
-    "unitId": "unit_10",
-    "unitName": "Unit 10: Infinite Sequences and Series",
-    "topics": [
-      {
-        "topicName": "Convergence and Divergence of Sequences",
-        "details": [
-          "A sequence converges if it approaches a specific value as the index increases, and diverges if it does not.",
-          "Tests for convergence include the limit test and the comparison test, among others.",
-          "Understanding convergence is critical for determining whether infinite series will sum to a finite value."
-        ]
-      },
-      {
-        "topicName": "Convergence Tests for Series",
-        "details": [
-          "Series are sums of terms from sequences, and determining whether a series converges or diverges requires various tests.",
-          "Common convergence tests include the ratio test, root test, and integral test.",
-          "These tests help determine the behavior of infinite series, crucial in advanced mathematical analysis."
-        ]
-      },
-      {
-        "topicName": "Power Series and Taylor Series",
-        "details": [
-          "Power series represent functions as infinite sums of terms involving powers of a variable.",
-          "Taylor series are specific types of power series centered around a particular point, used to approximate functions.",
-          "Understanding the interval of convergence for a power series is important for determining where the approximation is valid."
+        "unitId": "unit_10",
+        "unitName": "Unit 10: Infinite Sequences and Series",
+        "topics": [
+          {
+            "topicName": "Convergence and Divergence of Sequences",
+            "details": [
+              "A sequence converges if it approaches a specific value as the index increases, and diverges if it does not.",
+              "Tests for convergence include the limit test and the comparison test, among others.",
+              "Understanding convergence is critical for determining whether infinite series will sum to a finite value."
+            ]
+          },
+          {
+            "topicName": "Convergence Tests for Series",
+            "details": [
+              "Series are sums of terms from sequences, and determining whether a series converges or diverges requires various tests.",
+              "Common convergence tests include the ratio test, root test, and integral test.",
+              "These tests help determine the behavior of infinite series, crucial in advanced mathematical analysis."
+            ]
+          },
+          {
+            "topicName": "Power Series and Taylor Series",
+            "details": [
+              "Power series represent functions as infinite sums of terms involving powers of a variable.",
+              "Taylor series are specific types of power series centered around a particular point, used to approximate functions.",
+              "Understanding the interval of convergence for a power series is important for determining where the approximation is valid."
+            ]
+          }
         ]
       }
     ]
@@ -935,7 +935,6 @@
       }
     ]
   },
-  
   {
     "courseId": "apphysicsc_electricity",
     "courseName": "AP Physics C: Electricity and Magnetism",
@@ -1147,5 +1146,4 @@
       }
     ]
   }
-  
 ]

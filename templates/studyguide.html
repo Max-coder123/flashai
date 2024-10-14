@@ -9,120 +9,114 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="static/global.css">
     <style>
-        #study-guide-container {
-            width: 70%;
-            margin: 0 auto;
-            padding-left: 100px;
-            padding-bottom: 50px;
-            text-align: left;
-        }
+#study-guide-container {
+    width: 70%;
+    margin-left: 350px;
+    padding-bottom: 50px;
+    text-align: left;
+    font-size: 105%; 
+}
 
-        .unit-taskbar {
-            width: 350px;
-            border-right: 1px solid #ccc;
-            padding: 20px;
-            height: 100vh;
-            overflow-y: auto;
-            position: fixed;
-            top: 60px;
-            left: 60px;
-            background-color: transparent;
-            transition: left 0.3s ease;
-        }
+.unit-taskbar {
+    width: 350px;
+    border-right: 1px solid #ccc;
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
+    position: fixed;
+    top: 60px;
+    left: 60px;
+    background-color: transparent;
+    transition: left 0.3s ease;
+}
 
-        .taskbar.minimized+.main-content .unit-taskbar {
-            left: 60px;
-        }
+.taskbar.minimized+.main-content .unit-taskbar {
+    left: 60px;
+}
 
-        .taskbar:not(.minimized)+.main-content .unit-taskbar {
-            left: 350px;
-        }
+.taskbar:not(.minimized)+.main-content .unit-taskbar {
+    left: 350px;
+}
 
-        .unit-taskbar ul {
-            list-style: none;
-            padding: 0;
-        }
+.unit-taskbar ul {
+    list-style: none;
+    padding: 0;
+}
 
-        .unit-taskbar li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
-            width: 95%;
-            margin: 0 auto;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            user-select: none;
-        }
+.unit-taskbar li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    width: 95%;
+    margin: 0 auto;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    user-select: none;
+}
 
-        .unit-taskbar li:hover {
-            background-color: #f2f2f2;
-        }
+.unit-taskbar li:hover {
+    background-color: #f2f2f2;
+}
 
-        .unit-number,
-        .unit-title {
-            color: black;
-            display: block;
-            pointer-events: none;
-        }
+.unit-number,
+.unit-title {
+    color: black;
+    display: block;
+    pointer-events: none;
+}
 
-        .unit-number {
-            font-size: 75%;
-            font-weight: 650;
-            color: grey;
-        }
+.unit-number {
+    font-size: 75%;
+    font-weight: 650;
+    color: grey;
+}
 
-        .unit-title {
-            font-size: 100%;
-            font-weight: 400;
-        }
+.unit-title {
+    font-size: 100%;
+    font-weight: 400;
+}
 
-        .unit-taskbar li .unit-number {
-            color: grey;
-            font-size: 75%;
-            font-weight: 650;
-        }
+.unit-taskbar li .unit-number {
+    color: grey;
+    font-size: 75%;
+    font-weight: 650;
+}
 
-        .unit-taskbar li .unit-title {
-            color: black;
-            font-size: 100%;
-            font-weight: 400;
-            margin-left: 0;
-            display: inline;
-        }
+.unit-taskbar li .unit-title {
+    color: black;
+    font-size: 100%;
+    font-weight: 400;
+    margin-left: 0;
+    display: inline;
+}
 
-        .unit-button span {
-            pointer-events: none;
-        }
+.unit-button span {
+    pointer-events: none;
+}
 
-        .logo {
-            height: 150px;
-            margin: 0;
-            padding: 0;
-            display: block;
-            max-width: 100%;
-        }
+.logo {
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    max-width: 100%;
+}
 
-        #study-guide-container {
-            width: 70%;
-            margin: 0 auto;
-            padding-bottom: 50px;
-            text-align: left;
-        }
+h1,
+h2,
+h3 {
+    text-align: left;
+    margin-bottom: 20px;
+}
 
-        h1,
-        h2,
-        h3 {
-            text-align: left;
-            margin-bottom: 20px;
-        }
+ul {
+    list-style-position: inside;
+    padding-left: 20px;
+}
 
-        ul {
-            list-style-position: inside;
-            padding-left: 20px;
-        }
     </style>
 </head>
 
