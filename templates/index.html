@@ -101,7 +101,6 @@
     </div>
 
 
-
     <div class="main-content" id="main-content">
         <h1>flashcard generator</h1>
         <p>paste in notes below</p>
@@ -109,6 +108,7 @@
             <textarea name="question" placeholder="paste your text here..."></textarea>
             <input type="submit" value="send">
         </form>
+        <div class="completion-status"></div>
 
         <div class="shuffle-button-container" id="buttonContainer">
             <div class="tooltip">
@@ -162,20 +162,22 @@
         });
 
         const completionEl = document.getElementById("completion");
+        const completionStatusEl = document.querySelector(".completion-status")
         const prevButton = document.getElementById("previousCard");
         const nextButton = document.getElementById("nextCard");
         let activeCardIndex = 0;
 
         document.querySelector("#completion-input").addEventListener("submit", (event) => {
-            event.preventDefault(); 
-            const userInput = document.querySelector("textarea[name='question']").value; 
+            event.preventDefault();
+            const userInput = document.querySelector("textarea[name='question']").value;
 
+            completionStatusEl.textContent = "loading..."
             fetch("/api/completion", {
-                method: "POST", 
+                method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ question: userInput }) 
+                body: JSON.stringify({ question: userInput })
             })
                 .then(response => {
                     return response.json();
@@ -186,6 +188,9 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
+                })
+                .finally(() => {
+                    completionStatusEl.textContent = "";
                 });
         });
 
