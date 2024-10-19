@@ -56,7 +56,7 @@ def save_flashcards(content, flashcards):
 app = Flask(__name__)
 
 
-@app.route("/", methods=["GET", "POST"])
+@app.get("/")
 def index():
     user_message = request.form.get("question")
     if not user_message:
@@ -96,9 +96,44 @@ please return the following json structure:
     return render_template("index.html", completion=completion)
 
 
-@app.route("/api/completion")
+@app.post("/api/completion")
 def completion():
-    return fetch_json_completion("return the answer in json format: what is 5+5?")
+    user_message = request.json.get("question")
+    # if not user_message:
+
+    content = f"""
+generate flashcards for the following text:
+
+'''
+
+{user_message}
+
+'''
+
+please return the following json structure:
+
+
+```
+{{
+    "data": [
+        {{
+            "question": "question 1 about the text", 
+            "answer": "answer 1 for question 1",
+            "explanation": "explanation of answer 1"
+        }},
+        {{
+            "question": "question 2 about the text", 
+            "answer": "answer 2 for question 2",
+            "explanation": "explanation of answer 2"
+        }}
+    ]
+}}
+```
+
+    """
+    completion = fetch_json_completion(content)
+    save_flashcards(user_message, completion)
+    return completion
 
 
 @app.route("/history")
@@ -143,8 +178,8 @@ def clear_history():
     file_path = "flashcards_history.json"
     if os.path.exists(file_path):
         with open(file_path, "w") as file:
-            json.dump([], file)  
-    return render_template("history.html", history=[])  
+            json.dump([], file)
+    return render_template("history.html", history=[])
 
 
 @app.route("/flashcards/<flashcard_id>")
