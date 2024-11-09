@@ -106,9 +106,9 @@
         <p>paste in notes below</p>
         <form id="completion-input">
             <textarea name="question" placeholder="paste your text here..."></textarea>
-            <input type="submit" value="send">
+            <button type="submit">send</button>
         </form>
-        <div class="completion-status"></div>
+        <div class="completion-status">loading</div>
 
         <div class="shuffle-button-container" id="buttonContainer">
             <div class="tooltip">
@@ -165,13 +165,17 @@
         const completionStatusEl = document.querySelector(".completion-status")
         const prevButton = document.getElementById("previousCard");
         const nextButton = document.getElementById("nextCard");
+        const completionForm = document.querySelector("#completion-input")
+        const submitButton = completionForm.querySelector("button[type='submit']")
         let activeCardIndex = 0;
 
-        document.querySelector("#completion-input").addEventListener("submit", (event) => {
+        completionForm.addEventListener("submit", (event) => {
             event.preventDefault();
             const userInput = document.querySelector("textarea[name='question']").value;
 
-            completionStatusEl.textContent = "loading..."
+            completionStatusEl.classList.add("completion-status-visible");
+            submitButton.disabled = true;
+
             fetch("/api/completion", {
                 method: "POST",
                 headers: {
@@ -185,13 +189,16 @@
                 .then(data => {
                     flashcards = data.data;
                     renderFlashcards();
+                    updateCardIndex();
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 })
                 .finally(() => {
-                    completionStatusEl.textContent = "";
+                    completionStatusEl.classList.remove("completion-status-visible");
+                    submitButton.disabled = false;
                 });
+
         });
 
         let flashcards = [];
@@ -235,9 +242,6 @@
         }
 
         let cards;
-        renderFlashcards();
-        updateCardIndex();
-
         document.querySelector(".next-card").addEventListener("click", () => {
             const currentCard = cards[activeCardIndex];
             currentCard.classList.remove("active-card");
