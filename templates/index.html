@@ -106,9 +106,8 @@
         <p>paste in notes below</p>
         <form id="completion-input">
             <textarea name="question" placeholder="paste your text here..."></textarea>
-            <button type="submit">send</button>
+            <button type="submit" id="completion-input-submit">send</button>
         </form>
-        <div class="completion-status">loading</div>
 
         <div class="shuffle-button-container" id="buttonContainer">
             <div class="tooltip">
@@ -162,7 +161,6 @@
         });
 
         const completionEl = document.getElementById("completion");
-        const completionStatusEl = document.querySelector(".completion-status")
         const prevButton = document.getElementById("previousCard");
         const nextButton = document.getElementById("nextCard");
         const completionForm = document.querySelector("#completion-input")
@@ -173,7 +171,7 @@
             event.preventDefault();
             const userInput = document.querySelector("textarea[name='question']").value;
 
-            completionStatusEl.classList.add("completion-status-visible");
+            submitButton.innerHTML = '<span class="spinner"></span>';
             submitButton.disabled = true;
 
             fetch("/api/completion", {
@@ -195,7 +193,7 @@
                     console.error('Error:', error);
                 })
                 .finally(() => {
-                    completionStatusEl.classList.remove("completion-status-visible");
+                    submitButton.innerHTML = 'send';
                     submitButton.disabled = false;
                 });
 
