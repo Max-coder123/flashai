@@ -3,8 +3,19 @@ import requests
 import sys
 import json
 import uuid
+from db import (
+    Flashcard,
+    FlashcardSource,
+    get_flashcard_sources_for_user,
+    get_flashcards_for_source,
+    get_user,
+    insert_flashcard,
+    insert_flashcard_source,
+)
 from dotenv import load_dotenv
 from flask import Flask, request, render_template, request_tearing_down, url_for
+
+user_id = "1b27d88b-73f8-48b4-9132-c447146ca172"
 
 load_dotenv()  # take environment variables from .env.
 if not os.environ.get("OPENAI_API_KEY"):
@@ -133,6 +144,20 @@ please return the following json structure:
     """
     completion = fetch_json_completion(content)
     save_flashcards(user_message, completion)
+    flashcard_source = FlashcardSource(content=user_message, user_id=user_id)
+
+    source_id = insert_flashcard_source(flashcard_source)
+
+    completion = json.loads(completion)
+    for flashcard in completion["data"]:
+        flashcard = Flashcard(
+            question=flashcard["question"],
+            answer=flashcard["answer"],
+            explanation=flashcard["explanation"],
+            source_id=source_id,
+            user_id=user_id,
+        )
+        insert_flashcard(flashcard)
     return completion
 
 
@@ -140,6 +165,14 @@ please return the following json structure:
 def history():
     flashcards_history = load_flashcard_history()
     return render_template("history.html", history=flashcards_history)
+
+
+@app.route("/history-new")
+def history_new():
+    retrieved_sources = get_flashcard_sources_for_user(user_id)
+    return [
+        {"content": source.content, "id": source.id} for source in retrieved_sources
+    ]
 
 
 @app.route("/dashboard")
@@ -191,6 +224,15 @@ def view_flashcards(flashcard_id):
     if not flashcard_set:
         return "Flashcards not found", 404
     return render_template("view_flashcards.html", flashcard_set=flashcard_set)
+
+
+@app.route("/flashcards-new/<flashcard_source_id>")
+def view_flashcards_new(flashcard_source_id):
+    retrieved_flashcards = get_flashcards_for_source(flashcard_source_id)
+    return [
+        {"question": flashcard.question, "answer": flashcard.answer, "id": flashcard.id}
+        for flashcard in retrieved_flashcards
+    ]
 
 
 if __name__ == "__main__":
