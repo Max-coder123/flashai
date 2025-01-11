@@ -173,7 +173,7 @@
         <div id="history-section">
             {% for entry in history %}
             <div class="flashcard-project">
-                <h2>Project: {{ entry.input[:100] }}...</h2>
+                <h2>Project: {{ entry.content[:100] }}...</h2>
                 <a href="/flashcards/{{ entry.id }}">
                     <button>View Flashcards</button>
                 </a>

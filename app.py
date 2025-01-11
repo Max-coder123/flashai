@@ -42,26 +42,21 @@ def fetch_json_completion(content):
     return content
 
 
-def save_flashcards(content, flashcards):
-    file_path = "flashcards_history.json"
+def save_flashcards(content, completion):
+    flashcard_source = FlashcardSource(content=content, user_id=user_id)
 
-    # Check if the file exists, if not create an empty one
-    if not os.path.exists(file_path):
-        with open(file_path, "w") as file:
-            json.dump([], file)
+    source_id = insert_flashcard_source(flashcard_source)
 
-    # Load current history
-    with open(file_path, "r") as file:
-        history = json.load(file)
-
-    flashcard_id = str(uuid.uuid4())
-
-    # Append new flashcards to the history
-    history.append({"id": flashcard_id, "input": content, "flashcards": flashcards})
-
-    # Save updated history
-    with open(file_path, "w") as file:
-        json.dump(history, file)
+    completion = json.loads(completion)
+    for flashcard in completion["data"]:
+        flashcard = Flashcard(
+            question=flashcard["question"],
+            answer=flashcard["answer"],
+            explanation=flashcard["explanation"],
+            source_id=source_id,
+            user_id=user_id,
+        )
+        insert_flashcard(flashcard)
 
 
 app = Flask(__name__)
@@ -144,35 +139,15 @@ please return the following json structure:
     """
     completion = fetch_json_completion(content)
     save_flashcards(user_message, completion)
-    flashcard_source = FlashcardSource(content=user_message, user_id=user_id)
 
-    source_id = insert_flashcard_source(flashcard_source)
-
-    completion = json.loads(completion)
-    for flashcard in completion["data"]:
-        flashcard = Flashcard(
-            question=flashcard["question"],
-            answer=flashcard["answer"],
-            explanation=flashcard["explanation"],
-            source_id=source_id,
-            user_id=user_id,
-        )
-        insert_flashcard(flashcard)
     return completion
 
 
 @app.route("/history")
 def history():
-    flashcards_history = load_flashcard_history()
-    return render_template("history.html", history=flashcards_history)
-
-
-@app.route("/history-new")
-def history_new():
     retrieved_sources = get_flashcard_sources_for_user(user_id)
-    return [
-        {"content": source.content, "id": source.id} for source in retrieved_sources
-    ]
+    return render_template("history.html", history=retrieved_sources)
+
 
 
 @app.route("/dashboard")
@@ -195,17 +170,6 @@ def study_guide():
     return app.send_static_file("study_guides.json")
 
 
-def load_flashcard_history():
-    file_path = "flashcards_history.json"
-    if not os.path.exists(file_path):
-        return []
-
-    with open(file_path, "r") as file:
-        history = json.load(file)
-
-    return history
-
-
 @app.route("/clear-history", methods=["POST"])
 def clear_history():
     file_path = "flashcards_history.json"
@@ -215,24 +179,14 @@ def clear_history():
     return render_template("history.html", history=[])
 
 
-@app.route("/flashcards/<flashcard_id>")
-def view_flashcards(flashcard_id):
-    flashcards_history = load_flashcard_history()
-    flashcard_set = next(
-        (entry for entry in flashcards_history if entry["id"] == flashcard_id), None
-    )
-    if not flashcard_set:
-        return "Flashcards not found", 404
-    return render_template("view_flashcards.html", flashcard_set=flashcard_set)
-
-
-@app.route("/flashcards-new/<flashcard_source_id>")
-def view_flashcards_new(flashcard_source_id):
+@app.route("/flashcards/<flashcard_source_id>")
+def view_flashcards(flashcard_source_id):
     retrieved_flashcards = get_flashcards_for_source(flashcard_source_id)
-    return [
+    retrieved_flashcards = [
         {"question": flashcard.question, "answer": flashcard.answer, "id": flashcard.id}
         for flashcard in retrieved_flashcards
     ]
+    return render_template("view_flashcards.html", flashcard_set=retrieved_flashcards)
 
 
 if __name__ == "__main__":
