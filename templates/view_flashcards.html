@@ -83,7 +83,7 @@
 </head>
 
 <body>
-    <h1>Flashcards for: {{ flashcard_set.input }}</h1>
+    <h1>Flashcards for: </h1>
 
     <div class="flashcard-container">
         <button id="previousCard" class="previous-card" style="display: none;">
@@ -110,7 +110,7 @@
         let activeCardIndex = 0;
 
         // Use the flashcards data passed from Flask
-        const { data } = {{ flashcard_set.flashcards | safe}};
+        const data = {{ flashcard_set | safe}};
 
         function renderFlashcards() {
             if (data.length === 0) {
