@@ -11,6 +11,7 @@ from db import (
     get_user,
     insert_flashcard,
     insert_flashcard_source,
+    delete_flashcard_sources_for_user
 )
 from dotenv import load_dotenv
 from flask import Flask, request, render_template, request_tearing_down, url_for
@@ -170,12 +171,9 @@ def study_guide():
     return app.send_static_file("study_guides.json")
 
 
-@app.route("/clear-history", methods=["POST"])
+@app.route("/clear-history", methods=["DELETE"])
 def clear_history():
-    file_path = "flashcards_history.json"
-    if os.path.exists(file_path):
-        with open(file_path, "w") as file:
-            json.dump([], file)
+    delete_flashcard_sources_for_user(user_id)
     return render_template("history.html", history=[])
 
 

@@ -117,6 +117,10 @@ def get_flashcards_for_source(source_id):
     rows = cursor.fetchall()
     return [Flashcard.from_row(row) for row in rows]
 
+def delete_flashcard_sources_for_user(user_id):
+    cursor.execute("DELETE FROM flashcard WHERE user_id = ?", (user_id,))
+    cursor.execute("DELETE FROM flashcard_source WHERE user_id = ?", (user_id,))
+    conn.commit()
 
 # user = User(username="john_doe")
 # user_id = insert_user(user)

@@ -180,15 +180,27 @@
             </div>
             {% endfor %}
         </div>
-
-        <form method="POST" action="/clear-history">
-            <button type="submit" class="clear-history-btn">Clear All Flashcard History</button>
-        </form>
+            <button type="button" class="clear-history-btn">Clear All Flashcard History</button>
     </div>
 
     <script src="/static/global.js"></script>
 
     <script>
+        document.querySelector(".clear-history-btn").addEventListener("click", event=>{
+            const response = confirm ("are you sure you want to delete your flashcards?")
+            if (response) {
+                fetch("/clear-history", {
+                method: "DELETE",
+                
+            })
+                .then(response => {
+                    location.href = "/history"
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                })
+            }
+        })
     </script>
 
 </body>
