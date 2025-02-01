@@ -11,10 +11,12 @@ from db import (
     get_user,
     insert_flashcard,
     insert_flashcard_source,
-    delete_flashcard_sources_for_user
+    delete_flashcard_sources_for_user,
+    get_user_by_name_and_password
 )
 from dotenv import load_dotenv
-from flask import Flask, request, render_template, request_tearing_down, url_for
+from flask import Flask, jsonify, request, render_template, request_tearing_down, session, url_for
+
 
 user_id = "1b27d88b-73f8-48b4-9132-c447146ca172"
 
@@ -60,7 +62,10 @@ def save_flashcards(content, completion):
         insert_flashcard(flashcard)
 
 
+
 app = Flask(__name__)
+
+app.secret_key = "supersecretkey"
 
 
 @app.get("/")
@@ -185,6 +190,36 @@ def view_flashcards(flashcard_source_id):
         for flashcard in retrieved_flashcards
     ]
     return render_template("view_flashcards.html", flashcard_set=retrieved_flashcards)
+
+@app.post("/login")
+def login():
+    user_name = request.json.get("username")
+    password = request.json.get("password")
+
+    if not user_name or not password:
+        return jsonify({"error": "Missing username or password"}), 400
+
+    user = get_user_by_name_and_password(user_name, password)
+    
+    if user:
+        session["user"] = user.username 
+        return jsonify({"message": "Login successful", "username": user.username}), 200
+    else:
+        return jsonify({"error": "Invalid credentials"}), 401
+
+@app.get("/profile")
+def profile():
+    if "user" in session:
+        return jsonify({"message": "Welcome!", "username": session["user"]}), 200
+    else:
+        return jsonify({"error": "Not logged in"}), 401
+ 
+@app.get("/logout")
+def logout():
+    session.pop("user", None)  
+    return jsonify({"message": "Logged out successfully"}), 200
+
+
 
 
 if __name__ == "__main__":
