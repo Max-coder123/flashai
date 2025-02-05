@@ -108,12 +108,20 @@
 
 
     <div class="main-content" id="main-content">
-        <h1>flashcard generator</h1>
-        <p>paste in notes below</p>
+        <h1>Advanced AI Flashcard Generator</h1>
+        <h1 id="flashai-header">[FlashAI]</h1>
+        <h1></h1>
+        <p>Paste your notes to generate AI flashcards. Get results from GPT-4o instantly.</p>
+    
         <form id="completion-input">
-            <textarea name="question" placeholder="paste your text here..."></textarea>
-            <button type="submit" id="completion-input-submit">send</button>
+            <div class="flashcard-input-wrapper">
+              <div class="text-input-container">
+                <textarea name="question" placeholder="paste your text here..."></textarea>
+              </div>
+              <button type="submit" id="completion-input-submit" class="send-button">send</button>
+            </div>
         </form>
+          
 
         <div class="shuffle-button-container" id="buttonContainer">
             <div class="tooltip">
