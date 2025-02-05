@@ -55,7 +55,6 @@ def save_flashcards(content, completion):
         flashcard = Flashcard(
             question=flashcard["question"],
             answer=flashcard["answer"],
-            explanation=flashcard["explanation"],
             source_id=source_id,
             user_id=user_id,
         )
@@ -91,12 +90,10 @@ please return the following json structure:
         {{
             "question": "question 1 about the text", 
             "answer": "answer 1 for question 1",
-            "explanation": "explanation of answer 1"
         }},
         {{
             "question": "question 2 about the text", 
             "answer": "answer 2 for question 2",
-            "explanation": "explanation of answer 2"
         }}
     ]
 }}
@@ -114,7 +111,7 @@ def completion():
     # if not user_message:
 
     content = f"""
-generate flashcards for the following text:
+generate flashcards for the following text, giving an individual flashcard for each question/answer pair:
 
 '''
 
@@ -131,12 +128,10 @@ please return the following json structure:
         {{
             "question": "question 1 about the text", 
             "answer": "answer 1 for question 1",
-            "explanation": "explanation of answer 1"
         }},
         {{
             "question": "question 2 about the text", 
             "answer": "answer 2 for question 2",
-            "explanation": "explanation of answer 2"
         }}
     ]
 }}

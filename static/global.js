@@ -7,6 +7,19 @@ const authForm = document.getElementById('authForm'); // Added this
 
 let isLogin = true;
 
+document.addEventListener('DOMContentLoaded', function() {
+    const productsButton = document.getElementById('products-button');
+    const productsDropdown = document.getElementById('products-dropdown');
+
+    productsButton.addEventListener('click', function() {
+        if (productsDropdown.style.display === 'none' || productsDropdown.style.display === '') {
+            productsDropdown.style.display = 'block';
+        } else {
+            productsDropdown.style.display = 'none';
+        }
+    });
+});
+
 if (openModalBtn) {
     openModalBtn.addEventListener('click', () => {
         loginModal.style.display = 'flex';
