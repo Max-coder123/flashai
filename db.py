@@ -3,15 +3,16 @@ import uuid
 from datetime import datetime
 
 class User:
-    def __init__(self, id=None, username=None, created_at=None, updated_at=None):
+    def __init__(self, id=None, username=None, password=None, created_at=None, updated_at=None):
         self.id = id or str(uuid.uuid4())
         self.username = username
+        self.password = password
         self.created_at = created_at or datetime.now().isoformat()
         self.updated_at = updated_at or self.created_at
 
     @staticmethod
     def from_row(row):
-        return User(id=row[0], username=row[1], created_at=row[2], updated_at=row[3])
+        return User(id=row[0], username=row[1], created_at=row[2], updated_at=row[3], password=row[4])
 
 class FlashcardSource:
     def __init__(self, id=None, content=None, user_id=None, created_at=None, updated_at=None):
@@ -48,6 +49,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS user (
     id TEXT PRIMARY KEY,
     username TEXT,
+    password TEXT,
     created_at TEXT,
     updated_at TEXT
 )
@@ -79,11 +81,13 @@ CREATE TABLE IF NOT EXISTS flashcard (
 )
 """)
 
+
+
 def insert_user(user: User):
     cursor.execute("""
-        INSERT INTO user (id, username, created_at, updated_at)
-        VALUES (?, ?, ?, ?)
-    """, (user.id, user.username, user.created_at, user.updated_at))
+        INSERT INTO user (id, username, password, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?)
+    """, (user.id, user.username, user.password, user.created_at, user.updated_at))
     conn.commit()
     return user.id
 
@@ -107,6 +111,11 @@ def get_user(user_id):
     row = cursor.fetchone()
     return User.from_row(row) if row else None
 
+def get_user_by_name_and_password(username, password):
+    cursor.execute("SELECT * FROM user WHERE username = ? and password = ?", (username, password))
+    row = cursor.fetchone()
+    return User.from_row(row) if row else None
+
 def get_flashcard_sources_for_user(user_id):
     cursor.execute("SELECT * FROM flashcard_source WHERE user_id = ?", (user_id,))
     rows = cursor.fetchall()
@@ -117,6 +126,10 @@ def get_flashcards_for_source(source_id):
     rows = cursor.fetchall()
     return [Flashcard.from_row(row) for row in rows]
 
+def delete_flashcard_sources_for_user(user_id):
+    cursor.execute("DELETE FROM flashcard WHERE user_id = ?", (user_id,))
+    cursor.execute("DELETE FROM flashcard_source WHERE user_id = ?", (user_id,))
+    conn.commit()
 
 # user = User(username="john_doe")
 # user_id = insert_user(user)

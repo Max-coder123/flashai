@@ -22,7 +22,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-left: 20px;
+    padding-left: 0px;
+    margin-left: 0;
     padding-right: 20px;
     position: fixed;
     top: 0;
@@ -33,7 +34,9 @@ body {
 
 .top-taskbar img {
     height: 80px;
-    margin-right: 20px;
+    margin-right: 15px;
+    margin-left: -9px;
+    transform: translateY(-4px);
     filter: brightness(0) saturate(100%) invert(17%) sepia(86%) saturate(1226%) hue-rotate(179deg) brightness(90%) contrast(92%);
 }
 
@@ -153,6 +156,44 @@ html, body {
     padding: 0;
     display: block;
     max-width: 100%;
+}
+
+.products-button {
+    background-color: transparent;
+    border: none;                 
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #031738;               
+    cursor: pointer;
+    margin-left: 5px;            
+    display: inline-flex;          
+    align-items: center;           
+}
+
+.products-button:hover {
+    color: #ffffff;         
+    background-color: #031738; 
+}
+
+.dropdown-arrow {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.products-dropdown {
+    display: none;                 
+    position: absolute;          
+    top: 60px;                     
+    left: 200px;                    
+    width: 600px;
+    height: 600px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;             
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000;                 
 }
 
 .main-content {
