@@ -28,18 +28,18 @@
 
         <div id="feedback-dropdown" class="feedback-dropdown">
             <form id="feedback-form">
-              <label for="feedback-name">Name</label>
-              <input type="text" id="feedback-name" name="name" placeholder="Enter your name" required>
-          
-              <label for="feedback-subject">Subject</label>
-              <input type="text" id="feedback-subject" name="subject" placeholder="Enter the subject" required>
-          
-              <label for="feedback-message">Message</label>
-              <textarea id="feedback-message" name="message" placeholder="Enter your feedback" required></textarea>
-          
-              <button type="submit" class="feedback-submit-button">Send Feedback</button>
+                <label for="feedback-name">Name</label>
+                <input type="text" id="feedback-name" name="name" placeholder="Enter your name" required>
+
+                <label for="feedback-subject">Subject</label>
+                <input type="text" id="feedback-subject" name="subject" placeholder="Enter the subject" required>
+
+                <label for="feedback-message">Message</label>
+                <textarea id="feedback-message" name="message" placeholder="Enter your feedback" required></textarea>
+
+                <button type="submit" class="feedback-submit-button">Send Feedback</button>
             </form>
-          </div>
+        </div>
 
         <div class="login-container">
             <button id="open-modal" class="login-button">
@@ -191,6 +191,50 @@
     <script>
 
 
+        document.addEventListener('DOMContentLoaded', function () {
+            const feedbackForm = document.getElementById('feedback-form');
+
+            if (feedbackForm) {
+                feedbackForm.addEventListener('submit', function (e) {
+                    e.preventDefault(); // Prevent default form submission
+
+                    // Collect the form data
+                    const name = document.getElementById('feedback-name').value;
+                    const subject = document.getElementById('feedback-subject').value;
+                    const message = document.getElementById('feedback-message').value;
+
+                    const data = { name, subject, message };
+
+                    console.log("Submitting feedback:", data); // Debug log
+
+                    // Send the feedback data to the backend endpoint
+                    fetch('/api/feedback', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error("Network response was not ok");
+                            }
+                            return response.json();
+                        })
+                        .then(result => {
+                            console.log("Feedback submission result:", result); // Debug log
+                            alert('Feedback sent successfully!');
+                            feedbackForm.reset(); // Clear the form fields
+                        })
+                        .catch(error => {
+                            console.error("Error submitting feedback:", error);
+                            alert('Error sending feedback. Please try again later.');
+                        });
+                });
+            } else {
+                console.error("Feedback form not found.");
+            }
+        });
 
 
         document.getElementById('toggle-taskbar').addEventListener('click', function () {

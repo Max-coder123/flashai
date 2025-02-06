@@ -15,12 +15,14 @@ from db import (
     get_user_by_name_and_password
 )
 from dotenv import load_dotenv
+from flask_mail import Mail, Message
 from flask import Flask, jsonify, request, render_template, request_tearing_down, session, url_for
+
 
 
 user_id = "1b27d88b-73f8-48b4-9132-c447146ca172"
 
-load_dotenv()  # take environment variables from .env.
+load_dotenv()  
 if not os.environ.get("OPENAI_API_KEY"):
     print("OPENAI_API_KEY not found in env")
     sys.exit(1)
@@ -64,7 +66,18 @@ def save_flashcards(content, completion):
 
 app = Flask(__name__)
 
+app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+app.config['MAIL_PORT'] = int(os.environ.get('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.environ.get('MAIL_USE_TLS', 'True') == 'True'
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+app.config['MAIL_DEFAULT_SENDER'] = os.environ.get('MAIL_DEFAULT_SENDER', os.environ.get('MAIL_USERNAME'))
+
+mail = Mail(app)
+
+
 app.secret_key = "supersecretkey"
+
 
 
 @app.get("/")
@@ -215,6 +228,29 @@ def logout():
     return jsonify({"message": "Logged out successfully"}), 200
 
 
+@app.route('/api/feedback', methods=['POST'])
+def feedback():
+    print("Feedback endpoint triggered")
+    data = request.get_json()
+    name = data.get('name')
+    subject = data.get('subject')
+    message = data.get('message')
+
+    if not all([name, subject, message]):
+        return jsonify({'error': 'Missing fields. Please provide name, subject, and message.'}), 400
+
+    msg = Message(
+        subject=subject,
+        recipients=['maxx68329@gmail.com'], 
+        body=f"Feedback received from {name}:\n\n{message}"
+    )
+
+    try:
+        mail.send(msg)
+        return jsonify({'status': 'success', 'message': 'Feedback sent successfully!'}), 200
+    except Exception as e:
+        print("Error sending email:", e)
+        return jsonify({'error': 'Error sending feedback. Please try again later.'}), 500
 
 
 if __name__ == "__main__":
