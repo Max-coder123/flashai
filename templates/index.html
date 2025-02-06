@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="icon" href="https://fav.farm/⚙️" />
     <link rel="stylesheet" href="static/index.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
 </head>
 
 <body>
@@ -140,6 +141,15 @@
                 <div class="text-input-container">
                     <textarea name="question" placeholder="paste your text here..."></textarea>
                 </div>
+                <input type="file" id="upload-input" style="display: none;" multiple>
+                <button type="button" id="upload-button" class="upload-button">
+                    <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+                      <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="#031738" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                      <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="#031738" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                    <span>upload</span>
+                  </button>
+                  
                 <button type="button" id="completion-input-clear" class="clear-button">clear</button>
                 <button type="submit" id="completion-input-submit" class="send-button">send</button>
             </div>
@@ -196,18 +206,16 @@
 
             if (feedbackForm) {
                 feedbackForm.addEventListener('submit', function (e) {
-                    e.preventDefault(); // Prevent default form submission
+                    e.preventDefault();
 
-                    // Collect the form data
                     const name = document.getElementById('feedback-name').value;
                     const subject = document.getElementById('feedback-subject').value;
                     const message = document.getElementById('feedback-message').value;
 
                     const data = { name, subject, message };
 
-                    console.log("Submitting feedback:", data); // Debug log
+                    console.log("Submitting feedback:", data);
 
-                    // Send the feedback data to the backend endpoint
                     fetch('/api/feedback', {
                         method: 'POST',
                         headers: {
@@ -222,9 +230,9 @@
                             return response.json();
                         })
                         .then(result => {
-                            console.log("Feedback submission result:", result); // Debug log
+                            console.log("Feedback submission result:", result);
                             alert('Feedback sent successfully!');
-                            feedbackForm.reset(); // Clear the form fields
+                            feedbackForm.reset();
                         })
                         .catch(error => {
                             console.error("Error submitting feedback:", error);
@@ -235,6 +243,66 @@
                 console.error("Feedback form not found.");
             }
         });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const uploadInput = document.getElementById('upload-input');
+            const textarea = document.querySelector("textarea[name='question']");
+
+            if (uploadInput && textarea) {
+                uploadInput.addEventListener('change', function (event) {
+                    const file = event.target.files[0];
+                    if (file && file.type === 'application/pdf') {
+                        const fileReader = new FileReader();
+                        fileReader.onload = function () {
+                            const typedarray = new Uint8Array(this.result);
+
+                            pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+                                let maxPages = pdf.numPages;
+                                let pagePromises = [];
+
+                                for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
+                                    let pagePromise = pdf.getPage(pageNum).then(page => {
+                                        return page.getTextContent().then(textContent => {
+                                            return textContent.items.map(item => item.str).join(' ');
+                                        });
+                                    });
+                                    pagePromises.push(pagePromise);
+                                }
+
+                                Promise.all(pagePromises).then(pagesText => {
+                                    const fullText = pagesText.join('\n\n');
+                                    textarea.value = fullText;
+                                }).finally(() => {
+                                    setTimeout(() => {
+                                        uploadInput.value = '';
+                                    }, 50); 
+                                });
+
+                            }).catch(error => {
+                                console.error('Error loading PDF: ', error);
+                            });
+                        };
+                        fileReader.readAsArrayBuffer(file);
+                    }
+                });
+            } else {
+                console.error("Upload input or textarea not found.");
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const uploadButton = document.getElementById('upload-button');
+            const uploadInput = document.getElementById('upload-input');
+
+            if (uploadButton && uploadInput) {
+                uploadButton.addEventListener('click', function () {
+                    uploadInput.click();
+                });
+            } else {
+                console.error("Upload button or input not found.");
+            }
+        });
+
 
 
         document.getElementById('toggle-taskbar').addEventListener('click', function () {
