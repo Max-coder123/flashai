@@ -19,9 +19,28 @@
         <button id="products-button" class="products-button">
             Products <span class="dropdown-arrow">&#9662;</span>
         </button>
+        <button id="feedback-button" class="feedback-button">
+            Feedback <span class="dropdwon-arrow">&#9662;</span>
+        </button>
         <div id="products-dropdown" class="products-dropdown">
             <p>Placeholder for products. Adjust later.</p>
         </div>
+
+        <div id="feedback-dropdown" class="feedback-dropdown">
+            <form id="feedback-form">
+              <label for="feedback-name">Name</label>
+              <input type="text" id="feedback-name" name="name" placeholder="Enter your name" required>
+          
+              <label for="feedback-subject">Subject</label>
+              <input type="text" id="feedback-subject" name="subject" placeholder="Enter the subject" required>
+          
+              <label for="feedback-message">Message</label>
+              <textarea id="feedback-message" name="message" placeholder="Enter your feedback" required></textarea>
+          
+              <button type="submit" class="feedback-submit-button">Send Feedback</button>
+            </form>
+          </div>
+
         <div class="login-container">
             <button id="open-modal" class="login-button">
                 <span>login</span>
@@ -32,6 +51,7 @@
                     d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0a8.949 8.949 0 0 0 4.951-1.488A3.987 3.987 0 0 0 13 16h-2a3.987 3.987 0 0 0-3.951 3.512A8.948 8.948 0 0 0 12 21Zm3-11a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
             </svg>
         </div>
+
     </div>
 
     <div class="modal" id="login-modal">
@@ -52,6 +72,8 @@
                 </div>
                 <span id="toggleForm">Don't have an account? <span class="highlight">Sign up</span></span>
             </form>
+
+
         </div>
     </div>
 
@@ -112,16 +134,17 @@
         <h1 id="flashai-header">[FlashAI]</h1>
         <h1></h1>
         <p>Paste your notes to generate AI flashcards. Get results from GPT-4o instantly.</p>
-    
+
         <form id="completion-input">
             <div class="flashcard-input-wrapper">
-              <div class="text-input-container">
-                <textarea name="question" placeholder="paste your text here..."></textarea>
-              </div>
-              <button type="submit" id="completion-input-submit" class="send-button">send</button>
+                <div class="text-input-container">
+                    <textarea name="question" placeholder="paste your text here..."></textarea>
+                </div>
+                <button type="button" id="completion-input-clear" class="clear-button">clear</button>
+                <button type="submit" id="completion-input-submit" class="send-button">send</button>
             </div>
         </form>
-          
+
 
         <div class="shuffle-button-container" id="buttonContainer">
             <div class="tooltip">
@@ -169,6 +192,7 @@
 
 
 
+
         document.getElementById('toggle-taskbar').addEventListener('click', function () {
             const taskbar = document.getElementById('taskbar');
             const mainContent = document.getElementById('main-content');
@@ -181,7 +205,18 @@
         const nextButton = document.getElementById("nextCard");
         const completionForm = document.querySelector("#completion-input")
         const submitButton = completionForm.querySelector("button[type='submit']")
+        const clearButton = document.getElementById("completion-input-clear");
         let activeCardIndex = 0;
+
+
+        clearButton.addEventListener("click", function (e) {
+            e.preventDefault();
+            const textarea = document.querySelector("textarea[name='question']");
+            if (textarea) {
+                textarea.value = "";
+            }
+        });
+
 
         completionForm.addEventListener("submit", (event) => {
             event.preventDefault();

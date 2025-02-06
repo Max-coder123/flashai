@@ -8,6 +8,21 @@ const authForm = document.getElementById('authForm'); // Added this
 let isLogin = true;
 
 document.addEventListener('DOMContentLoaded', function() {
+    const feedbackButton = document.getElementById('feedback-button');
+    const feedbackDropdown = document.getElementById('feedback-dropdown');
+
+    feedbackButton.addEventListener('click', function() {
+        if (feedbackDropdown.style.display === 'none' || feedbackDropdown.style.display === '') {
+            feedbackDropdown.style.display = 'block';
+        }
+        else {
+            feedbackDropdown.style.display = 'none';
+        }
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
     const productsButton = document.getElementById('products-button');
     const productsDropdown = document.getElementById('products-dropdown');
 

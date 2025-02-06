@@ -223,7 +223,7 @@ input[type="submit"]:disabled {
 
 .spinner {
     border: 3px solid #f3f3f3; 
-    border-top: 3px solid #3498db; 
+    border-top: 3px solid #031738; 
     border-radius: 50%;
     width: 16px;
     height: 16px;
@@ -459,6 +459,92 @@ input[type="submit"]:disabled {
     z-index: 1000;                 
 }
 
+.feedback-button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: #031738;
+    cursor: pointer;
+    margin-left: 0; 
+    display: inline-flex;
+    align-items: center;
+}
+
+.feedback-button:hover {
+    color: #ffffff;
+    background-color: #031738;
+}
+
+
+/* Feedback dropdown container styling */
+.feedback-dropdown {
+    display: none;                /* Hidden by default; will be shown via JS later */
+    position: absolute;           
+    top: 60px;                    /* Adjust this value to position vertically as needed */
+    right: 20px;                  /* Adjust this value to position horizontally as needed */
+    width: 400px;                 /* Width of the feedback box */
+    background-color: #fff;       
+    border: 1px solid #ccc;       
+    border-radius: 8px;           
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;                
+    z-index: 1000;                /* Ensures it appears above other elements */
+  }
+  
+  /* Feedback form layout */
+  #feedback-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Labels styling */
+  #feedback-form label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-family: "Montserrat", sans-serif;
+    color: #031738;
+    font-weight: 600;
+  }
+  
+  /* Input fields and textarea styling */
+  #feedback-form input,
+  #feedback-form textarea {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Specific styling for textarea */
+  #feedback-form textarea {
+    resize: vertical; /* Allow vertical resize only, or change to 'none' if you want to disable resizing */
+    height: 100px;     /* Sets an initial height */
+  }
+  
+  /* Submit button styling for the feedback form */
+  .feedback-submit-button {
+    padding: 12px 20px;
+    background-color: #031738;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease;
+  }
+  
+  .feedback-submit-button:hover {
+    background-color: #000;
+  }
+  
+
+  
 
 .login-container {
     display: flex;
@@ -623,7 +709,7 @@ input[type="submit"]:disabled {
   .send-button {
     position: absolute;
     left: 900px;
-    top: 40px;                
+    top: 33px;                
     padding: 12px 20px;
     background-color: #031738;
     color: #ffffff;
@@ -638,6 +724,26 @@ input[type="submit"]:disabled {
   .send-button:hover {
     background-color: #000;       
   }
+
+  .clear-button {
+    position: absolute;
+    right: 120px;  
+    bottom: 20px;
+    padding: 12px 20px;
+    background-color: #031738;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+    background-color: #000;
+}
+
   
 
 #toggleForm {
