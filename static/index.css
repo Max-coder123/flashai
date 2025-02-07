@@ -85,8 +85,8 @@ body {
 }
 
 #flashai-header {
-    font-size: 1.5em; 
-    color: grey;     
+    font-size: 1.5em;
+    color: grey;
 }
 
 .main-content {
@@ -222,8 +222,8 @@ input[type="submit"]:disabled {
 }
 
 .spinner {
-    border: 3px solid #f3f3f3; 
-    border-top: 3px solid #031738; 
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #031738;
     border-radius: 50%;
     width: 16px;
     height: 16px;
@@ -233,8 +233,13 @@ input[type="submit"]:disabled {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .flashcard-container {
@@ -423,20 +428,20 @@ input[type="submit"]:disabled {
 
 .products-button {
     background-color: transparent;
-    border: none;                 
+    border: none;
     font-size: 18px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
-    color: #031738;               
+    color: #031738;
     cursor: pointer;
-    margin-left: 5px;            
-    display: inline-flex;          
-    align-items: center;           
+    margin-left: 5px;
+    display: inline-flex;
+    align-items: center;
 }
 
 .products-button:hover {
-    color: #ffffff;         
-    background-color: #031738; 
+    color: #ffffff;
+    background-color: #031738;
 }
 
 .dropdown-arrow {
@@ -445,18 +450,18 @@ input[type="submit"]:disabled {
 }
 
 .products-dropdown {
-    display: none;                 
-    position: absolute;          
-    top: 60px;                     
-    left: 200px;                    
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 200px;
     width: 600px;
     height: 600px;
     background-color: #fff;
     border: 1px solid #ccc;
-    border-radius: 8px;             
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    z-index: 1000;                 
+    z-index: 1000;
 }
 
 .feedback-button {
@@ -467,7 +472,7 @@ input[type="submit"]:disabled {
     font-weight: 600;
     color: #031738;
     cursor: pointer;
-    margin-left: 0; 
+    margin-left: 0;
     display: inline-flex;
     align-items: center;
 }
@@ -478,39 +483,35 @@ input[type="submit"]:disabled {
 }
 
 
-/* Feedback dropdown container styling */
 .feedback-dropdown {
-    display: none;                /* Hidden by default; will be shown via JS later */
-    position: absolute;           
-    top: 60px;                    /* Adjust this value to position vertically as needed */
-    right: 20px;                  /* Adjust this value to position horizontally as needed */
-    width: 400px;                 /* Width of the feedback box */
-    background-color: #fff;       
-    border: 1px solid #ccc;       
-    border-radius: 8px;           
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    width: 400px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;                
-    z-index: 1000;                /* Ensures it appears above other elements */
-  }
-  
-  /* Feedback form layout */
-  #feedback-form {
+    padding: 20px;
+    z-index: 1000;
+}
+
+#feedback-form {
     display: flex;
     flex-direction: column;
-  }
-  
-  /* Labels styling */
-  #feedback-form label {
+}
+
+#feedback-form label {
     margin-top: 10px;
     margin-bottom: 5px;
     font-family: "Montserrat", sans-serif;
     color: #031738;
     font-weight: 600;
-  }
-  
-  /* Input fields and textarea styling */
-  #feedback-form input,
-  #feedback-form textarea {
+}
+
+#feedback-form input,
+#feedback-form textarea {
     padding: 10px;
     font-size: 1em;
     border: 1px solid #ccc;
@@ -518,16 +519,14 @@ input[type="submit"]:disabled {
     margin-bottom: 10px;
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
-  }
-  
-  /* Specific styling for textarea */
-  #feedback-form textarea {
-    resize: vertical; /* Allow vertical resize only, or change to 'none' if you want to disable resizing */
-    height: 100px;     /* Sets an initial height */
-  }
-  
-  /* Submit button styling for the feedback form */
-  .feedback-submit-button {
+}
+
+#feedback-form textarea {
+    resize: vertical;
+    height: 100px;
+}
+
+.feedback-submit-button {
     padding: 12px 20px;
     background-color: #031738;
     color: #ffffff;
@@ -537,14 +536,14 @@ input[type="submit"]:disabled {
     font-size: 1.1em;
     font-family: "Montserrat", sans-serif;
     transition: background-color 0.3s ease;
-  }
-  
-  .feedback-submit-button:hover {
-    background-color: #000;
-  }
-  
+}
 
-  
+.feedback-submit-button:hover {
+    background-color: #000;
+}
+
+
+
 
 .login-container {
     display: flex;
@@ -635,37 +634,37 @@ input[type="submit"]:disabled {
 }
 
 .flashcard-input-wrapper {
-    position: relative;             
+    position: relative;
     width: 100%;
-    max-width: 1000px;               
-    margin: 20px auto;              
-    background-color: #f9f9f9;        
-    border-radius: 14px;            
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 14px;
     padding: 0;
-    padding-bottom: 60px;           
+    padding-bottom: 60px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     height: 400px;
     border: 0.25px solid grey;
-    
-  }
-  
-  
-  .text-input-container {
+
+}
+
+
+.text-input-container {
     position: relative;
     max-width: 1000px;
     height: 300px;
     width: 100%;
-    background-color: #fff;         
-    border-radius: 14px; 
-    border: 5px ;          
-    overflow: hidden;   
-    z-index: 1; 
-    border: 1px solid #ccc;       
+    background-color: #fff;
+    border-radius: 14px;
+    border: 5px;
+    overflow: hidden;
+    z-index: 1;
+    border: 1px solid #ccc;
     padding-top: 10px;
-    padding-bottom: 50px;    
-  }
-  
-  .text-input-container textarea {
+    padding-bottom: 50px;
+}
+
+.text-input-container textarea {
     width: 100%;
     height: 100%;
     border: none;
@@ -675,15 +674,15 @@ input[type="submit"]:disabled {
     font-family: "Montserrat", sans-serif;
     box-sizing: border-box;
     border-radius: 0;
-  }
-  
-  .text-input-container::before {
+}
+
+.text-input-container::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 10px;                 
+    height: 10px;
     background-color: #031738;
 }
 
@@ -693,41 +692,41 @@ input[type="submit"]:disabled {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50px;               
+    height: 50px;
     background-color: #031738;
 }
-  
-  .text-input-container::before {
-    top: 0;
-  }
-  
-  .text-input-container::after {
-    bottom: 0;
-  }
-  
 
-  .send-button {
+.text-input-container::before {
+    top: 0;
+}
+
+.text-input-container::after {
+    bottom: 0;
+}
+
+
+.send-button {
     position: absolute;
     left: 900px;
-    top: 33px;                
+    top: 33px;
     padding: 12px 20px;
     background-color: #031738;
     color: #ffffff;
     border: none;
-    border-radius: 12px;            
+    border-radius: 12px;
     cursor: pointer;
     font-size: 1.1em;
     font-family: "Montserrat", sans-serif;
     transition: background-color 0.3s ease;
-  }
-  
-  .send-button:hover {
-    background-color: #000;       
-  }
+}
 
-  .clear-button {
+.send-button:hover {
+    background-color: #000;
+}
+
+.clear-button {
     position: absolute;
-    right: 120px;  
+    right: 120px;
     bottom: 20px;
     padding: 12px 20px;
     background-color: #031738;
@@ -773,7 +772,40 @@ input[type="submit"]:disabled {
     stroke: #ffffff;
 }
 
+.upload-button .tooltiptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #031738;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
 
+.upload-button .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #031738 transparent;
+}
+
+
+
+.upload-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
 
 
 #toggleForm {
@@ -788,7 +820,7 @@ input[type="submit"]:disabled {
 }
 
 .user-icon {
-    fill:#031738;
+    fill: #031738;
     width: 24px;
     height: 24px;
     cursor: pointer;

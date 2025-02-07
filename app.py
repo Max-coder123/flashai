@@ -86,7 +86,7 @@ def index():
     if not user_message:
         return render_template("index.html", completion={"data": []})
     content = f"""
-generate flashcards for the following text:
+generate a flashcard for every key term and question from the text
 
 '''
 

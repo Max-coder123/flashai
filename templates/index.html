@@ -143,13 +143,18 @@
                 </div>
                 <input type="file" id="upload-input" style="display: none;" multiple>
                 <button type="button" id="upload-button" class="upload-button">
-                    <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
-                      <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="#031738" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                      <path d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073" stroke="#031738" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
+                        <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="#031738" stroke-width="1.5"
+                            stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path
+                            d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073"
+                            stroke="#031738" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                     <span>upload</span>
-                  </button>
-                  
+                    <span class="tooltiptext">supported formats: pdf, txt</span>
+                </button>
+
                 <button type="button" id="completion-input-clear" class="clear-button">clear</button>
                 <button type="submit" id="completion-input-submit" class="send-button">send</button>
             </div>
@@ -251,44 +256,52 @@
             if (uploadInput && textarea) {
                 uploadInput.addEventListener('change', function (event) {
                     const file = event.target.files[0];
-                    if (file && file.type === 'application/pdf') {
-                        const fileReader = new FileReader();
-                        fileReader.onload = function () {
-                            const typedarray = new Uint8Array(this.result);
-
-                            pdfjsLib.getDocument(typedarray).promise.then(pdf => {
-                                let maxPages = pdf.numPages;
-                                let pagePromises = [];
-
-                                for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
-                                    let pagePromise = pdf.getPage(pageNum).then(page => {
-                                        return page.getTextContent().then(textContent => {
-                                            return textContent.items.map(item => item.str).join(' ');
+                    if (file) {
+                        if (file.type === 'application/pdf') {
+                            const fileReader = new FileReader();
+                            fileReader.onload = function () {
+                                const typedarray = new Uint8Array(this.result);
+                                pdfjsLib.getDocument(typedarray).promise.then(pdf => {
+                                    let maxPages = pdf.numPages;
+                                    let pagePromises = [];
+                                    for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
+                                        let pagePromise = pdf.getPage(pageNum).then(page => {
+                                            return page.getTextContent().then(textContent => {
+                                                return textContent.items.map(item => item.str).join(' ');
+                                            });
                                         });
+                                        pagePromises.push(pagePromise);
+                                    }
+                                    Promise.all(pagePromises).then(pagesText => {
+                                        const fullText = pagesText.join('\n\n');
+                                        textarea.value = fullText;
+                                    }).catch(error => {
+                                        console.error('Error processing PDF:', error);
                                     });
-                                    pagePromises.push(pagePromise);
-                                }
-
-                                Promise.all(pagePromises).then(pagesText => {
-                                    const fullText = pagesText.join('\n\n');
-                                    textarea.value = fullText;
-                                }).finally(() => {
-                                    setTimeout(() => {
-                                        uploadInput.value = '';
-                                    }, 50); 
+                                }).catch(error => {
+                                    console.error('Error loading PDF:', error);
                                 });
-
-                            }).catch(error => {
-                                console.error('Error loading PDF: ', error);
-                            });
-                        };
-                        fileReader.readAsArrayBuffer(file);
+                            };
+                            fileReader.readAsArrayBuffer(file);
+                        }
+                        else if (file.type === 'text/plain') {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                const text = e.target.result;
+                                textarea.value = text;
+                            };
+                            reader.readAsText(file);
+                        }
+                        else {
+                            console.error('Unsupported file type:', file.type);
+                        }
                     }
                 });
             } else {
                 console.error("Upload input or textarea not found.");
             }
         });
+
 
         document.addEventListener('DOMContentLoaded', function () {
             const uploadButton = document.getElementById('upload-button');
