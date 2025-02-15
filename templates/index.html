@@ -11,394 +11,48 @@
     <link rel="stylesheet" href="static/global.css">
     <link rel="stylesheet" href="static/index.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
- 
+
 </head>
 
 <body>
+    <h1>FlashAI Landing Page</h1>
 
-    {% include 'partials/_nav.html' %}
-    <div class="main-content" id="main-content">
-        <h1>Advanced AI Flashcard Generator</h1>
-        <h2 id="flashai-header">[FlashAI]</h2>
-        <p>Paste your notes to generate AI flashcards. Get results from GPT-4o instantly.</p>
-
-        <form id="completion-input">
-            <div class="flashcard-input-wrapper">
-                <div class="text-input-container">
-                    <textarea name="question" placeholder="paste your text here..."></textarea>
-                </div>
-                <input type="file" id="upload-input" style="display: none;" multiple>
-                <button type="button" id="upload-button" class="upload-button">
-                    <svg width="24px" height="24px" stroke-width="1.5" viewBox="0 0 24 24" fill="none"
-                        xmlns="http://www.w3.org/2000/svg" style="margin-right: 8px;">
-                        <path d="M12 22V13M12 13L15.5 16.5M12 13L8.5 16.5" stroke="#031738" stroke-width="1.5"
-                            stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path
-                            d="M20 17.6073C21.4937 17.0221 23 15.6889 23 13C23 9 19.6667 8 18 8C18 6 18 2 12 2C6 2 6 6 6 8C4.33333 8 1 9 1 13C1 15.6889 2.50628 17.0221 4 17.6073"
-                            stroke="#031738" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
-                    <span>upload</span>
-                    <span class="tooltiptext">supported formats: pdf, txt</span>
-                </button>
-
-                <button type="button" id="completion-input-clear" class="clear-button">clear</button>
-                <button type="submit" id="completion-input-submit" class="send-button">send</button>
-            </div>
+    <div>
+        <form>
+            <label> username
+                <input type="text" id="username">
+            </label>
+            <label> password
+                <input type="password" id="password">
+            </label>
+            <button type="submit">login</button>
         </form>
 
-
-        <div class="shuffle-button-container" id="buttonContainer">
-            <div class="tooltip">
-                <button class="shuffle-icon-button" id="shuffleButton">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M3.75 8l5.75 4-5.75 4V8zm7.75 0v8h8V8h-8z" />
-                    </svg>
-                </button>
-                <span class="tooltiptext">Shuffle Cards</span>
-            </div>
-
-            <div class="tooltip">
-                <button class="flip-icon-button" id="flipAllButton">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            d="M15.88 3.79L14.46 5.21c1.95 1.77 3.04 4.23 3.04 6.79s-1.09 5.02-3.04 6.79l1.42 1.42C17.88 17.89 19.2 14.55 19.2 12s-1.32-5.89-3.32-8.21zm-9.76 0C4.12 6.11 2.8 9.45 2.8 12s1.32 5.89 3.32 8.21l1.42-1.42C5.59 17.02 4.5 14.55 4.5 12s1.09-5.02 3.04-6.79L6.12 3.79z" />
-                    </svg>
-                </button>
-                <span class="tooltiptext">Flip Cards</span>
-            </div>
-        </div>
-
-        <div class="flashcard-container">
-            <button id="previousCard" class="previous-card" style="display: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                </svg>
-            </button>
-
-            <div id="completion"></div>
-
-            <button id="nextCard" class="next-card" style="display: none;">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-                </svg>
-            </button>
-        </div>
-
-        <div class="card-index"></div>
     </div>
 
-    <script src="/static/global.js"></script>
-
     <script>
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const feedbackForm = document.getElementById('feedback-form');
-
-            if (feedbackForm) {
-                feedbackForm.addEventListener('submit', function (e) {
-                    e.preventDefault();
-
-                    const name = document.getElementById('feedback-name').value;
-                    const subject = document.getElementById('feedback-subject').value;
-                    const message = document.getElementById('feedback-message').value;
-
-                    const data = { name, subject, message };
-
-                    console.log("Submitting feedback:", data);
-
-                    fetch('/api/feedback', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    })
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error("Network response was not ok");
-                            }
-                            return response.json();
-                        })
-                        .then(result => {
-                            console.log("Feedback submission result:", result);
-                            alert('Feedback sent successfully!');
-                            feedbackForm.reset();
-                        })
-                        .catch(error => {
-                            console.error("Error submitting feedback:", error);
-                            alert('Error sending feedback. Please try again later.');
-                        });
-                });
-            } else {
-                console.error("Feedback form not found.");
-            }
-        });
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const uploadInput = document.getElementById('upload-input');
-            const textarea = document.querySelector("textarea[name='question']");
-
-            if (uploadInput && textarea) {
-                uploadInput.addEventListener('change', function (event) {
-                    const file = event.target.files[0];
-                    if (file) {
-                        if (file.type === 'application/pdf') {
-                            const fileReader = new FileReader();
-                            fileReader.onload = function () {
-                                const typedarray = new Uint8Array(this.result);
-                                pdfjsLib.getDocument(typedarray).promise.then(pdf => {
-                                    let maxPages = pdf.numPages;
-                                    let pagePromises = [];
-                                    for (let pageNum = 1; pageNum <= maxPages; pageNum++) {
-                                        let pagePromise = pdf.getPage(pageNum).then(page => {
-                                            return page.getTextContent().then(textContent => {
-                                                return textContent.items.map(item => item.str).join(' ');
-                                            });
-                                        });
-                                        pagePromises.push(pagePromise);
-                                    }
-                                    Promise.all(pagePromises).then(pagesText => {
-                                        const fullText = pagesText.join('\n\n');
-                                        textarea.value = fullText;
-                                    }).catch(error => {
-                                        console.error('Error processing PDF:', error);
-                                    });
-                                }).catch(error => {
-                                    console.error('Error loading PDF:', error);
-                                });
-                            };
-                            fileReader.readAsArrayBuffer(file);
-                        }
-                        else if (file.type === 'text/plain') {
-                            const reader = new FileReader();
-                            reader.onload = function (e) {
-                                const text = e.target.result;
-                                textarea.value = text;
-                            };
-                            reader.readAsText(file);
-                        }
-                        else {
-                            console.error('Unsupported file type:', file.type);
-                        }
-                    }
-                });
-            } else {
-                console.error("Upload input or textarea not found.");
-            }
-        });
-
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const uploadButton = document.getElementById('upload-button');
-            const uploadInput = document.getElementById('upload-input');
-
-            if (uploadButton && uploadInput) {
-                uploadButton.addEventListener('click', function () {
-                    uploadInput.click();
-                });
-            } else {
-                console.error("Upload button or input not found.");
-            }
-        });
-
-
-
-        document.getElementById('toggle-taskbar').addEventListener('click', function () {
-            const taskbar = document.getElementById('taskbar');
-            const mainContent = document.getElementById('main-content');
-            taskbar.classList.toggle('minimized');
-            mainContent.classList.toggle('expanded');
-        });
-
-        const completionEl = document.getElementById("completion");
-        const prevButton = document.getElementById("previousCard");
-        const nextButton = document.getElementById("nextCard");
-        const completionForm = document.querySelector("#completion-input")
-        const submitButton = completionForm.querySelector("button[type='submit']")
-        const clearButton = document.getElementById("completion-input-clear");
-        let activeCardIndex = 0;
-
-
-        clearButton.addEventListener("click", function (e) {
-            e.preventDefault();
-            const textarea = document.querySelector("textarea[name='question']");
-            if (textarea) {
-                textarea.value = "";
-            }
-        });
-
-
-        completionForm.addEventListener("submit", (event) => {
-            event.preventDefault();
-            const userInput = document.querySelector("textarea[name='question']").value;
-
-            submitButton.innerHTML = '<span class="spinner"></span>';
-            submitButton.disabled = true;
-
-            fetch("/api/completion", {
+        const username = document.querySelector("#username")
+        const password = document.querySelector("#password")
+        const form = document.querySelector("form")
+        form.addEventListener("submit", event => {
+            event.preventDefault()
+            fetch("login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ question: userInput })
+                body: JSON.stringify({
+                    username: username.value,
+                    password: password.value
+                })
             })
-                .then(response => {
-                    return response.json();
-                })
+                .then(response => response.json())
                 .then(data => {
-                    flashcards = data.data;
-                    renderFlashcards();
-                    updateCardIndex();
+                    console.log(data)
+                    window.location = "cards"
                 })
-                .catch(error => {
-                    console.error('Error:', error);
-                })
-                .finally(() => {
-                    submitButton.innerHTML = 'send';
-                    submitButton.disabled = false;
-                });
+                .catch(error => console.error("Error:", error));
 
-        });
-
-        let flashcards = [];
-
-        function renderFlashcards() {
-            completionEl.innerHTML = "";
-            if (flashcards.length === 0) {
-                prevButton.style.display = "none";
-                nextButton.style.display = "none";
-            } else {
-                prevButton.style.display = "inline-block";
-                nextButton.style.display = "inline-block";
-                flashcards.forEach((item, i) => {
-                    completionEl.innerHTML += `
-                        <div class="flashcard ${i === activeCardIndex ? "active-card" : ""}">
-                            <div class="flashcard-inner">
-                                <div class="flashcard-front">
-                                    <div class="flashcard-content">${item.question}</div>
-                                </div>
-                                <div class="flashcard-back">
-                                    <div class="flashcard-content">${item.answer}</div>
-                                </div>
-                            </div>
-                        </div>`;
-                });
-            }
-
-            cards = document.querySelectorAll('.flashcard');
-
-            cards.forEach((card, i) => {
-                card.addEventListener('click', () => {
-                    card.classList.toggle('flip');
-                });
-            });
-        }
-
-        const cardIndexEl = document.querySelector(".card-index");
-
-        function updateCardIndex() {
-            cardIndexEl.textContent = `${activeCardIndex + 1}/${cards.length}`;
-        }
-
-        let cards;
-        document.querySelector(".next-card").addEventListener("click", () => {
-            const currentCard = cards[activeCardIndex];
-            currentCard.classList.remove("active-card");
-            activeCardIndex++;
-            if (activeCardIndex >= cards.length) {
-                activeCardIndex = 0;
-            }
-            updateCardIndex();
-            cards[activeCardIndex].classList.add("active-card");
-        });
-
-        document.querySelector(".previous-card").addEventListener("click", () => {
-            const currentCard = cards[activeCardIndex];
-            currentCard.classList.remove("active-card");
-            activeCardIndex--;
-            if (activeCardIndex < 0) {
-                activeCardIndex = cards.length - 1;
-            }
-            updateCardIndex();
-            cards[activeCardIndex].classList.add("active-card");
-        });
-
-
-        document.getElementById('flipAllButton').addEventListener('click', () => {
-            const cards = document.querySelectorAll('.flashcard');
-            const shouldFlipToBack = !cards[0].classList.contains('flip');
-
-            cards.forEach(card => {
-                if (shouldFlipToBack) {
-                    card.classList.add('flip');
-                } else {
-                    card.classList.remove('flip');
-                }
-            });
-        });
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
-        document.getElementById("shuffleButton").addEventListener("click", () => {
-            shuffleArray(flashcards);
-            const completionEl = document.getElementById("completion");
-            completionEl.innerHTML = "";
-
-            activeCardIndex = 0;
-            cards[activeCardIndex].classList.add("active-card");
-            renderFlashcards();
-            updateCardIndex();
-        });
-
-        function reinitializeEventListeners(cards) {
-            const nextButton = document.getElementById('nextCard');
-            const prevButton = document.getElementById('previousCard');
-
-            function nextCardHandler() {
-                const currentCard = cards[activeCardIndex];
-                currentCard.style.opacity = 0;
-                currentCard.style.transform = 'translateX(-25%)';
-
-                setTimeout(() => {
-                    currentCard.classList.remove("active-card");
-                    activeCardIndex++;
-                    if (activeCardIndex >= cards.length) {
-                        activeCardIndex = 0;
-                    }
-                    const nextCard = cards[activeCardIndex];
-                    nextCard.classList.add("active-card");
-                    nextCard.style.opacity = 1;
-                    nextCard.style.transform = 'translateX(0)';
-                }, 300);
-            }
-
-            function prevCardHandler() {
-                const currentCard = cards[activeCardIndex];
-                currentCard.style.opacity = 0;
-                currentCard.style.transform = 'translateX(25%)';
-
-                setTimeout(() => {
-                    currentCard.classList.remove("active-card");
-                    activeCardIndex--;
-                    if (activeCardIndex < 0) {
-                        activeCardIndex = cards.length - 1;
-                    }
-                    const prevCard = cards[activeCardIndex];
-                    prevCard.classList.add("active-card");
-                    prevCard.style.opacity = 1;
-                    prevCard.style.transform = 'translateX(0)';
-                }, 300);
-            }
-
-            nextButton.addEventListener("click", nextCardHandler);
-            prevButton.addEventListener("click", prevCardHandler);
-        }
-
-
+        })
     </script>
+</body>

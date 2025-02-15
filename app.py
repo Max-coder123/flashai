@@ -3,6 +3,7 @@ import requests
 import sys
 import json
 import uuid
+
 from db import (
     Flashcard,
     FlashcardSource,
@@ -16,7 +17,7 @@ from db import (
 )
 from dotenv import load_dotenv
 from flask_mail import Mail, Message
-from flask import Flask, jsonify, request, render_template, request_tearing_down, session, url_for
+from flask import Flask, jsonify, request, render_template, redirect, request_tearing_down, session, url_for
 
 
 
@@ -80,46 +81,22 @@ app.secret_key = "supersecretkey"
 
 
 
+@app.get("/cards")
+def cards():
+    if "user" in session:
+        return render_template("cards.html")
+
+    return redirect("/")
+
 @app.get("/")
 def index():
-    user_message = request.form.get("question")
-    if not user_message:
-        return render_template("index.html", completion={"data": []})
-    content = f"""
-generate a flashcard for every key term and question from the text
 
-'''
-
-{user_message}
-
-'''
-
-please return the following json structure:
-
-
-```
-{{
-    "data": [
-        {{
-            "question": "question 1 about the text", 
-            "answer": "answer 1 for question 1",
-        }},
-        {{
-            "question": "question 2 about the text", 
-            "answer": "answer 2 for question 2",
-        }}
-    ]
-}}
-```
-
-    """
-    completion = fetch_json_completion(content)
-    save_flashcards(user_message, completion)
-    return render_template("index.html", completion=completion)
-
+    return render_template("index.html")
 
 @app.post("/api/completion")
 def completion():
+    if 'user' not in session:
+        return {'error': 'unauthorized'}, 401
     user_message = request.json.get("question")
     # if not user_message:
 
@@ -159,24 +136,36 @@ please return the following json structure:
 
 @app.route("/history")
 def history():
-    retrieved_sources = get_flashcard_sources_for_user(user_id)
-    return render_template("history.html", history=retrieved_sources)
+    if "user" in session:
+        retrieved_sources = get_flashcard_sources_for_user(user_id)
+        return render_template("history.html", history=retrieved_sources)
+
+    return redirect("/")
 
 
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template("dashboard.html")
+    if "user" in session:
+        return render_template("dashboard.html")
+
+    return redirect("/")
 
 
 @app.route("/practice")
 def practice():
-    return render_template("practice.html")
+    if "user" in session:
+        return render_template("practice.html")
+
+    return redirect("/")
 
 
 @app.route("/studyguide")
 def studyguide():
-    return render_template("studyguide.html")
+    if "user" in session:
+        return render_template("studyguide.html")
+
+    return redirect("/")
 
 
 @app.route("/study_guide.json")

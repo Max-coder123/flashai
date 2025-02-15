@@ -1,0 +1,362 @@
+
+textarea {
+    width: 100%;
+    height: 180px;
+    padding: 15px;
+    background-color: #dee7ec;
+    color: #031738;
+    border-radius: 10px;
+    border: 2px solid #A0A4B8;
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.2);
+    resize: none;
+    outline: none;
+    font-size: 1.1em;
+}
+
+
+
+#completion-input-submit {
+    position: relative;
+}
+
+.spinner {
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #031738;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.flashcard-container {
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    gap: 15px;
+}
+
+.flashcard {
+    perspective: 1000px;
+    width: 600px;
+    height: 375px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border: rgba(0, 0, 0, 0.2);
+}
+
+.active-card {
+    display: flex;
+    position: relative;
+}
+
+.flashcard-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.flashcard.flip .flashcard-inner {
+    transform: rotateX(180deg);
+}
+
+.flashcard-front,
+.flashcard-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    font-size: 1.5em;
+    background-color: #f2f5f8;
+    color: #031738;
+    border: 1.5px solid #031738;
+}
+
+.flashcard-back {
+    transform: rotateX(180deg);
+}
+
+.previous-card svg,
+.next-card svg {
+    width: 28px;
+    height: 28px;
+    fill: #F5F5F5;
+}
+
+.previous-card:hover,
+.next-card:hover {
+    background-color: #031738;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.previous-card {
+    margin-right: 20px;
+    background-color: #031738;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.next-card {
+    margin-left: 20px;
+    background-color: #031738;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.shuffle-button-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    top: -10px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: none;
+}
+
+.shuffle-icon-button,
+.flip-icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #b0b0b0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.shuffle-icon-button:hover,
+.flip-icon-button:hover {
+    background-color: #d3d3d3;
+    color: #031738;
+    box-shadow: none;
+    border: none;
+    outline: none;
+}
+
+.shuffle-icon-button svg,
+.flip-icon-button svg {
+    fill: currentColor;
+    width: 24px;
+    height: 24px;
+}
+
+
+.card-index {
+    text-align: center;
+    padding: 2em;
+    font-size: 1.2em;
+    color: #031738;
+}
+
+.logo {
+    height: 150px;
+    margin: 0;
+    padding: 0;
+    display: block;
+    max-width: 100%;
+}
+
+.flashcard-input-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 14px;
+    padding: 0;
+    padding-bottom: 60px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 400px;
+    border: 0.25px solid grey;
+
+}
+
+
+.text-input-container {
+    position: relative;
+    max-width: 1000px;
+    height: 300px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 14px;
+    border: 5px;
+    overflow: hidden;
+    z-index: 1;
+    border: 1px solid #ccc;
+    padding-top: 10px;
+    padding-bottom: 50px;
+}
+
+.text-input-container textarea {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 15px;
+    font-size: 1em;
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+    border-radius: 0;
+}
+
+.text-input-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #031738;
+}
+
+.text-input-container::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #031738;
+}
+
+.text-input-container::before {
+    top: 0;
+}
+
+.text-input-container::after {
+    bottom: 0;
+}
+
+
+.send-button {
+    position: absolute;
+    left: 900px;
+    top: 33px;
+    padding: 12px 20px;
+    background-color: #031738;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.send-button:hover {
+    background-color: #000;
+}
+
+.clear-button {
+    position: absolute;
+    right: 120px;
+    bottom: 20px;
+    padding: 12px 20px;
+    background-color: #031738;
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+    background-color: #000;
+}
+
+
+.upload-button {
+    position: absolute;
+    left: 10px;
+    bottom: 15px;
+    padding: 12px 20px;
+    background-color: transparent;
+    border: 1.5px solid #031738;
+    color: #031738;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-family: "Montserrat", sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    transform: scale(0.8);
+    transform-origin: center;
+}
+
+.upload-button:hover {
+    background-color: #031738;
+    color: #ffffff;
+}
+
+.upload-button:hover svg path {
+    stroke: #ffffff;
+}
+
+.upload-button .tooltiptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #031738;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    top: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.upload-button .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #031738 transparent;
+}
+
+
+
+.upload-button:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+

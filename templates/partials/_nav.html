@@ -27,8 +27,8 @@
     </div>
 
     <div class="login-container">
-        <button id="open-modal" class="login-button">
-            <span>login</span>
+        <button id="logout" class="login-button">
+            <span>logout</span>
         </button>
         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             width="36" height="36" fill="none" viewBox="0 0 24 24">
@@ -112,3 +112,18 @@
         <span>Practice</span>
     </a>
 </div>
+
+<script>
+    const logoutButton = document.querySelector("#logout")
+    logoutButton.addEventListener("click", event => {
+        fetch("logout", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(data => {
+                window.location = "/"
+            })
+            .catch(error => console.error("Error:", error));
+    })
+</script>
