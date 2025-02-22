@@ -18,7 +18,7 @@
     <h1>FlashAI Landing Page</h1>
 
     <div>
-        <form>
+        <form id="login">
             <label> username
                 <input type="text" id="username">
             </label>
@@ -28,15 +28,25 @@
             <button type="submit">login</button>
         </form>
 
+        <form id="register">
+            <label> username
+                <input type="text" id="register-username">
+            </label>
+            <label> password
+                <input type="password" id="register-password">
+            </label>
+            <button type="submit">register</button>
+        </form>
+
     </div>
 
     <script>
         const username = document.querySelector("#username")
         const password = document.querySelector("#password")
-        const form = document.querySelector("form")
-        form.addEventListener("submit", event => {
+        const loginForm = document.querySelector("form#login")
+        loginForm.addEventListener("submit", event => {
             event.preventDefault()
-            fetch("login", {
+            fetch("/api/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -44,6 +54,30 @@
                 body: JSON.stringify({
                     username: username.value,
                     password: password.value
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                    window.location = "cards"
+                })
+                .catch(error => console.error("Error:", error));
+
+        })
+
+        const register_username = document.querySelector("#register-username")
+        const register_password = document.querySelector("#register-password")
+        const registerForm = document.querySelector("form#register")
+        registerForm.addEventListener("submit", event => {
+            event.preventDefault()
+            fetch("/api/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: register_username.value,
+                    password: register_password.value
                 })
             })
                 .then(response => response.json())

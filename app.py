@@ -7,13 +7,15 @@ import uuid
 from db import (
     Flashcard,
     FlashcardSource,
+    User,
     get_flashcard_sources_for_user,
     get_flashcards_for_source,
     get_user,
     insert_flashcard,
     insert_flashcard_source,
     delete_flashcard_sources_for_user,
-    get_user_by_name_and_password
+    get_user_by_name_and_password,
+    insert_user
 )
 from dotenv import load_dotenv
 from flask_mail import Mail, Message
@@ -188,7 +190,24 @@ def view_flashcards(flashcard_source_id):
     ]
     return render_template("view_flashcards.html", flashcard_set=retrieved_flashcards)
 
-@app.post("/login")
+@app.post("/api/register")
+def register():
+    user_name = request.json.get("username")
+    password = request.json.get("password")
+
+    if not user_name or not password:
+        return jsonify({"error": "Missing username or password"}), 400
+
+    user = User(username=user_name, password=password)
+    user_id = insert_user(user)
+    
+    if user_id:
+        session["user"] = user_id 
+        return jsonify({"message": "registration successful", "username": user.username}), 200
+    else:
+        return jsonify({"error": "user already exists"}), 401
+
+@app.post("/api/login")
 def login():
     user_name = request.json.get("username")
     password = request.json.get("password")
@@ -199,19 +218,12 @@ def login():
     user = get_user_by_name_and_password(user_name, password)
     
     if user:
-        session["user"] = user.username 
+        session["user"] = user_id
         return jsonify({"message": "Login successful", "username": user.username}), 200
     else:
         return jsonify({"error": "Invalid credentials"}), 401
-
-@app.get("/profile")
-def profile():
-    if "user" in session:
-        return jsonify({"message": "Welcome!", "username": session["user"]}), 200
-    else:
-        return jsonify({"error": "Not logged in"}), 401
  
-@app.get("/logout")
+@app.get("/api/logout")
 def logout():
     session.pop("user", None)  
     return jsonify({"message": "Logged out successfully"}), 200

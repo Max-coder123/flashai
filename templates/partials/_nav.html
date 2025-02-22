@@ -116,7 +116,7 @@
 <script>
     const logoutButton = document.querySelector("#logout")
     logoutButton.addEventListener("click", event => {
-        fetch("logout", {
+        fetch("/api/logout", {
             method: "GET",
             credentials: "include"
         })

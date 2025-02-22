@@ -48,12 +48,14 @@ cursor = conn.cursor()
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS user (
     id TEXT PRIMARY KEY,
-    username TEXT,
+    username TEXT UNIQUE,
     password TEXT,
     created_at TEXT,
     updated_at TEXT
 )
 """)
+
+
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS flashcard_source (
