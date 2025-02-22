@@ -23,7 +23,6 @@ from flask import Flask, jsonify, request, render_template, redirect, request_te
 
 
 
-user_id = "1b27d88b-73f8-48b4-9132-c447146ca172"
 
 load_dotenv()  
 if not os.environ.get("OPENAI_API_KEY"):
@@ -50,7 +49,7 @@ def fetch_json_completion(content):
     return content
 
 
-def save_flashcards(content, completion):
+def save_flashcards(content, completion, user_id):
     flashcard_source = FlashcardSource(content=content, user_id=user_id)
 
     source_id = insert_flashcard_source(flashcard_source)
@@ -85,7 +84,7 @@ app.secret_key = "supersecretkey"
 
 @app.get("/cards")
 def cards():
-    if "user" in session:
+    if "user_id" in session:
         return render_template("cards.html")
 
     return redirect("/")
@@ -97,10 +96,11 @@ def index():
 
 @app.post("/api/completion")
 def completion():
-    if 'user' not in session:
+    if 'user_id' not in session:
         return {'error': 'unauthorized'}, 401
     user_message = request.json.get("question")
     # if not user_message:
+    user = get_user(session["user_id"])
 
     content = f"""
 generate flashcards for the following text, giving an individual flashcard for each question/answer pair:
@@ -131,15 +131,17 @@ please return the following json structure:
 
     """
     completion = fetch_json_completion(content)
-    save_flashcards(user_message, completion)
+    save_flashcards(user_message, completion, user.id)
 
     return completion
 
 
 @app.route("/history")
 def history():
-    if "user" in session:
-        retrieved_sources = get_flashcard_sources_for_user(user_id)
+    if "user_id" in session:
+        user = get_user(session["user_id"])
+        print(session)
+        retrieved_sources = get_flashcard_sources_for_user(user.id)
         return render_template("history.html", history=retrieved_sources)
 
     return redirect("/")
@@ -148,7 +150,7 @@ def history():
 
 @app.route("/dashboard")
 def dashboard():
-    if "user" in session:
+    if "user_id" in session:
         return render_template("dashboard.html")
 
     return redirect("/")
@@ -156,7 +158,7 @@ def dashboard():
 
 @app.route("/practice")
 def practice():
-    if "user" in session:
+    if "user_id" in session:
         return render_template("practice.html")
 
     return redirect("/")
@@ -164,7 +166,7 @@ def practice():
 
 @app.route("/studyguide")
 def studyguide():
-    if "user" in session:
+    if "user_id" in session:
         return render_template("studyguide.html")
 
     return redirect("/")
@@ -202,7 +204,7 @@ def register():
     user_id = insert_user(user)
     
     if user_id:
-        session["user"] = user_id 
+        session["user_id"] = user_id 
         return jsonify({"message": "registration successful", "username": user.username}), 200
     else:
         return jsonify({"error": "user already exists"}), 401
@@ -218,7 +220,7 @@ def login():
     user = get_user_by_name_and_password(user_name, password)
     
     if user:
-        session["user"] = user_id
+        session["user_id"] = user.id
         return jsonify({"message": "Login successful", "username": user.username}), 200
     else:
         return jsonify({"error": "Invalid credentials"}), 401
