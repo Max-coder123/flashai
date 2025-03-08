@@ -31,11 +31,3 @@ FlashAI is an AI-driven tool designed to help learners create personalized flash
    
    view the site in the browser at http://127.0.0.1:5000/
 
-## Roadmap
-
-- **user authentication**
-- **convert json database to sqlite**
-- **deploy to python anywhere**
-- **edit flashcard feature**
-- **make accessible to mobile**
-

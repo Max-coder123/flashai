@@ -122,7 +122,9 @@
         })
             .then(response => response.json())
             .then(data => {
-                window.location = "/"
+                if (data.message==="Logged out successfully") {
+                    window.location = "/"
+                }
             })
             .catch(error => console.error("Error:", error));
     })

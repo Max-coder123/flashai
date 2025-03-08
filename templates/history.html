@@ -96,6 +96,7 @@
                 <a href="/flashcards/{{ entry.id }}">
                     <button>View Flashcards</button>
                 </a>
+                <button class="delete-flashcard-source" data-id="{{entry.id}}">X</button>
             </div>
             {% endfor %}
         </div>
@@ -120,6 +121,26 @@
                     })
             }
         })
+
+        const flashcardSourceDeleteBtns = document.querySelectorAll(".delete-flashcard-source")
+        for (const flashcardSourceDeleteBtn of flashcardSourceDeleteBtns) {
+            flashcardSourceDeleteBtn.addEventListener("click", event=> {
+                const sourceId = (event.target.getAttribute("data-id"))
+                const response = confirm("are you sure you want to delete your flashcards?")
+                if (response) {
+                fetch("/api/flashcard-source/" + sourceId, {
+                    method: "DELETE",
+                })
+                    .then(response => {
+                        location.href = "/history"
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    })
+                }
+            })
+            
+        }
     </script>
 
 </body>

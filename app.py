@@ -8,6 +8,7 @@ from db import (
     Flashcard,
     FlashcardSource,
     User,
+    delete_flashcard_source_by_id,
     get_flashcard_sources_for_user,
     get_flashcards_for_source,
     get_user,
@@ -94,53 +95,10 @@ def index():
 
     return render_template("index.html")
 
-@app.post("/api/completion")
-def completion():
-    if 'user_id' not in session:
-        return {'error': 'unauthorized'}, 401
-    user_message = request.json.get("question")
-    # if not user_message:
-    user = get_user(session["user_id"])
-
-    content = f"""
-generate flashcards for the following text, giving an individual flashcard for each question/answer pair:
-
-'''
-
-{user_message}
-
-'''
-
-please return the following json structure:
-
-
-```
-{{
-    "data": [
-        {{
-            "question": "question 1 about the text", 
-            "answer": "answer 1 for question 1",
-        }},
-        {{
-            "question": "question 2 about the text", 
-            "answer": "answer 2 for question 2",
-        }}
-    ]
-}}
-```
-
-    """
-    completion = fetch_json_completion(content)
-    save_flashcards(user_message, completion, user.id)
-
-    return completion
-
-
 @app.route("/history")
 def history():
     if "user_id" in session:
         user = get_user(session["user_id"])
-        print(session)
         retrieved_sources = get_flashcard_sources_for_user(user.id)
         return render_template("history.html", history=retrieved_sources)
 
@@ -179,11 +137,13 @@ def study_guide():
 
 @app.route("/clear-history", methods=["DELETE"])
 def clear_history():
+    if 'user_id' not in session:
+        return {'error': 'unauthorized'}, 401
     delete_flashcard_sources_for_user(user_id)
     return render_template("history.html", history=[])
 
 
-@app.route("/flashcards/<flashcard_source_id>")
+@app.get("/flashcards/<flashcard_source_id>")
 def view_flashcards(flashcard_source_id):
     retrieved_flashcards = get_flashcards_for_source(flashcard_source_id)
     retrieved_flashcards = [
@@ -227,13 +187,12 @@ def login():
  
 @app.get("/api/logout")
 def logout():
-    session.pop("user", None)  
+    session.pop("user_id", None)  
     return jsonify({"message": "Logged out successfully"}), 200
 
 
 @app.route('/api/feedback', methods=['POST'])
 def feedback():
-    print("Feedback endpoint triggered")
     data = request.get_json()
     name = data.get('name')
     subject = data.get('subject')
@@ -255,6 +214,57 @@ def feedback():
         print("Error sending email:", e)
         return jsonify({'error': 'Error sending feedback. Please try again later.'}), 500
 
+@app.post("/api/completion")
+def completion():
+    if 'user_id' not in session:
+        return {'error': 'unauthorized'}, 401
+    user_message = request.json.get("question")
+    # if not user_message:
+    user = get_user(session["user_id"])
+
+    content = f"""
+generate flashcards for the following text, giving an individual flashcard for each question/answer pair:
+
+'''
+
+{user_message}
+
+'''
+
+please return the following json structure:
+
+
+```
+{{
+    "data": [
+        {{
+            "question": "question 1 about the text", 
+            "answer": "answer 1 for question 1",
+        }},
+        {{
+            "question": "question 2 about the text", 
+            "answer": "answer 2 for question 2",
+        }}
+    ]
+}}
+```
+
+    """
+    completion = fetch_json_completion(content)
+    save_flashcards(user_message, completion, user.id)
+
+    return completion
+
+@app.delete("/api/flashcard-source/<flashcard_source_id>")
+def delete_flashcard_source(flashcard_source_id):
+    print(session)
+    if 'user_id' not in session:
+        return {'error': 'unauthorized'}, 401
+    
+    print(flashcard_source_id)
+    delete_flashcard_source_by_id(flashcard_source_id)
+    return {'status':'success'}
+    
 
 if __name__ == "__main__":
     app.run(debug=True)

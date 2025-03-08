@@ -133,6 +133,10 @@ def delete_flashcard_sources_for_user(user_id):
     cursor.execute("DELETE FROM flashcard_source WHERE user_id = ?", (user_id,))
     conn.commit()
 
+def delete_flashcard_source_by_id(flashcard_source_id):
+    cursor.execute("DELETE FROM flashcard WHERE source_id = ?", (flashcard_source_id,))
+    cursor.execute("DELETE FROM flashcard_source WHERE id = ?", (flashcard_source_id,))
+    conn.commit()
 # user = User(username="john_doe")
 # user_id = insert_user(user)
 
