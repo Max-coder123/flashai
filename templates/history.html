@@ -114,7 +114,9 @@
 
                 })
                     .then(response => {
-                        location.href = "/history"
+                        if (response.ok) {
+                            location.href = "/history"
+                        }
                     })
                     .catch(error => {
                         console.error('Error:', error);
@@ -124,22 +126,23 @@
 
         const flashcardSourceDeleteBtns = document.querySelectorAll(".delete-flashcard-source")
         for (const flashcardSourceDeleteBtn of flashcardSourceDeleteBtns) {
-            flashcardSourceDeleteBtn.addEventListener("click", event=> {
+            flashcardSourceDeleteBtn.addEventListener("click", event => {
                 const sourceId = (event.target.getAttribute("data-id"))
-                const response = confirm("are you sure you want to delete your flashcards?")
+                const response = confirm("are you sure you want to delete this flashcard set?")
                 if (response) {
-                fetch("/api/flashcard-source/" + sourceId, {
-                    method: "DELETE",
-                })
-                    .then(response => {
-                        location.href = "/history"
+                    const flashcardSource = flashcardSourceDeleteBtn.closest(".flashcard-project")
+                    flashcardSource.remove()
+                    fetch("/api/flashcard-source/" + sourceId, {
+                        method: "DELETE",
                     })
-                    .catch(error => {
-                        console.error('Error:', error);
-                    })
+                        .then(response => {
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        })
                 }
             })
-            
+
         }
     </script>
 

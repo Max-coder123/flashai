@@ -2,8 +2,11 @@ import sqlite3
 import uuid
 from datetime import datetime
 
+
 class User:
-    def __init__(self, id=None, username=None, password=None, created_at=None, updated_at=None):
+    def __init__(
+        self, id=None, username=None, password=None, created_at=None, updated_at=None
+    ):
         self.id = id or str(uuid.uuid4())
         self.username = username
         self.password = password
@@ -12,10 +15,19 @@ class User:
 
     @staticmethod
     def from_row(row):
-        return User(id=row[0], username=row[1], created_at=row[2], updated_at=row[3], password=row[4])
+        return User(
+            id=row[0],
+            username=row[1],
+            created_at=row[2],
+            updated_at=row[3],
+            password=row[4],
+        )
+
 
 class FlashcardSource:
-    def __init__(self, id=None, content=None, user_id=None, created_at=None, updated_at=None):
+    def __init__(
+        self, id=None, content=None, user_id=None, created_at=None, updated_at=None
+    ):
         self.id = id or str(uuid.uuid4())
         self.content = content
         self.user_id = user_id
@@ -24,10 +36,27 @@ class FlashcardSource:
 
     @staticmethod
     def from_row(row):
-        return FlashcardSource(id=row[0], content=row[1], user_id=row[2], created_at=row[3], updated_at=row[4])
+        return FlashcardSource(
+            id=row[0],
+            content=row[1],
+            user_id=row[2],
+            created_at=row[3],
+            updated_at=row[4],
+        )
+
 
 class Flashcard:
-    def __init__(self, id=None, question=None, answer=None, explanation=None, source_id=None, user_id=None, created_at=None, updated_at=None):
+    def __init__(
+        self,
+        id=None,
+        question=None,
+        answer=None,
+        explanation=None,
+        source_id=None,
+        user_id=None,
+        created_at=None,
+        updated_at=None,
+    ):
         self.id = id or str(uuid.uuid4())
         self.question = question
         self.answer = answer
@@ -39,13 +68,24 @@ class Flashcard:
 
     @staticmethod
     def from_row(row):
-        return Flashcard(id=row[0], question=row[1], answer=row[2], explanation=row[3], source_id=row[4], user_id=row[5], created_at=row[6], updated_at=row[7])
+        return Flashcard(
+            id=row[0],
+            question=row[1],
+            answer=row[2],
+            explanation=row[3],
+            source_id=row[4],
+            user_id=row[5],
+            created_at=row[6],
+            updated_at=row[7],
+        )
 
-conn = sqlite3.connect('flashai.db', check_same_thread=False)
+
+conn = sqlite3.connect("flashai.db", check_same_thread=False)
 
 cursor = conn.cursor()
 
-cursor.execute("""
+cursor.execute(
+    """
 CREATE TABLE IF NOT EXISTS user (
     id TEXT PRIMARY KEY,
     username TEXT UNIQUE,
@@ -53,11 +93,12 @@ CREATE TABLE IF NOT EXISTS user (
     created_at TEXT,
     updated_at TEXT
 )
-""")
+"""
+)
 
 
-
-cursor.execute("""
+cursor.execute(
+    """
 CREATE TABLE IF NOT EXISTS flashcard_source (
     id TEXT PRIMARY KEY,
     content TEXT,
@@ -66,9 +107,11 @@ CREATE TABLE IF NOT EXISTS flashcard_source (
     updated_at TEXT,
     FOREIGN KEY (user_id) REFERENCES user (id)
 )
-""")
+"""
+)
 
-cursor.execute("""
+cursor.execute(
+    """
 CREATE TABLE IF NOT EXISTS flashcard (
     id TEXT PRIMARY KEY,
     question TEXT,
@@ -81,62 +124,105 @@ CREATE TABLE IF NOT EXISTS flashcard (
     FOREIGN KEY (source_id) REFERENCES flashcard_source (id),
     FOREIGN KEY (user_id) REFERENCES user (id)
 )
-""")
-
+"""
+)
 
 
 def insert_user(user: User):
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT INTO user (id, username, password, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?)
-    """, (user.id, user.username, user.password, user.created_at, user.updated_at))
+    """,
+        (user.id, user.username, user.password, user.created_at, user.updated_at),
+    )
     conn.commit()
     return user.id
 
+
 def insert_flashcard_source(flashcard_source: FlashcardSource):
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT INTO flashcard_source (id, content, user_id, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?)
-    """, (flashcard_source.id, flashcard_source.content, flashcard_source.user_id, flashcard_source.created_at, flashcard_source.updated_at))
+    """,
+        (
+            flashcard_source.id,
+            flashcard_source.content,
+            flashcard_source.user_id,
+            flashcard_source.created_at,
+            flashcard_source.updated_at,
+        ),
+    )
     conn.commit()
     return flashcard_source.id
 
+
 def insert_flashcard(flashcard: Flashcard):
-    cursor.execute("""
+    cursor.execute(
+        """
         INSERT INTO flashcard (id, question, answer, explanation, source_id, user_id, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    """, (flashcard.id, flashcard.question, flashcard.answer, flashcard.explanation, flashcard.source_id, flashcard.user_id, flashcard.created_at, flashcard.updated_at))
+    """,
+        (
+            flashcard.id,
+            flashcard.question,
+            flashcard.answer,
+            flashcard.explanation,
+            flashcard.source_id,
+            flashcard.user_id,
+            flashcard.created_at,
+            flashcard.updated_at,
+        ),
+    )
     conn.commit()
+
 
 def get_user(user_id):
     cursor.execute("SELECT * FROM user WHERE id = ?", (user_id,))
     row = cursor.fetchone()
     return User.from_row(row) if row else None
 
+
 def get_user_by_name_and_password(username, password):
-    cursor.execute("SELECT * FROM user WHERE username = ? and password = ?", (username, password))
+    cursor.execute(
+        "SELECT * FROM user WHERE username = ? and password = ?", (username, password)
+    )
     row = cursor.fetchone()
     return User.from_row(row) if row else None
+
 
 def get_flashcard_sources_for_user(user_id):
     cursor.execute("SELECT * FROM flashcard_source WHERE user_id = ?", (user_id,))
     rows = cursor.fetchall()
     return [FlashcardSource.from_row(row) for row in rows]
 
+
 def get_flashcards_for_source(source_id):
     cursor.execute("SELECT * FROM flashcard WHERE source_id = ?", (source_id,))
     rows = cursor.fetchall()
     return [Flashcard.from_row(row) for row in rows]
+
 
 def delete_flashcard_sources_for_user(user_id):
     cursor.execute("DELETE FROM flashcard WHERE user_id = ?", (user_id,))
     cursor.execute("DELETE FROM flashcard_source WHERE user_id = ?", (user_id,))
     conn.commit()
 
-def delete_flashcard_source_by_id(flashcard_source_id):
-    cursor.execute("DELETE FROM flashcard WHERE source_id = ?", (flashcard_source_id,))
-    cursor.execute("DELETE FROM flashcard_source WHERE id = ?", (flashcard_source_id,))
+
+def delete_flashcard_source_by_id(flashcard_source_id, user_id):
+    flashcard_deleted = cursor.execute(
+        "DELETE FROM flashcard WHERE source_id = ? AND user_id = ?",
+        (flashcard_source_id, user_id),
+    ).rowcount
+    source_deleted = cursor.execute(
+        "DELETE FROM flashcard_source WHERE id = ? AND user_id = ?",
+        (flashcard_source_id, user_id),
+    ).rowcount
     conn.commit()
+    return flashcard_deleted > 0 or source_deleted > 0
+
+
 # user = User(username="john_doe")
 # user_id = insert_user(user)
 
@@ -167,19 +253,21 @@ def delete_flashcard_source_by_id(flashcard_source_id):
 # insert_flashcard(flashcard1)
 # insert_flashcard(flashcard2)
 
+
 def list_all_users():
     cursor.execute("SELECT * FROM user")
     rows = cursor.fetchall()
     return [User.from_row(row) for row in rows]
 
-if __name__=="main":
+
+if __name__ == "main":
     # Example usage
     all_users = list_all_users()
     for user in all_users:
-        print(f"ID: {user.id}, Username: {user.username}, Created At: {user.created_at}, Updated At: {user.updated_at}")
+        print(
+            f"ID: {user.id}, Username: {user.username}, Created At: {user.created_at}, Updated At: {user.updated_at}"
+        )
     user_id = "1b27d88b-73f8-48b4-9132-c447146ca172"
-
-
 
     retrieved_user = get_user(user_id)
     retrieved_sources = get_flashcard_sources_for_user(user_id)
@@ -196,7 +284,7 @@ if __name__=="main":
 
     conn.close()
 
-# ID: 40e7617c-d695-4433-addf-de57e1f62a5e, Username: max, Created At: chen, Updated 
+# ID: 40e7617c-d695-4433-addf-de57e1f62a5e, Username: max, Created At: chen, Updated
 # At: 2025-02-22T10:22:41.471295
-# ID: a992461d-438f-4eab-a76d-cf72d3929317, Username: john, Created At: doe, Updated 
+# ID: a992461d-438f-4eab-a76d-cf72d3929317, Username: john, Created At: doe, Updated
 # At: 2025-02-22T10:42:08.250578
