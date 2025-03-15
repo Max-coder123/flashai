@@ -143,14 +143,6 @@ def study_guide():
     return app.send_static_file("study_guides.json")
 
 
-@app.route("/clear-history", methods=["DELETE"])
-def clear_history():
-    if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
-    delete_flashcard_sources_for_user(user_id)
-    return render_template("history.html", history=[])
-
-
 @app.get("/flashcards/<flashcard_source_id>")
 def view_flashcards(flashcard_source_id):
     retrieved_flashcards = get_flashcards_for_source(flashcard_source_id)
@@ -280,6 +272,12 @@ please return the following json structure:
 
     return completion
 
+@app.route("/api/clear-history", methods=["DELETE"])
+def clear_history():
+    if "user_id" not in session:
+        return {"error": "unauthorized"}, 401
+    delete_flashcard_sources_for_user(session["user_id"])
+    return {"status":"success"}
 
 @app.delete("/api/flashcard-source/<flashcard_source_id>")
 def delete_flashcard_source(flashcard_source_id):

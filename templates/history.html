@@ -96,7 +96,8 @@
                 <a href="/flashcards/{{ entry.id }}">
                     <button>View Flashcards</button>
                 </a>
-                <button class="delete-flashcard-source" data-id="{{entry.id}}">X</button>
+                <button class="delete-flashcard-source" data-id="{{entry.id}}"><i class="fa-solid fa-trash"></i>
+                </button>
             </div>
             {% endfor %}
         </div>
@@ -109,7 +110,7 @@
         document.querySelector(".clear-history-btn").addEventListener("click", event => {
             const response = confirm("are you sure you want to delete your flashcards?")
             if (response) {
-                fetch("/clear-history", {
+                fetch("/api/clear-history", {
                     method: "DELETE",
 
                 })
