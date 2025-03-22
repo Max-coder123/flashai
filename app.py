@@ -54,15 +54,14 @@ def fetch_json_completion(content):
     response = requests.post(url, headers=headers, json=data)
     response.raise_for_status()
     content = response.json()["choices"][0]["message"]["content"]
-    return content
+    return json.loads(content)
 
 
 def save_flashcards(content, completion, user_id):
-    flashcard_source = FlashcardSource(content=content, user_id=user_id)
-
+    flashcard_source = FlashcardSource(content=content, user_id=user_id, title = completion["title"])
     source_id = insert_flashcard_source(flashcard_source)
 
-    completion = json.loads(completion)
+    
     for flashcard in completion["data"]:
         flashcard = Flashcard(
             question=flashcard["question"],
@@ -240,7 +239,7 @@ def completion():
     # if not user_message:
 
     content = f"""
-generate flashcards for the following text, giving an individual flashcard for each question/answer pair:
+generate flashcards for the following text, giving an individual flashcard for each question/answer pair, and provide a title that summarizes the text concisely:
 
 '''
 
@@ -262,7 +261,8 @@ please return the following json structure:
             "question": "question 2 about the text", 
             "answer": "answer 2 for question 2",
         }}
-    ]
+    ],
+    "title": "summary of flashcards"
 }}
 ```
 

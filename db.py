@@ -26,10 +26,11 @@ class User:
 
 class FlashcardSource:
     def __init__(
-        self, id=None, content=None, user_id=None, created_at=None, updated_at=None
+        self, id=None, content=None, title=None, user_id=None, created_at=None, updated_at=None
     ):
         self.id = id or str(uuid.uuid4())
         self.content = content
+        self.title = title
         self.user_id = user_id
         self.created_at = created_at or datetime.now().isoformat()
         self.updated_at = updated_at or self.created_at
@@ -39,6 +40,7 @@ class FlashcardSource:
         return FlashcardSource(
             id=row[0],
             content=row[1],
+            title=row[5],
             user_id=row[2],
             created_at=row[3],
             updated_at=row[4],
@@ -102,6 +104,7 @@ cursor.execute(
 CREATE TABLE IF NOT EXISTS flashcard_source (
     id TEXT PRIMARY KEY,
     content TEXT,
+    title TEXT,
     user_id TEXT,
     created_at TEXT,
     updated_at TEXT,
@@ -143,12 +146,13 @@ def insert_user(user: User):
 def insert_flashcard_source(flashcard_source: FlashcardSource):
     cursor.execute(
         """
-        INSERT INTO flashcard_source (id, content, user_id, created_at, updated_at)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO flashcard_source (id, content, title, user_id, created_at, updated_at)
+        VALUES (?, ?, ?, ?, ?, ?)
     """,
         (
             flashcard_source.id,
             flashcard_source.content,
+            flashcard_source.title,
             flashcard_source.user_id,
             flashcard_source.created_at,
             flashcard_source.updated_at,
