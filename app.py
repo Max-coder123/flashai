@@ -239,7 +239,7 @@ def completion():
     # if not user_message:
 
     content = f"""
-generate flashcards for the following text, giving an individual flashcard for each question/answer pair, and provide a title that summarizes the text concisely:
+generate flashcards for the following text, giving an individual flashcard for each question/answer pair, and provide a title that summarizes the text concisely without unnecessary words:
 
 '''
 
@@ -262,7 +262,7 @@ please return the following json structure:
             "answer": "answer 2 for question 2",
         }}
     ],
-    "title": "summary of flashcards"
+    "title": "concise summary of flashcards"
 }}
 ```
 
