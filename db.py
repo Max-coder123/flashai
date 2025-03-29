@@ -16,11 +16,11 @@ class User:
     @staticmethod
     def from_row(row):
         return User(
-            id=row[0],
-            username=row[1],
-            created_at=row[2],
-            updated_at=row[3],
-            password=row[4],
+            id=row['id'],
+            username=row['username'],
+            created_at=row['created_at'],
+            updated_at=row['updated_at'],
+            password=row['password'],
         )
 
 
@@ -38,12 +38,12 @@ class FlashcardSource:
     @staticmethod
     def from_row(row):
         return FlashcardSource(
-            id=row[0],
-            content=row[1],
-            title=row[5],
-            user_id=row[2],
-            created_at=row[3],
-            updated_at=row[4],
+            id=row['id'],
+            content=row['content'],
+            title=row['title'],
+            user_id=row['user_id'],
+            created_at=row['created_at'],
+            updated_at=row['updated_at'],
         )
 
 
@@ -71,18 +71,19 @@ class Flashcard:
     @staticmethod
     def from_row(row):
         return Flashcard(
-            id=row[0],
-            question=row[1],
-            answer=row[2],
-            explanation=row[3],
-            source_id=row[4],
-            user_id=row[5],
-            created_at=row[6],
-            updated_at=row[7],
+            id=row['id'],
+            question=row['question'],
+            answer=row['answer'],
+            explanation=row['explanation'],
+            source_id=row['source_id'],
+            user_id=row['user_id'],
+            created_at=row['created_at'],
+            updated_at=row['updated_at'],
         )
 
 
 conn = sqlite3.connect("flashai.db", check_same_thread=False)
+conn.row_factory = sqlite3.Row
 
 cursor = conn.cursor()
 
