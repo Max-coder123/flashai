@@ -9,6 +9,7 @@ from db import (
     FlashcardSource,
     User,
     delete_flashcard_source_by_id,
+    get_flashcard_source,
     get_flashcard_sources_for_user,
     get_flashcards_for_source,
     get_user,
@@ -149,7 +150,8 @@ def view_flashcards(flashcard_source_id):
         {"question": flashcard.question, "answer": flashcard.answer, "id": flashcard.id}
         for flashcard in retrieved_flashcards
     ]
-    return render_template("view_flashcards.html", flashcard_set=retrieved_flashcards)
+    retrieved_source = get_flashcard_source(flashcard_source_id)
+    return render_template("view_flashcards.html", flashcard_set=retrieved_flashcards, flashcard_source=retrieved_source)
 
 
 @app.post("/api/register")

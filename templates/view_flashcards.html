@@ -6,84 +6,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flashcards View</title>
+    <link rel="stylesheet" href="/static/global.css">
+    <link rel="stylesheet" href="/static/cards.css">
+
     <style>
-        .flashcard-container {
-            margin-top: 1em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 300px;
-            gap: 10px;
-        }
-
-        .flashcard {
-            perspective: 1000px;
-            width: 600px;
-            height: 375px;
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .active-card {
-            display: flex;
-            position: relative;
-        }
-
-        .flashcard-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s;
-            transform-style: preserve-3d;
-        }
-
-        .flashcard.flip .flashcard-inner {
-            transform: rotateX(180deg);
-        }
-
-        .flashcard-front,
-        .flashcard-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            border-radius: 10px;
-            padding: 1em;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            font-size: 1.75em;
-        }
-
-        .flashcard-front {
-            background-color: aliceblue;
-        }
-
-        .flashcard-back {
-            background-color: aliceblue;
-            transform: rotateX(180deg);
-        }
-
-        .previous-card svg,
-        .next-card svg {
-            width: 24px;
-            height: 24px;
-            fill: black;
-        }
-
-        .previous-card:hover,
-        .next-card:hover {
-            background-color: lightblue;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-        }
+        
     </style>
 </head>
 
 <body>
-    <h1>Flashcards for: </h1>
+    {% include 'partials/_nav.html' %}
+    <div class="main-content" id="main-content">
+    <h1>Flashcards for: {{flashcard_source.title}}</h1>
 
     <div class="flashcard-container">
         <button id="previousCard" class="previous-card" style="display: none;">
@@ -102,7 +36,7 @@
     <div class="card-index"></div>
 
     <a href="/history">Back to History</a>
-
+    </div>
     <script>
         const completionEl = document.getElementById("completion");
         const prevButton = document.getElementById("previousCard");
@@ -120,7 +54,6 @@
                 prevButton.style.display = "inline-block";
                 nextButton.style.display = "inline-block";
 
-                // Render flashcards with front and back sides
                 data.forEach((item, i) => {
                     completionEl.innerHTML += `
                     <div class="flashcard ${i === activeCardIndex ? "active-card" : ""}">
@@ -138,7 +71,6 @@
 
             const cards = document.querySelectorAll('.flashcard');
 
-            // Add click event to flip the flashcard
             cards.forEach((card, i) => {
                 card.addEventListener('click', () => {
                     card.classList.toggle('flip');
@@ -156,7 +88,6 @@
         const cards = document.querySelectorAll('.flashcard');
         updateCardIndex();
 
-        // Move to the next card
         document.querySelector(".next-card").addEventListener("click", () => {
             const currentCard = cards[activeCardIndex];
             currentCard.classList.remove("active-card");
@@ -168,7 +99,6 @@
             cards[activeCardIndex].classList.add("active-card");
         });
 
-        // Move to the previous card
         document.querySelector(".previous-card").addEventListener("click", () => {
             const currentCard = cards[activeCardIndex];
             currentCard.classList.remove("active-card");
@@ -179,7 +109,10 @@
             updateCardIndex();
             cards[activeCardIndex].classList.add("active-card");
         });
+        
     </script>
+    
 </body>
+
 
 </html>

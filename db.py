@@ -196,6 +196,10 @@ def get_user_by_name_and_password(username, password):
     row = cursor.fetchone()
     return User.from_row(row) if row else None
 
+def get_flashcard_source(source_id):
+    cursor.execute("SELECT * FROM flashcard_source WHERE id = ?", (source_id,))
+    row = cursor.fetchone()
+    return FlashcardSource.from_row(row) if row else None
 
 def get_flashcard_sources_for_user(user_id):
     cursor.execute("SELECT * FROM flashcard_source WHERE user_id = ?", (user_id,))

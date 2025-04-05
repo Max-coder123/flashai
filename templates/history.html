@@ -92,7 +92,7 @@
         <div id="history-section">
             {% for entry in history %}
             <div class="flashcard-project">
-                <h2>{{ entry.title }}</h2>
+                <h2 title="{{entry.created_at.split('T')[0]}}">{{ entry.title }}</h2>
                 <a href="/flashcards/{{ entry.id }}">
                     <button>View Flashcards</button>
                 </a>
