@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account Settings</title>
+
+    <link rel="icon" href="https://fav.farm/⚙️" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="static/global.css">
+    <style>
+        .logo {
+            height: 150px;
+            margin: 0;
+            padding: 0;
+            display: block;
+            max-width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+    {% include 'partials/_nav.html' %}
+
+
+    <div class="main-content" id="main-content">
+        <h1 id="header">Account Settings - {{ username }}</h1>
+
+        <form id="change-username">
+            <div>
+                <label> change username
+                    <input type="text" id="new-username">
+                </label>
+            </div>
+
+            <div>
+                <button type="submit">change username</button>
+            </div>
+        </form>
+
+        <form id="change-password">
+            <div>
+                <label> change password
+                    <input type="password" id="reset-password">
+                </label>
+            </div>
+            <div>
+                <button type="submit">change password</button>
+            </div>
+        </form>
+
+
+    </div>
+
+    <script src="/static/global.js"></script>
+
+    <script>
+
+        const newUsername = document.querySelector("#new-username")
+        const changeUsernameForm = document.querySelector("form#change-username")
+        changeUsernameForm.addEventListener("submit", event => {
+            event.preventDefault()
+            const newUsernameElement = document.querySelector("#header")
+            newUsernameElement.textContent = "Account Settings - " + newUsername.value
+            fetch("/api/change-username", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    username: newUsername.value,
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(error => console.error("Error:", error));
+
+        })
+
+        const newPassword = document.querySelector("#reset-password")
+        const changePasswordForm = document.querySelector("form#change-password")
+        changePasswordForm.addEventListener("submit", event => {
+            event.preventDefault()
+            fetch("/api/change-password", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    password: newPassword.value,
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(error => console.error("Error:", error));
+
+        })
+    </script>
+</body>
+
+</html>

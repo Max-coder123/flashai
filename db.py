@@ -182,12 +182,28 @@ def insert_flashcard(flashcard: Flashcard):
     )
     conn.commit()
 
+cursor.execute("SELECT * FROM user")
+row = cursor.fetchall()
+print(repr(row[0]["password"]))
+print(row[0]["username"])
+
+print(row[1]["password"])
+print(row[1]["username"])
+
+
 
 def get_user(user_id):
     cursor.execute("SELECT * FROM user WHERE id = ?", (user_id,))
     row = cursor.fetchone()
     return User.from_row(row) if row else None
 
+def update_username(user_id, new_username):
+    cursor.execute("UPDATE user SET username = ? WHERE id = ?", (new_username, user_id))
+    conn.commit()
+
+def update_password(user_id, new_password):
+    cursor.execute("UPDATE user SET password = ? WHERE id = ?", (new_password, user_id))
+    conn.commit()
 
 def get_user_by_name_and_password(username, password):
     cursor.execute(

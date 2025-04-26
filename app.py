@@ -18,6 +18,8 @@ from db import (
     delete_flashcard_sources_for_user,
     get_user_by_name_and_password,
     insert_user,
+    update_password,
+    update_username,
 )
 from dotenv import load_dotenv
 from flask_mail import Mail, Message
@@ -129,6 +131,13 @@ def practice():
 
     return redirect("/")
 
+@app.route("/account")
+def account():
+    if "user_id" in session:
+        user = get_user(session["user_id"])
+        return render_template("account.html", username=user.username)
+
+    return redirect("/")
 
 @app.route("/studyguide")
 def studyguide():
@@ -180,8 +189,8 @@ def login():
     user_name = request.json.get("username")
     password = request.json.get("password")
 
-    if not user_name or not password:
-        return jsonify({"error": "Missing username or password"}), 400
+    # if not user_name or not password:
+    #     return jsonify({"error": "Missing username or password"}), 400
 
     user = get_user_by_name_and_password(user_name, password)
 
@@ -196,6 +205,7 @@ def login():
 def logout():
     session.pop("user_id", None)
     return jsonify({"message": "Logged out successfully"}), 200
+
 
 
 @app.route("/api/feedback", methods=["POST"])
@@ -231,7 +241,22 @@ def feedback():
             jsonify({"error": "Error sending feedback. Please try again later."}),
             500,
         )
+    
+@app.post("/api/change-username")
+def change_username():
+    if "user_id" not in session:
+        return {"error": "unauthorized"}, 401
+    new_user_name = request.json.get("username")
+    update_username(session["user_id"], new_user_name)
+    return(jsonify({"message": "okay"}))
 
+@app.post("/api/change-password")
+def change_password():
+    if "user_id" not in session:
+        return {"error": "unauthorized"}, 401
+    new_password = request.json.get("password")
+    update_password(session["user_id"], new_password)
+    return(jsonify({"message": "okay"}))
 
 @app.post("/api/completion")
 def completion():
