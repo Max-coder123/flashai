@@ -15,30 +15,38 @@
 </head>
 
 <body>
-    <h1>FlashAI Landing Page</h1>
+    <body>
+        <header class="landing-header">
+            <h1>FlashAI</h1>
+            <p class="byline">Study Smarter, Not Harder.</p>
+            <p class="subtitle">Instantly generate, customize, and master flashcards with AI.</p>
+        </header>
+    
+        <main class="auth-container">
+            <form id="login">
+                <h2>Login</h2>
+                <label> Username
+                    <input type="text" id="username">
+                </label>
+                <label> Password
+                    <input type="password" id="password">
+                </label>
+                <button type="submit">Login</button>
+            </form>
+    
+            <form id="register">
+                <h2>Register</h2>
+                <label> Username
+                    <input type="text" id="register-username">
+                </label>
+                <label> Password
+                    <input type="password" id="register-password">
+                </label>
+                <button type="submit">Register</button>
+            </form>
+        </main>
 
-    <div>
-        <form id="login">
-            <label> username
-                <input type="text" id="username">
-            </label>
-            <label> password
-                <input type="password" id="password">
-            </label>
-            <button type="submit">login</button>
-        </form>
-
-        <form id="register">
-            <label> username
-                <input type="text" id="register-username">
-            </label>
-            <label> password
-                <input type="password" id="register-password">
-            </label>
-            <button type="submit">register</button>
-        </form>
-
-    </div>
+    
 
     <script>
         const username = document.querySelector("#username")
