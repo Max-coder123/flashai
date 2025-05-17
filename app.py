@@ -172,6 +172,9 @@ def register():
         return jsonify({"error": "Missing username or password"}), 400
 
     user = User(username=user_name, password=password)
+    validation_errors = user.validate()
+    if validation_errors:
+        return jsonify({"errors": validation_errors}), 422
     user_id = insert_user(user)
 
     if user_id:
@@ -247,6 +250,11 @@ def change_username():
     if "user_id" not in session:
         return {"error": "unauthorized"}, 401
     new_user_name = request.json.get("username")
+    user = get_user(session["user_id"])
+    user.username = new_user_name
+    validation_errors = user.validate()
+    if validation_errors:
+        return jsonify({"errors": validation_errors}), 422
     update_username(session["user_id"], new_user_name)
     return(jsonify({"message": "okay"}))
 
@@ -255,6 +263,11 @@ def change_password():
     if "user_id" not in session:
         return {"error": "unauthorized"}, 401
     new_password = request.json.get("password")
+    user = get_user(session["user_id"])
+    user.password = new_password
+    validation_errors = user.validate()
+    if validation_errors:
+        return jsonify({"errors": validation_errors}), 422
     update_password(session["user_id"], new_password)
     return(jsonify({"message": "okay"}))
 

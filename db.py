@@ -1,4 +1,6 @@
+import re
 import sqlite3
+import string
 import uuid
 from datetime import datetime
 
@@ -13,6 +15,7 @@ class User:
         self.created_at = created_at or datetime.now().isoformat()
         self.updated_at = updated_at or self.created_at
 
+
     @staticmethod
     def from_row(row):
         return User(
@@ -22,6 +25,33 @@ class User:
             updated_at=row['updated_at'],
             password=row['password'],
         )
+    
+    def validate(self):
+        errors = []
+        pwd = self.password
+        user = self.username
+
+        # Length
+        if len(pwd) < 8:
+            errors.append("Password must be at least 8 characters long.")
+        if len(pwd) > 15:
+            errors.append("Password must be shorter than 15 characters.")
+        if len(user) < 4:
+            errors.append("Username must be at least 4 characters")
+        if len(user) > 15:
+            errors.append("Username must be shorter than 15 characters")
+
+        # Character‐type checks
+        if not re.search(r"[A-Z]", pwd):
+            errors.append("Password must include at least one uppercase letter.")
+        if not re.search(r"[a-z]", pwd):
+            errors.append("Password must include at least one lowercase letter.")
+        if not re.search(r"\d", pwd):
+            errors.append("Password must include at least one number.")
+        if not any(ch in string.punctuation for ch in pwd):
+            errors.append("Password must include at least one symbol (e.g. !@#$%^&*).")
+        
+        return errors
 
 
 class FlashcardSource:
@@ -182,19 +212,12 @@ def insert_flashcard(flashcard: Flashcard):
     )
     conn.commit()
 
-cursor.execute("SELECT * FROM user")
-row = cursor.fetchall()
-print(repr(row[0]["password"]))
-print(row[0]["username"])
-
-print(row[1]["password"])
-print(row[1]["username"])
-
 
 
 def get_user(user_id):
     cursor.execute("SELECT * FROM user WHERE id = ?", (user_id,))
     row = cursor.fetchone()
+    print(row["password"])
     return User.from_row(row) if row else None
 
 def update_username(user_id, new_username):

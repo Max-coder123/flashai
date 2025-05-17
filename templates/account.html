@@ -63,7 +63,7 @@
         changeUsernameForm.addEventListener("submit", event => {
             event.preventDefault()
             const newUsernameElement = document.querySelector("#header")
-            newUsernameElement.textContent = "Account Settings - " + newUsername.value
+            
             fetch("/api/change-username", {
                 method: "POST",
                 headers: {
@@ -71,31 +71,46 @@
                 },
                 body: JSON.stringify({
                     username: newUsername.value,
+                    
                 })
             })
                 .then(response => response.json())
                 .then(data => {
+                    if (data.errors?.length) {
+                        alert(data.errors.join("\n"))
+                    }
+                    else {
+                        newUsernameElement.textContent = "Account Settings - " + newUsername.value
+                    }
                     console.log(data)
                 })
                 .catch(error => console.error("Error:", error));
 
         })
 
-        const newPassword = document.querySelector("#reset-password")
+        const newPasswordEl = document.querySelector("#reset-password")
         const changePasswordForm = document.querySelector("form#change-password")
         changePasswordForm.addEventListener("submit", event => {
             event.preventDefault()
+            const newPassword = newPasswordEl.value
+            changePasswordForm.reset()
             fetch("/api/change-password", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    password: newPassword.value,
+                    password: newPassword,
                 })
             })
                 .then(response => response.json())
                 .then(data => {
+                    if (data.errors?.length) {
+                        alert(data.errors.join("\n"))
+                    }
+                    else {
+                        alert("password changed successfully")
+                    }
                     console.log(data)
                 })
                 .catch(error => console.error("Error:", error));
