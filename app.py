@@ -1,4 +1,5 @@
 import os
+import bcrypt
 import requests
 import sys
 import json
@@ -16,7 +17,7 @@ from db import (
     insert_flashcard,
     insert_flashcard_source,
     delete_flashcard_sources_for_user,
-    get_user_by_name_and_password,
+    get_user_by_name,
     insert_user,
     update_password,
     update_username,
@@ -61,10 +62,11 @@ def fetch_json_completion(content):
 
 
 def save_flashcards(content, completion, user_id):
-    flashcard_source = FlashcardSource(content=content, user_id=user_id, title = completion["title"])
+    flashcard_source = FlashcardSource(
+        content=content, user_id=user_id, title=completion["title"]
+    )
     source_id = insert_flashcard_source(flashcard_source)
 
-    
     for flashcard in completion["data"]:
         flashcard = Flashcard(
             question=flashcard["question"],
@@ -73,6 +75,26 @@ def save_flashcards(content, completion, user_id):
             user_id=user_id,
         )
         insert_flashcard(flashcard)
+
+
+def hash_password(plain_text_password: str) -> str:
+    """
+    Generate a bcrypt hash for the given plain-text password and
+    return it as a UTF-8 string to store in the database.
+    """
+    # gensalt() by default uses 12 rounds. Adjust 'rounds' if you want higher cost.
+    salt = bcrypt.gensalt()
+    hashed_bytes = bcrypt.hashpw(plain_text_password.encode("utf-8"), salt)
+    return hashed_bytes.decode("utf-8")
+
+
+def verify_password(plain_text_password: str, hashed_password: str) -> bool:
+    """
+    Check whether the plain-text password matches the stored bcrypt hash.
+    """
+    return bcrypt.checkpw(
+        plain_text_password.encode("utf-8"), hashed_password.encode("utf-8")
+    )
 
 
 app = Flask(__name__)
@@ -131,6 +153,7 @@ def practice():
 
     return redirect("/")
 
+
 @app.route("/account")
 def account():
     if "user_id" in session:
@@ -138,6 +161,7 @@ def account():
         return render_template("account.html", username=user.username)
 
     return redirect("/")
+
 
 @app.route("/studyguide")
 def studyguide():
@@ -160,7 +184,11 @@ def view_flashcards(flashcard_source_id):
         for flashcard in retrieved_flashcards
     ]
     retrieved_source = get_flashcard_source(flashcard_source_id)
-    return render_template("view_flashcards.html", flashcard_set=retrieved_flashcards, flashcard_source=retrieved_source)
+    return render_template(
+        "view_flashcards.html",
+        flashcard_set=retrieved_flashcards,
+        flashcard_source=retrieved_source,
+    )
 
 
 @app.post("/api/register")
@@ -175,6 +203,8 @@ def register():
     validation_errors = user.validate()
     if validation_errors:
         return jsonify({"errors": validation_errors}), 422
+    hashed_pw = hash_password(password)
+    user = User(username=user_name, password=hashed_pw)
     user_id = insert_user(user)
 
     if user_id:
@@ -195,20 +225,20 @@ def login():
     # if not user_name or not password:
     #     return jsonify({"error": "Missing username or password"}), 400
 
-    user = get_user_by_name_and_password(user_name, password)
+    user = get_user_by_name(user_name)
 
-    if user:
-        session["user_id"] = user.id
-        return jsonify({"message": "Login successful", "username": user.username}), 200
-    else:
+    if not user:
         return jsonify({"error": "Invalid credentials"}), 401
+    if not verify_password(password, user.password):
+        return jsonify({"error": "Invalid credentials"}), 401
+    session["user_id"] = user.id
+    return jsonify({"message": "Login successful", "username": user.username}), 200
 
 
 @app.get("/api/logout")
 def logout():
     session.pop("user_id", None)
     return jsonify({"message": "Logged out successfully"}), 200
-
 
 
 @app.route("/api/feedback", methods=["POST"])
@@ -244,7 +274,8 @@ def feedback():
             jsonify({"error": "Error sending feedback. Please try again later."}),
             500,
         )
-    
+
+
 @app.post("/api/change-username")
 def change_username():
     if "user_id" not in session:
@@ -256,20 +287,26 @@ def change_username():
     if validation_errors:
         return jsonify({"errors": validation_errors}), 422
     update_username(session["user_id"], new_user_name)
-    return(jsonify({"message": "okay"}))
+    return jsonify({"message": "okay"})
+
 
 @app.post("/api/change-password")
 def change_password():
     if "user_id" not in session:
         return {"error": "unauthorized"}, 401
     new_password = request.json.get("password")
+    if not new_password:
+        return jsonify({"error": "Missing new password"}), 400
     user = get_user(session["user_id"])
     user.password = new_password
     validation_errors = user.validate()
     if validation_errors:
         return jsonify({"errors": validation_errors}), 422
-    update_password(session["user_id"], new_password)
-    return(jsonify({"message": "okay"}))
+    new_hashed_pw = hash_password(new_password)
+    user.password = new_hashed_pw
+    update_password(session["user_id"], new_hashed_pw)
+    return jsonify({"message": "password updated"}), 200
+
 
 @app.post("/api/completion")
 def completion():
@@ -312,12 +349,14 @@ please return the following json structure:
 
     return completion
 
+
 @app.route("/api/clear-history", methods=["DELETE"])
 def clear_history():
     if "user_id" not in session:
         return {"error": "unauthorized"}, 401
     delete_flashcard_sources_for_user(session["user_id"])
-    return {"status":"success"}
+    return {"status": "success"}
+
 
 @app.delete("/api/flashcard-source/<flashcard_source_id>")
 def delete_flashcard_source(flashcard_source_id):

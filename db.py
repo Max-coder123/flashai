@@ -15,17 +15,16 @@ class User:
         self.created_at = created_at or datetime.now().isoformat()
         self.updated_at = updated_at or self.created_at
 
-
     @staticmethod
     def from_row(row):
         return User(
-            id=row['id'],
-            username=row['username'],
-            created_at=row['created_at'],
-            updated_at=row['updated_at'],
-            password=row['password'],
+            id=row["id"],
+            username=row["username"],
+            created_at=row["created_at"],
+            updated_at=row["updated_at"],
+            password=row["password"],
         )
-    
+
     def validate(self):
         errors = []
         pwd = self.password
@@ -50,13 +49,19 @@ class User:
             errors.append("Password must include at least one number.")
         if not any(ch in string.punctuation for ch in pwd):
             errors.append("Password must include at least one symbol (e.g. !@#$%^&*).")
-        
+
         return errors
 
 
 class FlashcardSource:
     def __init__(
-        self, id=None, content=None, title=None, user_id=None, created_at=None, updated_at=None
+        self,
+        id=None,
+        content=None,
+        title=None,
+        user_id=None,
+        created_at=None,
+        updated_at=None,
     ):
         self.id = id or str(uuid.uuid4())
         self.content = content
@@ -68,12 +73,12 @@ class FlashcardSource:
     @staticmethod
     def from_row(row):
         return FlashcardSource(
-            id=row['id'],
-            content=row['content'],
-            title=row['title'],
-            user_id=row['user_id'],
-            created_at=row['created_at'],
-            updated_at=row['updated_at'],
+            id=row["id"],
+            content=row["content"],
+            title=row["title"],
+            user_id=row["user_id"],
+            created_at=row["created_at"],
+            updated_at=row["updated_at"],
         )
 
 
@@ -101,14 +106,14 @@ class Flashcard:
     @staticmethod
     def from_row(row):
         return Flashcard(
-            id=row['id'],
-            question=row['question'],
-            answer=row['answer'],
-            explanation=row['explanation'],
-            source_id=row['source_id'],
-            user_id=row['user_id'],
-            created_at=row['created_at'],
-            updated_at=row['updated_at'],
+            id=row["id"],
+            question=row["question"],
+            answer=row["answer"],
+            explanation=row["explanation"],
+            source_id=row["source_id"],
+            user_id=row["user_id"],
+            created_at=row["created_at"],
+            updated_at=row["updated_at"],
         )
 
 
@@ -213,38 +218,39 @@ def insert_flashcard(flashcard: Flashcard):
     conn.commit()
 
 
-
 def get_user(user_id):
     cursor.execute("SELECT * FROM user WHERE id = ?", (user_id,))
     row = cursor.fetchone()
     print(row["password"])
     return User.from_row(row) if row else None
 
+
 def update_username(user_id, new_username):
     cursor.execute("UPDATE user SET username = ? WHERE id = ?", (new_username, user_id))
     conn.commit()
+
 
 def update_password(user_id, new_password):
     cursor.execute("UPDATE user SET password = ? WHERE id = ?", (new_password, user_id))
     conn.commit()
 
-def get_user_by_name_and_password(username, password):
-    cursor.execute(
-        "SELECT * FROM user WHERE username = ? and password = ?", (username, password)
-    )
+
+def get_user_by_name(username):
+    cursor.execute("SELECT * FROM user WHERE username = ?", (username,))
     row = cursor.fetchone()
     return User.from_row(row) if row else None
+
 
 def get_flashcard_source(source_id):
     cursor.execute("SELECT * FROM flashcard_source WHERE id = ?", (source_id,))
     row = cursor.fetchone()
     return FlashcardSource.from_row(row) if row else None
 
+
 def get_flashcard_sources_for_user(user_id):
     cursor.execute("SELECT * FROM flashcard_source WHERE user_id = ?", (user_id,))
     rows = cursor.fetchall()
     return [FlashcardSource.from_row(row) for row in rows]
-
 
 def get_flashcards_for_source(source_id):
     cursor.execute("SELECT * FROM flashcard WHERE source_id = ?", (source_id,))

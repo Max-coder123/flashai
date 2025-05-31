@@ -2,3 +2,4 @@ python-dotenv==1.0.1
 requests==2.32.2
 flask==3.0.3
 flask-mail==0.10.0
+bcrypt==4.3.0
