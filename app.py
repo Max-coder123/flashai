@@ -4,6 +4,12 @@ import requests
 import sys
 import json
 import uuid
+from pathlib import Path
+
+from dotenv import load_dotenv
+BASE_DIR = Path(__file__).resolve().parent
+load_dotenv(BASE_DIR / ".env")
+load_dotenv(BASE_DIR.parent / ".env")
 
 from db import (
     Flashcard,
@@ -22,7 +28,7 @@ from db import (
     update_password,
     update_username,
 )
-from dotenv import load_dotenv
+
 from flask_mail import Mail, Message
 from flask import (
     Flask,
@@ -36,10 +42,8 @@ from flask import (
 )
 
 
-load_dotenv()
 if not os.environ.get("OPENAI_API_KEY"):
     print("OPENAI_API_KEY not found in env")
-    sys.exit(1)
 
 
 def fetch_json_completion(content):
