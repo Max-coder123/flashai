@@ -25,7 +25,7 @@ FlashAI is an AI-driven tool designed to help learners create personalized flash
    ```
 4. Run the app
    ```bash
-   python app.py
+   python flask_app.py
    ```
 5. Use Website
    

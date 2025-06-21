@@ -146,11 +146,7 @@ ul {
                     taskbar.classList.add('minimized');
                     mainContent.classList.add('expanded');
                 }
-    
-                document.getElementById('toggle-taskbar').addEventListener('click', function () {
-                    taskbar.classList.toggle('minimized');
-                    mainContent.classList.toggle('expanded');
-                });
+
     
                 if (courseId) {
                     fetch('/static/study_guides.json')
