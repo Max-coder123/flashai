@@ -159,6 +159,7 @@ input[type="submit"]:disabled {
     display: block;
     width: 24px;
     height: 24px;
+    flex-shrink: none;
 }
 
 #toggle-taskbar {
@@ -500,4 +501,10 @@ body {
     font-size: 1.5em;
     color: grey;
     text-align: center;
+}
+
+@media (max-width: 1000px) {
+    .taskbar span {
+        display: none;
+    }
 }
