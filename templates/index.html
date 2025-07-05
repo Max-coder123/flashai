@@ -15,90 +15,176 @@
 </head>
 
 <body>
+
     <body>
         <header class="landing-header">
             <h1>FlashAI</h1>
             <p class="byline">Study Smarter, Not Harder.</p>
             <p class="subtitle">Instantly generate, customize, and master flashcards with AI.</p>
         </header>
-    
+
         <main class="auth-container">
             <form id="login">
                 <h2>Login</h2>
                 <label> Username
                     <input type="text" id="username">
+                    <div class="error-container" id="login-username-error"></div>
                 </label>
                 <label> Password
                     <input type="password" id="password">
+                    <div class="error-container" id="login-password-error"></div>
                 </label>
                 <button type="submit">Login</button>
             </form>
-    
+
             <form id="register">
                 <h2>Register</h2>
                 <label> Username
                     <input type="text" id="register-username">
+                    <div class="error-container" id="register-username-error"></div>
                 </label>
                 <label> Password
                     <input type="password" id="register-password">
+                    <div class="error-container" id="register-password-error"></div>
                 </label>
                 <button type="submit">Register</button>
             </form>
         </main>
 
-    
 
-    <script>
-        const username = document.querySelector("#username")
-        const password = document.querySelector("#password")
-        const loginForm = document.querySelector("form#login")
-        loginForm.addEventListener("submit", event => {
-            event.preventDefault()
-            fetch("/api/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    username: username.value,
-                    password: password.value
+
+        <script>
+            const username = document.querySelector("#username")
+            const password = document.querySelector("#password")
+            const loginForm = document.querySelector("form#login")
+            const loginUsernameError = document.querySelector("#login-username-error")
+            const loginPasswordError = document.querySelector("#login-password-error")
+
+            loginForm.addEventListener("submit", event => {
+                event.preventDefault()
+                // Clear previous errors
+                loginUsernameError.innerHTML = ""
+                loginUsernameError.style.display = "none"
+                loginPasswordError.innerHTML = ""
+                loginPasswordError.style.display = "none"
+
+                fetch("/api/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username: username.value,
+                        password: password.value
+                    })
                 })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.error) {
+                            // Display login error under password field
+                            loginPasswordError.innerHTML = `<div class="error-message">${data.error}</div>`
+                            loginPasswordError.style.display = "block"
+                        } else {
+                            window.location = "cards"
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error)
+                        loginPasswordError.innerHTML = `<div class="error-message">An error occurred. Please try again.</div>`
+                        loginPasswordError.style.display = "block"
+                    });
+
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                    window.location = "cards"
-                })
-                .catch(error => console.error("Error:", error));
 
-        })
+            const register_username = document.querySelector("#register-username")
+            const register_password = document.querySelector("#register-password")
+            const registerForm = document.querySelector("form#register")
+            const registerUsernameError = document.querySelector("#register-username-error")
+            const registerPasswordError = document.querySelector("#register-password-error")
 
-        const register_username = document.querySelector("#register-username")
-        const register_password = document.querySelector("#register-password")
-        const registerForm = document.querySelector("form#register")
-        registerForm.addEventListener("submit", event => {
-            event.preventDefault()
-            fetch("/api/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    username: register_username.value,
-                    password: register_password.value
+            registerForm.addEventListener("submit", event => {
+                event.preventDefault()
+                // Clear previous errors
+                registerUsernameError.innerHTML = ""
+                registerUsernameError.style.display = "none"
+                registerPasswordError.innerHTML = ""
+                registerPasswordError.style.display = "none"
+
+                fetch("/api/register", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        username: register_username.value,
+                        password: register_password.value
+                    })
                 })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.errors?.length) {
+                            // Separate username and password errors
+                            const usernameErrors = []
+                            const passwordErrors = []
+
+                            data.errors.forEach(error => {
+                                if (error.toLowerCase().includes('username')) {
+                                    usernameErrors.push(error)
+                                } else if (error.toLowerCase().includes('password')) {
+                                    passwordErrors.push(error)
+                                } else {
+                                    // Default to password errors for general validation issues
+                                    passwordErrors.push(error)
+                                }
+                            })
+
+                            // Display consolidated errors
+                            if (usernameErrors.length > 0) {
+                                const consolidatedUsernameError = consolidateErrors(usernameErrors)
+                                registerUsernameError.innerHTML = `<div class="error-message">${consolidatedUsernameError}</div>`
+                                registerUsernameError.style.display = "block"
+                            }
+
+                            if (passwordErrors.length > 0) {
+                                const consolidatedPasswordError = consolidateErrors(passwordErrors)
+                                registerPasswordError.innerHTML = `<div class="error-message">${consolidatedPasswordError}</div>`
+                                registerPasswordError.style.display = "block"
+                            }
+                        }
+                        else {
+                            window.location = "cards"
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error)
+                        registerPasswordError.innerHTML = `<div class="error-message">An error occurred. Please try again.</div>`
+                        registerPasswordError.style.display = "block"
+                    });
+
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.errors?.length) {
-                        alert(data.errors.join("\n"))
-                    }
-                    else {
-                        window.location = "cards"
-                    }
-                })
-                .catch(error => console.error("Error:", error));
 
-        })
-    </script>
-</body>
+            // Function to consolidate multiple errors into a single message
+            function consolidateErrors(errors) {
+                if (errors.length === 1) {
+                    return errors[0]
+                }
+
+                // Extract the requirements from error messages
+                const requirements = errors.map(error => {
+                    if (error.includes('at least 8 characters')) return 'at least 8 characters'
+                    if (error.includes('shorter than 15 characters')) return 'no more than 15 characters'
+                    if (error.includes('uppercase letter')) return 'one uppercase letter'
+                    if (error.includes('lowercase letter')) return 'one lowercase letter'
+                    if (error.includes('number')) return 'one number'
+                    if (error.includes('symbol')) return 'one symbol'
+                    if (error.includes('at least 4 characters')) return 'at least 4 characters'
+                    return error.replace(/^(Username|Password) must /, '').replace(/\.$/, '')
+                })
+
+                // Create consolidated message
+                const fieldType = errors[0].toLowerCase().includes('username') ? 'Username' : 'Password'
+                return `${fieldType} must include: ${requirements.join(', ')}.`
+            }
+        </script>
+    </body>

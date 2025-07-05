@@ -33,6 +33,7 @@
             <div>
                 <label> change username
                     <input type="text" id="new-username">
+                    <div class="error-container" id="username-errors"></div>
                 </label>
             </div>
 
@@ -45,6 +46,7 @@
             <div>
                 <label> change password
                     <input type="password" id="reset-password">
+                    <div class="error-container" id="password-errors"></div>
                 </label>
             </div>
             <div>
@@ -61,10 +63,16 @@
 
         const newUsername = document.querySelector("#new-username")
         const changeUsernameForm = document.querySelector("form#change-username")
+        const usernameErrors = document.querySelector("#username-errors")
+
         changeUsernameForm.addEventListener("submit", event => {
             event.preventDefault()
             const newUsernameElement = document.querySelector("#header")
-            
+
+            // Clear previous errors
+            usernameErrors.innerHTML = ""
+            usernameErrors.style.display = "none"
+
             fetch("/api/change-username", {
                 method: "POST",
                 headers: {
@@ -72,29 +80,52 @@
                 },
                 body: JSON.stringify({
                     username: newUsername.value,
-                    
+
                 })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (data.errors?.length) {
-                        alert(data.errors.join("\n"))
+                        // Display consolidated validation errors
+                        const consolidatedError = consolidateErrors(data.errors)
+                        usernameErrors.innerHTML = `<div class="error-message">${consolidatedError}</div>`
+                        usernameErrors.style.display = "block"
                     }
                     else {
                         newUsernameElement.textContent = "Account Settings - " + newUsername.value
+                        // Show success message
+                        usernameErrors.innerHTML = `<div class="success-message">Username changed successfully!</div>`
+                        usernameErrors.style.display = "block"
+                        usernameErrors.style.backgroundColor = "#d4edda"
+                        usernameErrors.style.borderColor = "#c3e6cb"
+                        usernameErrors.style.borderLeftColor = "#28a745"
+                        setTimeout(() => {
+                            usernameErrors.style.display = "none"
+                        }, 3000)
                     }
                     console.log(data)
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => {
+                    console.error("Error:", error)
+                    usernameErrors.innerHTML = `<div class="error-message">An error occurred. Please try again.</div>`
+                    usernameErrors.style.display = "block"
+                });
 
         })
 
         const newPasswordEl = document.querySelector("#reset-password")
         const changePasswordForm = document.querySelector("form#change-password")
+        const passwordErrors = document.querySelector("#password-errors")
+
         changePasswordForm.addEventListener("submit", event => {
             event.preventDefault()
             const newPassword = newPasswordEl.value
             changePasswordForm.reset()
+
+            // Clear previous errors
+            passwordErrors.innerHTML = ""
+            passwordErrors.style.display = "none"
+
             fetch("/api/change-password", {
                 method: "POST",
                 headers: {
@@ -107,16 +138,54 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.errors?.length) {
-                        alert(data.errors.join("\n"))
+                        // Display consolidated validation errors
+                        const consolidatedError = consolidateErrors(data.errors)
+                        passwordErrors.innerHTML = `<div class="error-message">${consolidatedError}</div>`
+                        passwordErrors.style.display = "block"
                     }
                     else {
-                        alert("password changed successfully")
+                        // Show success message
+                        passwordErrors.innerHTML = `<div class="success-message">Password changed successfully!</div>`
+                        passwordErrors.style.display = "block"
+                        passwordErrors.style.backgroundColor = "#d4edda"
+                        passwordErrors.style.borderColor = "#c3e6cb"
+                        passwordErrors.style.borderLeftColor = "#28a745"
+                        setTimeout(() => {
+                            passwordErrors.style.display = "none"
+                        }, 3000)
                     }
                     console.log(data)
                 })
-                .catch(error => console.error("Error:", error));
+                .catch(error => {
+                    console.error("Error:", error)
+                    passwordErrors.innerHTML = `<div class="error-message">An error occurred. Please try again.</div>`
+                    passwordErrors.style.display = "block"
+                });
 
         })
+
+        // Function to consolidate multiple errors into a single message
+        function consolidateErrors(errors) {
+            if (errors.length === 1) {
+                return errors[0]
+            }
+
+            // Extract the requirements from error messages
+            const requirements = errors.map(error => {
+                if (error.includes('at least 8 characters')) return 'at least 8 characters'
+                if (error.includes('shorter than 15 characters')) return 'no more than 15 characters'
+                if (error.includes('uppercase letter')) return 'one uppercase letter'
+                if (error.includes('lowercase letter')) return 'one lowercase letter'
+                if (error.includes('number')) return 'one number'
+                if (error.includes('symbol')) return 'one symbol'
+                if (error.includes('at least 4 characters')) return 'at least 4 characters'
+                return error.replace(/^(Username|Password) must /, '').replace(/\.$/, '')
+            })
+
+            // Create consolidated message
+            const fieldType = errors[0].toLowerCase().includes('username') ? 'Username' : 'Password'
+            return `${fieldType} must include: ${requirements.join(', ')}.`
+        }
     </script>
 </body>
 
