@@ -269,7 +269,6 @@ body {
     border-left: 0.1px solid #A0A4B8;
     position: relative;
     transition: width 0.4s, margin-left 0.4s ease;
-    overflow-y: auto;
 }
 
 .login-container {

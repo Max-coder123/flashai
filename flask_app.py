@@ -201,8 +201,7 @@ def study_guide():
 
 
 @app.get("/flashcards/<flashcard_source_id>")
-@login_required
-def view_flashcards(user, flashcard_source_id):
+def view_flashcards(flashcard_source_id):
     retrieved_flashcards = get_flashcards_for_source(flashcard_source_id)
     retrieved_flashcards = [
         {"question": flashcard.question, "answer": flashcard.answer, "id": flashcard.id}
