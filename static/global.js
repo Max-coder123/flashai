@@ -7,11 +7,11 @@ const authForm = document.getElementById('authForm'); // Added this
 
 let isLogin = true;
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const feedbackButton = document.getElementById('feedback-button');
     const feedbackDropdown = document.getElementById('feedback-dropdown');
 
-    feedbackButton.addEventListener('click', function() {
+    feedbackButton.addEventListener('click', function () {
         if (feedbackDropdown.style.display === 'none' || feedbackDropdown.style.display === '') {
             feedbackDropdown.style.display = 'block';
         }
@@ -22,11 +22,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const productsButton = document.getElementById('products-button');
     const productsDropdown = document.getElementById('products-dropdown');
 
-    productsButton.addEventListener('click', function() {
+    productsButton.addEventListener('click', function () {
         if (productsDropdown.style.display === 'none' || productsDropdown.style.display === '') {
             productsDropdown.style.display = 'block';
         } else {
@@ -69,10 +69,3 @@ if (toggleFormText) {
         }
     });
 }
-
-document.getElementById('toggle-taskbar').addEventListener('click', function () {
-    const taskbar = document.getElementById('taskbar');
-    const mainContent = document.getElementById('main-content');
-    taskbar.classList.toggle('minimized');
-    mainContent.classList.toggle('expanded');
-});

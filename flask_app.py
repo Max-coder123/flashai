@@ -5,8 +5,10 @@ import sys
 import json
 import uuid
 from pathlib import Path
+from functools import wraps
 
 from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 load_dotenv(BASE_DIR.parent / ".env")
@@ -44,6 +46,38 @@ from flask import (
 
 if not os.environ.get("OPENAI_API_KEY"):
     print("OPENAI_API_KEY not found in env")
+
+
+def login_required(f):
+    """Decorator to require login for routes"""
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user_id" not in session:
+            return redirect("/")
+        user = get_user(session["user_id"])
+        if not user:
+            session.pop("user_id", None)
+            return redirect("/")
+        return f(user, *args, **kwargs)
+
+    return decorated_function
+
+
+def api_login_required(f):
+    """Decorator to require login for API routes"""
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if "user_id" not in session:
+            return {"error": "unauthorized"}, 401
+        user = get_user(session["user_id"])
+        if not user:
+            session.pop("user_id", None)
+            return {"error": "unauthorized"}, 401
+        return f(user, *args, **kwargs)
+
+    return decorated_function
 
 
 def fetch_json_completion(content):
@@ -119,11 +153,9 @@ app.secret_key = "supersecretkey"
 
 
 @app.get("/cards")
-def cards():
-    if "user_id" in session:
-        return render_template("cards.html")
-
-    return redirect("/")
+@login_required
+def cards(user):
+    return render_template("cards.html")
 
 
 @app.get("/")
@@ -133,46 +165,34 @@ def index():
 
 
 @app.route("/history")
-def history():
-    if "user_id" in session:
-        user = get_user(session["user_id"])
-        retrieved_sources = get_flashcard_sources_for_user(user.id)
-        return render_template("history.html", history=retrieved_sources)
-
-    return redirect("/")
+@login_required
+def history(user):
+    retrieved_sources = get_flashcard_sources_for_user(user.id)
+    return render_template("history.html", history=retrieved_sources)
 
 
 @app.route("/dashboard")
-def dashboard():
-    if "user_id" in session:
-        return render_template("dashboard.html")
-
-    return redirect("/")
+@login_required
+def dashboard(user):
+    return render_template("dashboard.html")
 
 
 @app.route("/practice")
-def practice():
-    if "user_id" in session:
-        return render_template("practice.html")
-
-    return redirect("/")
+@login_required
+def practice(user):
+    return render_template("practice.html")
 
 
 @app.route("/account")
-def account():
-    if "user_id" in session:
-        user = get_user(session["user_id"])
-        return render_template("account.html", username=user.username)
-
-    return redirect("/")
+@login_required
+def account(user):
+    return render_template("account.html", username=user.username)
 
 
 @app.route("/studyguide")
-def studyguide():
-    if "user_id" in session:
-        return render_template("studyguide.html")
-
-    return redirect("/")
+@login_required
+def studyguide(user):
+    return render_template("studyguide.html")
 
 
 @app.route("/study_guide.json")
@@ -181,7 +201,8 @@ def study_guide():
 
 
 @app.get("/flashcards/<flashcard_source_id>")
-def view_flashcards(flashcard_source_id):
+@login_required
+def view_flashcards(user, flashcard_source_id):
     retrieved_flashcards = get_flashcards_for_source(flashcard_source_id)
     retrieved_flashcards = [
         {"question": flashcard.question, "answer": flashcard.answer, "id": flashcard.id}
@@ -197,6 +218,9 @@ def view_flashcards(flashcard_source_id):
 
 @app.post("/api/register")
 def register():
+    if not request.json:
+        return jsonify({"error": "Invalid JSON"}), 400
+
     user_name = request.json.get("username")
     password = request.json.get("password")
 
@@ -223,6 +247,9 @@ def register():
 
 @app.post("/api/login")
 def login():
+    if not request.json:
+        return jsonify({"error": "Invalid JSON"}), 400
+
     user_name = request.json.get("username")
     password = request.json.get("password")
 
@@ -281,11 +308,12 @@ def feedback():
 
 
 @app.post("/api/change-username")
-def change_username():
-    if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
+@api_login_required
+def change_username(user):
+    if not request.json:
+        return jsonify({"error": "Invalid JSON"}), 400
+
     new_user_name = request.json.get("username")
-    user = get_user(session["user_id"])
     user.username = new_user_name
     validation_errors = user.validate()
     if validation_errors:
@@ -295,13 +323,14 @@ def change_username():
 
 
 @app.post("/api/change-password")
-def change_password():
-    if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
+@api_login_required
+def change_password(user):
+    if not request.json:
+        return jsonify({"error": "Invalid JSON"}), 400
+
     new_password = request.json.get("password")
     if not new_password:
         return jsonify({"error": "Missing new password"}), 400
-    user = get_user(session["user_id"])
     user.password = new_password
     validation_errors = user.validate()
     if validation_errors:
@@ -313,9 +342,11 @@ def change_password():
 
 
 @app.post("/api/completion")
-def completion():
-    if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
+@api_login_required
+def completion(user):
+    if not request.json:
+        return jsonify({"error": "Invalid JSON"}), 400
+
     user_message = request.json.get("question")
     # if not user_message:
 
@@ -355,18 +386,15 @@ please return the following json structure:
 
 
 @app.route("/api/clear-history", methods=["DELETE"])
-def clear_history():
-    if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
+@api_login_required
+def clear_history(user):
     delete_flashcard_sources_for_user(session["user_id"])
     return {"status": "success"}
 
 
 @app.delete("/api/flashcard-source/<flashcard_source_id>")
-def delete_flashcard_source(flashcard_source_id):
-    if "user_id" not in session:
-        return {"error": "unauthorized"}, 401
-
+@api_login_required
+def delete_flashcard_source(user, flashcard_source_id):
     deleted = delete_flashcard_source_by_id(flashcard_source_id, session["user_id"])
     if deleted:
         return {"status": "success"}

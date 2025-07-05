@@ -96,6 +96,9 @@
                 <a href="/flashcards/{{ entry.id }}">
                     <button>View Flashcards</button>
                 </a>
+                <button class="share-flashcard-source" data-id="{{entry.id}}" title="Share this flashcard set">
+                    <i class="fa-solid fa-share"></i>
+                </button>
                 <button class="delete-flashcard-source" data-id="{{entry.id}}"><i class="fa-solid fa-trash"></i>
                 </button>
             </div>
@@ -124,6 +127,65 @@
                     })
             }
         })
+
+        // Share flashcard functionality
+        const flashcardSourceShareBtns = document.querySelectorAll(".share-flashcard-source")
+        for (const flashcardSourceShareBtn of flashcardSourceShareBtns) {
+            flashcardSourceShareBtn.addEventListener("click", event => {
+                const sourceId = event.target.closest('.share-flashcard-source').getAttribute("data-id")
+                const shareUrl = window.location.origin + "/flashcards/" + sourceId
+
+                // Try to use the modern Clipboard API first
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(shareUrl).then(() => {
+                        showShareNotification("Link copied to clipboard!", flashcardSourceShareBtn)
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err)
+                        fallbackCopyTextToClipboard(shareUrl, flashcardSourceShareBtn)
+                    })
+                } else {
+                    // Fallback for older browsers
+                    fallbackCopyTextToClipboard(shareUrl, flashcardSourceShareBtn)
+                }
+            })
+        }
+
+        // Fallback copy function for older browsers
+        function fallbackCopyTextToClipboard(text, button) {
+            const textArea = document.createElement("textarea")
+            textArea.value = text
+            textArea.style.top = "0"
+            textArea.style.left = "0"
+            textArea.style.position = "fixed"
+            document.body.appendChild(textArea)
+            textArea.focus()
+            textArea.select()
+
+            try {
+                const successful = document.execCommand('copy')
+                if (successful) {
+                    showShareNotification("Link copied to clipboard!", button)
+                } else {
+                    showShareNotification("Failed to copy link", button)
+                }
+            } catch (err) {
+                showShareNotification("Failed to copy link", button)
+            }
+
+            document.body.removeChild(textArea)
+        }
+
+        // Show notification for share action
+        function showShareNotification(message, button) {
+            const originalText = button.innerHTML
+            button.innerHTML = '<i class="fa-solid fa-check"></i>'
+            button.style.backgroundColor = '#7FC29B'
+
+            setTimeout(() => {
+                button.innerHTML = originalText
+                button.style.backgroundColor = '#031738'
+            }, 2000)
+        }
 
         const flashcardSourceDeleteBtns = document.querySelectorAll(".delete-flashcard-source")
         for (const flashcardSourceDeleteBtn of flashcardSourceDeleteBtns) {

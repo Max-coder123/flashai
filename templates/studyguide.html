@@ -9,114 +9,105 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="static/global.css">
     <style>
-#study-guide-container {
-    width: 70%;
-    margin-left: 350px;
-    padding-bottom: 50px;
-    text-align: left;
-    font-size: 105%; 
-}
+        #study-guide-container {
+            width: 70%;
+            margin-left: 350px;
+            padding-bottom: 50px;
+            text-align: left;
+            font-size: 105%;
+        }
 
-.unit-taskbar {
-    width: 350px;
-    border-right: 1px solid #ccc;
-    padding: 20px;
-    height: 100vh;
-    overflow-y: auto;
-    position: fixed;
-    top: 60px;
-    left: 60px;
-    background-color: transparent;
-    transition: left 0.3s ease;
-}
+        .unit-taskbar {
+            position: fixed;
+            top: 60px;
+            left: 350px;
+            width: 300px;
+            height: calc(100vh - 60px);
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            overflow-y: auto;
+            z-index: 99;
+            transition: left 0.3s ease;
+        }
 
-.taskbar.minimized+.main-content .unit-taskbar {
-    left: 60px;
-}
+        .unit-taskbar ul {
+            list-style: none;
+            padding: 0;
+        }
 
-.taskbar:not(.minimized)+.main-content .unit-taskbar {
-    left: 350px;
-}
+        .unit-taskbar li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            width: 95%;
+            margin: 0 auto;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            user-select: none;
+        }
 
-.unit-taskbar ul {
-    list-style: none;
-    padding: 0;
-}
+        .unit-taskbar li:hover {
+            background-color: #f2f2f2;
+        }
 
-.unit-taskbar li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-    width: 95%;
-    margin: 0 auto;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    user-select: none;
-}
+        .unit-number,
+        .unit-title {
+            color: black;
+            display: block;
+            pointer-events: none;
+        }
 
-.unit-taskbar li:hover {
-    background-color: #f2f2f2;
-}
+        .unit-number {
+            font-size: 75%;
+            font-weight: 650;
+            color: grey;
+        }
 
-.unit-number,
-.unit-title {
-    color: black;
-    display: block;
-    pointer-events: none;
-}
+        .unit-title {
+            font-size: 100%;
+            font-weight: 400;
+        }
 
-.unit-number {
-    font-size: 75%;
-    font-weight: 650;
-    color: grey;
-}
+        .unit-taskbar li .unit-number {
+            color: grey;
+            font-size: 75%;
+            font-weight: 650;
+        }
 
-.unit-title {
-    font-size: 100%;
-    font-weight: 400;
-}
+        .unit-taskbar li .unit-title {
+            color: black;
+            font-size: 100%;
+            font-weight: 400;
+            margin-left: 0;
+            display: inline;
+        }
 
-.unit-taskbar li .unit-number {
-    color: grey;
-    font-size: 75%;
-    font-weight: 650;
-}
+        .unit-button span {
+            pointer-events: none;
+        }
 
-.unit-taskbar li .unit-title {
-    color: black;
-    font-size: 100%;
-    font-weight: 400;
-    margin-left: 0;
-    display: inline;
-}
+        .logo {
+            height: 150px;
+            margin: 0;
+            padding: 0;
+            display: block;
+            max-width: 100%;
+        }
 
-.unit-button span {
-    pointer-events: none;
-}
+        h1,
+        h2,
+        h3 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
 
-.logo {
-    height: 150px;
-    margin: 0;
-    padding: 0;
-    display: block;
-    max-width: 100%;
-}
-
-h1,
-h2,
-h3 {
-    text-align: left;
-    margin-bottom: 20px;
-}
-
-ul {
-    list-style-position: inside;
-    padding-left: 20px;
-}
-
+        ul {
+            list-style-position: inside;
+            padding-left: 20px;
+        }
     </style>
 </head>
 
@@ -124,127 +115,120 @@ ul {
 
     {% include 'partials/_nav.html' %}
 
-    
-        <div class="main-content" id="main-content">
-            <div id="unit-taskbar" class="unit-taskbar">
-                <ul id="unit-list"></ul>
-            </div>
-            <div id="study-guide-container"></div>
+
+    <div class="main-content" id="main-content">
+        <div id="unit-taskbar" class="unit-taskbar">
+            <ul id="unit-list"></ul>
         </div>
-    
-        <script src="/static/global.js"></script>
-    
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const taskbar = document.getElementById('taskbar');
-                const mainContent = document.getElementById('main-content');
-                const unitTaskbar = document.getElementById('unit-list');
-                const urlParams = new URLSearchParams(window.location.search);
-                const courseId = urlParams.get('course');
-    
-                if (courseId) {
-                    taskbar.classList.add('minimized');
-                    mainContent.classList.add('expanded');
-                }
+        <div id="study-guide-container"></div>
+    </div>
 
-    
-                if (courseId) {
-                    fetch('/static/study_guides.json')
-                        .then(response => response.json())
-                        .then(data => {
-                            const studyGuide = data.find(course => course.courseId === courseId);
-                            if (studyGuide) {
-                                populateUnitTaskbar(studyGuide.units);
-                                displayStudyGuide(studyGuide);
-    
-                                document.getElementById('unit-taskbar').addEventListener('click', function (e) {
-                                    if (e.target.classList.contains('unit-button')) {
-                                        const unitId = e.target.dataset.unitId;
-                                        loadUnit(unitId, studyGuide);
-                                    }
-                                });
-                            } else {
-                                console.error('Study guide not found for courseId:', courseId);
-                            }
-                        })
-                        .catch(error => console.error('Error loading study guide:', error));
-                }
-    
-                function populateUnitTaskbar(units) {
-    if (!units || !Array.isArray(units)) return;
-    unitTaskbar.innerHTML = units.map(unit => {
-        const unitNumber = unit.unitId.replace(/\D/g, '');
-        const unitTitle = unit.unitName.replace(/unit\s?\d*:/i, '').trim();
+    <script src="/static/global.js"></script>
 
-        return `
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const taskbar = document.getElementById('taskbar');
+            const mainContent = document.getElementById('main-content');
+            const unitTaskbar = document.getElementById('unit-list');
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('course');
+
+            if (courseId) {
+                fetch('/static/study_guides.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const studyGuide = data.find(course => course.courseId === courseId);
+                        if (studyGuide) {
+                            populateUnitTaskbar(studyGuide.units);
+                            displayStudyGuide(studyGuide);
+
+                            document.getElementById('unit-taskbar').addEventListener('click', function (e) {
+                                if (e.target.classList.contains('unit-button')) {
+                                    const unitId = e.target.dataset.unitId;
+                                    loadUnit(unitId, studyGuide);
+                                }
+                            });
+                        } else {
+                            console.error('Study guide not found for courseId:', courseId);
+                        }
+                    })
+                    .catch(error => console.error('Error loading study guide:', error));
+            }
+
+            function populateUnitTaskbar(units) {
+                if (!units || !Array.isArray(units)) return;
+                unitTaskbar.innerHTML = units.map(unit => {
+                    const unitNumber = unit.unitId.replace(/\D/g, '');
+                    const unitTitle = unit.unitName.replace(/unit\s?\d*:/i, '').trim();
+
+                    return `
             <li class="unit-button" data-unit-id="${unit.unitId}" style="cursor: pointer;">
                 <div class="unit-number">UNIT ${unitNumber}</div>
                 <div class="unit-title">${unitTitle}</div>
             </li>
         `;
-    }).join('');
-}
+                }).join('');
+            }
 
-    
-function displayStudyGuide(studyGuide) {
-    const guideContainer = document.getElementById('study-guide-container');
 
-    if (!studyGuide.units || !Array.isArray(studyGuide.units)) {
-        guideContainer.innerHTML = '<p>No units available for this course.</p>';
-        return;
-    }
+            function displayStudyGuide(studyGuide) {
+                const guideContainer = document.getElementById('study-guide-container');
 
-    guideContainer.innerHTML = `
+                if (!studyGuide.units || !Array.isArray(studyGuide.units)) {
+                    guideContainer.innerHTML = '<p>No units available for this course.</p>';
+                    return;
+                }
+
+                guideContainer.innerHTML = `
         <h1>${studyGuide.courseName}</h1>
         ${studyGuide.units.map(unit => `
             <div class="unit">
                 <h2>${unit.unitName}</h2>
-                ${unit.topics && unit.topics.length > 0 
-                    ? unit.topics.map(topic => `
+                ${unit.topics && unit.topics.length > 0
+                        ? unit.topics.map(topic => `
                         <h3>${topic.topicName}</h3>
                         <ul>
-                            ${topic.details && topic.details.length > 0 
-                                ? topic.details.map(detail => `<li>${detail}</li>`).join('') 
+                            ${topic.details && topic.details.length > 0
+                                ? topic.details.map(detail => `<li>${detail}</li>`).join('')
                                 : '<li>No details available for this topic.</li>'
                             }
                         </ul>
                     `).join('')
-                    : '<p>No topics available for this unit.</p>'
-                }
+                        : '<p>No topics available for this unit.</p>'
+                    }
             </div>
         `).join('')}
     `;
-}
+            }
 
 
-function loadUnit(unitId, studyGuide) {
-    const unit = studyGuide.units.find(u => u.unitId === unitId);
-    const guideContainer = document.getElementById('study-guide-container');
+            function loadUnit(unitId, studyGuide) {
+                const unit = studyGuide.units.find(u => u.unitId === unitId);
+                const guideContainer = document.getElementById('study-guide-container');
 
-    if (unit) {
-        guideContainer.innerHTML = `
+                if (unit) {
+                    guideContainer.innerHTML = `
             <h2>${unit.unitName}</h2>
             ${unit.topics && unit.topics.length > 0
-                ? unit.topics.map(topic => `
+                            ? unit.topics.map(topic => `
                     <h3>${topic.topicName}</h3>
                     <ul>
-                        ${topic.details && topic.details.length > 0 
-                            ? topic.details.map(detail => `<li>${detail}</li>`).join('')
-                            : '<li>No details available for this topic.</li>'
-                        }
+                        ${topic.details && topic.details.length > 0
+                                    ? topic.details.map(detail => `<li>${detail}</li>`).join('')
+                                    : '<li>No details available for this topic.</li>'
+                                }
                     </ul>
                 `).join('')
-                : '<p>No topics available for this unit.</p>'
-            }
+                            : '<p>No topics available for this unit.</p>'
+                        }
         `;
-    }
-}
+                }
+            }
 
 
 
-            });
-        </script>
-    </body>
-    
-    </html>
-    
+        });
+    </script>
+</body>
+
+</html>
