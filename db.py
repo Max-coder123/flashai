@@ -221,7 +221,6 @@ def insert_flashcard(flashcard: Flashcard):
 def get_user(user_id):
     cursor.execute("SELECT * FROM user WHERE id = ?", (user_id,))
     row = cursor.fetchone()
-    print(row["password"])
     return User.from_row(row) if row else None
 
 
