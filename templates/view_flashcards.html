@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,32 +9,56 @@
     <link rel="stylesheet" href="/static/cards.css">
 
     <style>
-        
+        h1 {
+            margin-bottom: 100px;
+        }
+
+        .flashcard-container {
+            margin-top: 30px;
+        }
+
+        .back-to-history-btn {
+            background-color: #031738;
+            color: #e6e5e7;
+            border: none;
+            padding: 0.8em 1.5em;
+            border-radius: 8px;
+            font-family: "Montserrat", sans-serif;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .back-to-history-btn:hover {
+            background-color: #7FC29B;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 
 <body>
     {% include 'partials/_nav.html' %}
     <div class="main-content" id="main-content">
-    <h1>Flashcards for: {{flashcard_source.title}}</h1>
+        <h1>{{flashcard_source.title}}</h1>
 
-    <div class="flashcard-container">
-        <button id="previousCard" class="previous-card" style="display: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-            </svg>
-        </button>
-        <div id="completion"></div>
-        <button id="nextCard" class="next-card" style="display: none;">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-            </svg>
-        </button>
-    </div>
+        <div class="flashcard-container">
+            <button id="previousCard" class="previous-card" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+            <div id="completion"></div>
+            <button id="nextCard" class="next-card" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+                </svg>
+            </button>
+        </div>
 
-    <div class="card-index"></div>
+        <div class="card-index"></div>
 
-    <a href="/history">Back to History</a>
+        <button onclick="window.location.href='/history'" class="back-to-history-btn">Back to History</button>
     </div>
     <script>
         const completionEl = document.getElementById("completion");
@@ -109,9 +132,9 @@
             updateCardIndex();
             cards[activeCardIndex].classList.add("active-card");
         });
-        
+
     </script>
-    
+
 </body>
 
 

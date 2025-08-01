@@ -171,12 +171,6 @@ def history(user):
     return render_template("history.html", history=retrieved_sources)
 
 
-@app.route("/dashboard")
-@login_required
-def dashboard(user):
-    return render_template("dashboard.html")
-
-
 @app.route("/practice")
 @login_required
 def practice(user):
@@ -187,17 +181,6 @@ def practice(user):
 @login_required
 def account(user):
     return render_template("account.html", username=user.username)
-
-
-@app.route("/studyguide")
-@login_required
-def studyguide(user):
-    return render_template("studyguide.html")
-
-
-@app.route("/study_guide.json")
-def study_guide():
-    return app.send_static_file("study_guides.json")
 
 
 @app.get("/flashcards/<flashcard_source_id>")
@@ -399,10 +382,12 @@ def delete_flashcard_source(user, flashcard_source_id):
         return {"status": "success"}
     return {"status": "failure"}, 404
 
+
 @app.errorhandler(404)
 def page_not_found(e):
     print("hello")
-    return render_template('404.html'), 404
+    return render_template("404.html"), 404
+
 
 if __name__ == "__main__":
     app.run(debug=True)
