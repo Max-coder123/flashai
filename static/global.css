@@ -260,7 +260,7 @@ body {
 }
 
 .main-content {
-    width: 90%;
+    width: 100%;
     padding: 3em;
     background-color: #F2F6FA;
     margin-left: 10%;
@@ -449,5 +449,16 @@ body {
 @media (max-width: 1200px) {
     .taskbar .hideable {
         display: none;
+    }
+}
+
+@media (max-width: 700px) {
+    .main-content {
+        padding: 1em;
+    }
+}
+@media (max-width: 500px) {
+    .main-content {
+        padding: 0.5em;
     }
 }
