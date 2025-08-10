@@ -10,8 +10,6 @@ textarea {
     font-size: 1.1em;
 }
 
-
-
 #completion-input-submit {
     position: relative;
 }
@@ -37,23 +35,35 @@ textarea {
     }
 }
 
+/* FLEXIBLE FLASHCARD CONTAINER */
 .flashcard-container {
     margin-top: 2em;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
-    gap: 15px;
+    height: auto;
+    min-height: 60vh;
+    max-height: 80vh;
+    gap: 10px;
+    padding: 1rem;
+    flex-direction: row;
 }
 
+/* FLEXIBLE FLASHCARD DIMENSIONS */
 .flashcard {
     perspective: 1000px;
-    width: 600px;
-    height: 375px;
+    width: 80vw;
+    max-width: 600px;
+    min-width: 280px;
+    height: 60vh;
+    max-height: 375px;
+    min-height: 200px;
     display: none;
     justify-content: center;
     align-items: center;
     border: rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    margin: 0 auto;
 }
 
 .active-card {
@@ -66,6 +76,8 @@ textarea {
     height: 100%;
     transition: transform 0.6s;
     transform-style: preserve-3d;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .flashcard.flip .flashcard-inner {
@@ -89,6 +101,12 @@ textarea {
     background-color: #f2f5f8;
     color: #031738;
     border: 1.5px solid #031738;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.flashcard:focus {
+    outline-color: #031738;
 }
 
 .flashcard-back {
@@ -109,17 +127,21 @@ textarea {
 }
 
 .previous-card {
-    margin-right: 20px;
+    margin-right: 10px;
     background-color: #031738;
     padding: 10px;
     border-radius: 50%;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .next-card {
-    margin-left: 20px;
+    margin-left: 10px;
     background-color: #031738;
     padding: 10px;
     border-radius: 50%;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .shuffle-button-container {
@@ -136,6 +158,21 @@ textarea {
     margin-left: auto;
     margin-right: auto;
     box-shadow: none;
+    min-height: 60px;
+}
+
+.mobile-navigation-arrows {
+    display: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.mobile-navigation-arrows button {
+    pointer-events: auto;
 }
 
 .shuffle-icon-button,
@@ -148,6 +185,8 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 .shuffle-icon-button:hover,
@@ -165,7 +204,6 @@ textarea {
     width: 24px;
     height: 24px;
 }
-
 
 .card-index {
     text-align: center;
@@ -258,9 +296,7 @@ textarea {
     bottom: 0;
 }
 
-
 .send-button {
-
     padding: 12px 20px;
     background-color: #031738;
     color: #ffffff;
@@ -277,7 +313,6 @@ textarea {
 }
 
 .clear-button {
-
     margin-top: 2px;
     padding: 12px 20px;
     background-color: #031738;
@@ -294,9 +329,7 @@ textarea {
     background-color: #000;
 }
 
-
 .upload-button {
-
     padding: 12px 20px;
     background-color: transparent;
     border: 1.5px solid #031738;
@@ -349,15 +382,66 @@ textarea {
     border-color: transparent transparent #031738 transparent;
 }
 
-
-
 .upload-button:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
 }
 
-/* Responsive design for smaller screens */
+/* TABLET AND MOBILE ADJUSTMENTS */
 @media (max-width: 768px) {
+    .flashcard-container {
+        flex-direction: column;
+        gap: 0.5rem;
+        min-height: 50vh;
+        padding: 0 1rem;
+    }
+
+    /* Hide desktop navigation arrows */
+    .flashcard-container .previous-card,
+    .flashcard-container .next-card {
+        display: none !important;
+    }
+
+    /* Show mobile navigation arrows in the button container */
+    .mobile-navigation-arrows {
+        display: flex !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 8px;
+    }
+
+    .shuffle-button-container {
+        flex-direction: row;
+        justify-content: center;
+        width: 95vw;
+        max-width: 400px;
+        margin: 1rem auto;
+        padding: 0.5rem;
+        position: relative;
+        gap: 0.5rem;
+    }
+
+    .flashcard {
+        width: 75vw;
+        max-width: 450px;
+        height: 50vh;
+        font-size: 1.2em;
+    }
+
+    .flashcard-front,
+    .flashcard-back {
+        font-size: 1.2em;
+        padding: 15px;
+    }
+
+    .previous-card {
+        margin: 0;
+    }
+
+    .next-card {
+        margin: 0;
+    }
+
     .button-wrapper {
         justify-content: center;
         gap: 15px;
@@ -371,7 +455,48 @@ textarea {
     }
 }
 
+/* MOBILE PHONE SPECIFIC ADJUSTMENTS */
 @media (max-width: 480px) {
+    .flashcard-container {
+        padding: 0 1rem;
+        gap: 0.25rem;
+    }
+
+    .shuffle-button-container {
+        width: 95vw;
+        max-width: none;
+        padding: 0.5rem;
+        margin: 0.5rem auto;
+        position: relative;
+        gap: 0.5rem;
+    }
+
+    .flashcard {
+        width: 70vw;
+        max-width: 350px;
+        height: 45vh;
+        font-size: 1em;
+        min-height: 180px;
+    }
+
+    .flashcard-front,
+    .flashcard-back {
+        font-size: 1em;
+        padding: 10px;
+    }
+
+    .previous-card,
+    .next-card {
+        margin: 0;
+        padding: 8px;
+    }
+
+    .previous-card svg,
+    .next-card svg {
+        width: 24px;
+        height: 24px;
+    }
+
     .button-wrapper {
         flex-direction: column;
         gap: 10px;
@@ -382,5 +507,57 @@ textarea {
     .clear-button {
         width: 100%;
         justify-content: center;
+    }
+
+    .card-index {
+        padding: 1em;
+        font-size: 1em;
+    }
+}
+
+/* TOUCH DEVICE OPTIMIZATION */
+@media (hover: none) and (pointer: coarse) {
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .flashcard-inner {
+        transition: transform 0.4s;
+    }
+
+    .shuffle-icon-button,
+    .flip-icon-button {
+        padding: 12px;
+    }
+}
+
+/* EXTRA SMALL SCREENS */
+@media (max-width: 360px) {
+    .flashcard {
+        width: 65vw;
+        max-width: 300px;
+        min-width: 250px;
+    }
+
+    .shuffle-button-container {
+        width: 90vw;
+        padding: 0.25rem;
+        gap: 0.5rem;
+    }
+
+    .mobile-navigation-arrows {
+        padding: 0 5px;
+    }
+
+    .previous-card,
+    .next-card {
+        padding: 6px;
+    }
+
+    .previous-card svg,
+    .next-card svg {
+        width: 20px;
+        height: 20px;
     }
 }

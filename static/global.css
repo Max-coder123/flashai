@@ -388,13 +388,35 @@ body {
     color: #7FC29B;
 }
 
+.sandwich-menu button {
+    width: 48px;
+    height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  /* Make the SVG use the same navy color as the user icon */
+  .sandwich-menu svg {
+    width: 43px;
+    height: 43px;
+    display: block;
+    fill: #031738;       /* for hamburger */
+    stroke: #031738;     /* in case you use stroke paths later */
+  }  
+
 .user-icon {
     fill: #031738;
     width: 48px;
     height: 48px;
+    margin-top: 3px;
+    margin-left: -5px;
 
 }
-
 .user-icon:hover {
     fill: #031738;
     width: 48px;
@@ -452,13 +474,30 @@ body {
     }
 }
 
-@media (max-width: 700px) {
-    .main-content {
-        padding: 1em;
-    }
-}
 @media (max-width: 500px) {
     .main-content {
         padding: 0.5em;
+    }
+}
+
+@media (max-width: 700px) {
+    .taskbar {
+        display: none;
+    }
+    .main-content {
+        margin-left: 0;
+        padding: 1em;
+    }
+    #products-button {
+        display: none;
+    }
+    #feedback-button {
+        display: none;
+    }
+    .login-button {
+        display: none;
+    }
+    .user-icon {
+        display: none;
     }
 }

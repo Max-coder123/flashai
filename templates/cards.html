@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="static/global.css">
     <link rel="stylesheet" href="static/cards.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.14.305/pdf.min.js"></script>
- 
+
 </head>
 
 <body>
@@ -43,8 +43,8 @@
             </div>
         </form>
 
-
-        <div class="shuffle-button-container" id="buttonContainer">
+        <!-- UNIFIED CONTROL PANEL -->
+        <div class="shuffle-button-container" id="buttonContainer" style="display: none;">
             <div class="tooltip">
                 <button class="shuffle-icon-button" id="shuffleButton">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -62,6 +62,21 @@
                     </svg>
                 </button>
                 <span class="tooltiptext">Flip Cards</span>
+            </div>
+
+            <!-- MOBILE NAVIGATION ARROWS (hidden by default) -->
+            <div class="mobile-navigation-arrows">
+                <button id="previousCardMobile" class="previous-card" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                    </svg>
+                </button>
+
+                <button id="nextCardMobile" class="next-card" style="display: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+                    </svg>
+                </button>
             </div>
         </div>
 
@@ -87,7 +102,6 @@
     <script src="/static/global.js"></script>
 
     <script>
-
 
         document.addEventListener('DOMContentLoaded', function () {
             const feedbackForm = document.getElementById('feedback-form');
@@ -185,7 +199,6 @@
             }
         });
 
-
         document.addEventListener('DOMContentLoaded', function () {
             const uploadButton = document.getElementById('upload-button');
             const uploadInput = document.getElementById('upload-input');
@@ -202,11 +215,13 @@
         const completionEl = document.getElementById("completion");
         const prevButton = document.getElementById("previousCard");
         const nextButton = document.getElementById("nextCard");
+        const prevButtonMobile = document.getElementById("previousCardMobile");
+        const nextButtonMobile = document.getElementById("nextCardMobile");
+        const buttonContainer = document.getElementById("buttonContainer");
         const completionForm = document.querySelector("#completion-input")
         const submitButton = completionForm.querySelector("button[type='submit']")
         const clearButton = document.getElementById("completion-input-clear");
         let activeCardIndex = 0;
-
 
         clearButton.addEventListener("click", function (e) {
             e.preventDefault();
@@ -215,7 +230,6 @@
                 textarea.value = "";
             }
         });
-
 
         completionForm.addEventListener("submit", (event) => {
             event.preventDefault();
@@ -256,9 +270,15 @@
             if (flashcards.length === 0) {
                 prevButton.style.display = "none";
                 nextButton.style.display = "none";
+                prevButtonMobile.style.display = "none";
+                nextButtonMobile.style.display = "none";
+                buttonContainer.style.display = "none";
             } else {
                 prevButton.style.display = "inline-block";
                 nextButton.style.display = "inline-block";
+                prevButtonMobile.style.display = "inline-block";
+                nextButtonMobile.style.display = "inline-block";
+                buttonContainer.style.display = "flex";
                 flashcards.forEach((item, i) => {
                     completionEl.innerHTML += `
                         <div class="flashcard ${i === activeCardIndex ? "active-card" : ""}">
@@ -290,7 +310,9 @@
         }
 
         let cards;
-        document.querySelector(".next-card").addEventListener("click", () => {
+
+        // Function to handle next card navigation
+        function nextCard() {
             const currentCard = cards[activeCardIndex];
             currentCard.classList.remove("active-card");
             activeCardIndex++;
@@ -299,9 +321,10 @@
             }
             updateCardIndex();
             cards[activeCardIndex].classList.add("active-card");
-        });
+        }
 
-        document.querySelector(".previous-card").addEventListener("click", () => {
+        // Function to handle previous card navigation
+        function previousCard() {
             const currentCard = cards[activeCardIndex];
             currentCard.classList.remove("active-card");
             activeCardIndex--;
@@ -310,10 +333,18 @@
             }
             updateCardIndex();
             cards[activeCardIndex].classList.add("active-card");
-        });
+        }
 
+        // Desktop navigation event listeners
+        nextButton.addEventListener("click", nextCard);
+        prevButton.addEventListener("click", previousCard);
 
-        document.getElementById('flipAllButton').addEventListener('click', () => {
+        // Mobile navigation event listeners
+        nextButtonMobile.addEventListener("click", nextCard);
+        prevButtonMobile.addEventListener("click", previousCard);
+
+        // Function to handle flip all cards
+        function flipAllCards() {
             const cards = document.querySelectorAll('.flashcard');
             const shouldFlipToBack = !cards[0].classList.contains('flip');
 
@@ -324,16 +355,10 @@
                     card.classList.remove('flip');
                 }
             });
-        });
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
         }
 
-        document.getElementById("shuffleButton").addEventListener("click", () => {
+        // Function to handle shuffle cards
+        function shuffleCards() {
             shuffleArray(flashcards);
             const completionEl = document.getElementById("completion");
             completionEl.innerHTML = "";
@@ -342,7 +367,18 @@
             cards[activeCardIndex].classList.add("active-card");
             renderFlashcards();
             updateCardIndex();
-        });
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Button event listeners
+        document.getElementById('flipAllButton').addEventListener('click', flipAllCards);
+        document.getElementById("shuffleButton").addEventListener("click", shuffleCards);
 
         function reinitializeEventListeners(cards) {
             const nextButton = document.getElementById('nextCard');
@@ -388,5 +424,7 @@
             prevButton.addEventListener("click", prevCardHandler);
         }
 
-
     </script>
+</body>
+
+</html>
