@@ -52,6 +52,11 @@
 
         .flashcard-project .button-group {
             margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
         }
 
         .flashcard-project button {
@@ -64,6 +69,35 @@
             font-size: 1em;
             cursor: pointer;
             transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            min-height: 44px;
+        }
+
+        /* Default: all three can sit on one line when space allows */
+        .flashcard-project .button-group .view-link {
+            flex: 0 0 auto;
+        }
+
+        .flashcard-project .button-group .share-flashcard-source,
+        .flashcard-project .button-group .delete-flashcard-source {
+            flex: 0 0 auto;
+        }
+
+        /* When space gets tight, stack: View full-width on top, Share/Delete below 50% each */
+        @media (max-width: 700px) {
+            .flashcard-project .button-group {
+                justify-content: stretch;
+            }
+
+            .flashcard-project .button-group .view-link {
+                flex: 1 1 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            .flashcard-project .button-group .share-flashcard-source,
+            .flashcard-project .button-group .delete-flashcard-source {
+                flex: 1 1 calc(50% - 5px);
+            }
         }
 
         .flashcard-project button:hover {
@@ -84,8 +118,67 @@
         }
 
         .clear-history-btn:hover {
-            background-color: #7FC29B;
+            background-color: #031738;
+            color: #ffffff;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Tablet and mobile adjustments to mirror cards page behavior */
+        @media (max-width: 768px) {
+            #history-section {
+                padding: 0 1rem;
+            }
+
+            .flashcard-project {
+                width: 95%;
+                padding: 16px;
+            }
+
+            .flashcard-project h2 {
+                font-size: 1.4em;
+                margin-bottom: 20px;
+            }
+
+            .flashcard-project .button-group {
+                gap: 12px;
+            }
+
+            .flashcard-project button,
+            .clear-history-btn {
+                padding: 10px 16px;
+                font-size: 1em;
+                min-height: 44px;
+            }
+        }
+
+        /* Mobile phone specific adjustments */
+        @media (max-width: 480px) {
+            .flashcard-project {
+                width: 95%;
+                padding: 14px;
+            }
+
+            .flashcard-project h2 {
+                font-size: 1.2em;
+                margin-bottom: 16px;
+            }
+
+            .clear-history-btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 360px) {
+            .flashcard-project {
+                width: 95%;
+                padding: 12px;
+            }
+
+            .flashcard-project h2 {
+                font-size: 1.1em;
+            }
         }
     </style>
 </head>
@@ -102,7 +195,7 @@
             <div class="flashcard-project">
                 <h2 title="{{entry.created_at.split('T')[0]}}">{{ entry.title }}</h2>
                 <div class="button-group">
-                    <a href="/flashcards/{{ entry.id }}">
+                    <a href="/flashcards/{{ entry.id }}" class="view-link">
                         <button>View Flashcards</button>
                     </a>
                     <button class="share-flashcard-source" data-id="{{entry.id}}" title="Share this flashcard set">

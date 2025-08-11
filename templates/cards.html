@@ -45,6 +45,12 @@
 
         <!-- UNIFIED CONTROL PANEL -->
         <div class="shuffle-button-container" id="buttonContainer" style="display: none;">
+            <button id="previousCardMobile" class="previous-card" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+                </svg>
+            </button>
+
             <div class="tooltip">
                 <button class="shuffle-icon-button" id="shuffleButton">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -64,20 +70,11 @@
                 <span class="tooltiptext">Flip Cards</span>
             </div>
 
-            <!-- MOBILE NAVIGATION ARROWS (hidden by default) -->
-            <div class="mobile-navigation-arrows">
-                <button id="previousCardMobile" class="previous-card" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-                    </svg>
-                </button>
-
-                <button id="nextCardMobile" class="next-card" style="display: none;">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
-                    </svg>
-                </button>
-            </div>
+            <button id="nextCardMobile" class="next-card" style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z" />
+                </svg>
+            </button>
         </div>
 
         <div class="flashcard-container">
@@ -362,7 +359,6 @@
             shuffleArray(flashcards);
             const completionEl = document.getElementById("completion");
             completionEl.innerHTML = "";
-
             activeCardIndex = 0;
             cards[activeCardIndex].classList.add("active-card");
             renderFlashcards();
